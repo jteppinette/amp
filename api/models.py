@@ -28,8 +28,7 @@ class Company(models.Model):
 
 
 class Employee(models.Model):
-    """
-    Represents an employee at a specific amp company. This model is used to
+    """ Represents an employee at a specific amp company. This model is used to
     request and track permissions between individuals.
     """
     first_name = models.CharField(max_length=80)
@@ -141,8 +140,10 @@ class ContractorRequest(models.Model):
 
     remote = models.BooleanField()
 
+    background_check = models.FileField(upload_to='background', blank=True, null=True)
+
     def __unicode__(self):
         """
         Provide a unicode representation of this model.
         """
-        return 'Contractor request by %s' % (str(self.contractr))
+        return 'Contractor request by %s' % (str(self.contractor))
