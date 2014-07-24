@@ -1,5 +1,30 @@
 """
 Detail the models that will be used in the AMP api.
+
+The AMP models are seperated into the following groups:
+
+    COMPANY MODEL:
+
+        * Company
+
+    NOTIFICATION MODEL:
+        
+        * Notification
+
+    ACCESSOR MODELS:
+
+        * Employee
+        * Contractor
+
+    PERMISSION MODELS:
+        
+        * Permission
+        * Log
+
+    REQUEST MODELS:
+
+        * Employee Request
+        * Contractor Request
 """
 
 from django.db import models
@@ -21,6 +46,26 @@ class Company(models.Model):
         Provide a unicode representation of this model.
         """
         return self.name
+
+"""
+                             NOTIFICATION MODEL
+"""
+
+
+class Notification(models.Model):
+    """
+    Represents a notification that will be sent to a user.
+    """
+    title = models.CharField(max_length=80)
+    description = models.CharField(max_length=160)
+
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+
+    def __unicode__(self):
+        """
+        Provide a unicode representation of this model.
+        """
+        return "%s | %s" % (self.title, self.description)
 
 """
                              ACCESSOR MODELS
