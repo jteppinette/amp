@@ -65,7 +65,7 @@ class LogAdmin(admin.ModelAdmin):
     """
     Define the custom characteristics for the `Log` model.
     """
-    list_display = ('__unicode__', 'author', 'accessor')
+    list_display = ('__unicode__', 'author', 'accessor', 'creation_time')
     search_fields = ['author', 'accessor', 'accessor']
 
 """

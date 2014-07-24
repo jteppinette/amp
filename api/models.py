@@ -105,6 +105,7 @@ class Log(models.Model):
     accessor = models.CharField(max_length=160)
 
     change = models.TextField()
+    creation_time = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
         """
