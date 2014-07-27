@@ -6,6 +6,8 @@ user model has been created for the use-case of authenticating by email.
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 
+from api.models import Company
+
 
 class UserManager(BaseUserManager):
     """
@@ -13,14 +15,14 @@ class UserManager(BaseUserManager):
     to interact with the pre defined Django authentication system.
     """
 
-    def create_user(self, email, password=None):
+    def create_user(self, email, password=None, *args, **kwargs):
         """
         Create and save a User with the given email and password.
         """
         if not email:
             raise ValueError('Users must have an email address.')
 
-        user = self.model(email=self.normalize_email(email))
+        user = self.model(email=self.normalize_email(email), *args, **kwargs)
         user.set_password(password)
         user.save(using=self._db)
                 
@@ -54,6 +56,7 @@ class User(AbstractBaseUser):
     first_name = models.CharField(max_length=80, null=True, blank=True)
     last_name = models.CharField(max_length=80, null=True, blank=True)
 
+    company = models.ForeignKey(Company, null=True, blank=True)
     title = models.CharField(max_length=80, choices=TITLES, null=True, blank=True)
 
     is_active = models.BooleanField(default=True)

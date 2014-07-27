@@ -17,22 +17,22 @@ class CustomUserAdmin(UserAdmin):
     form = UserChangeForm
     add_form = UserCreationForm
 
-    list_display = ('email', 'first_name', 'last_name', 'title', 'is_admin')
+    list_display = ('email', 'first_name', 'last_name', 'company', 'title', 'is_admin')
     list_filter = ('is_admin',)
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        ('AMP Information', {'fields': ('first_name', 'last_name', 'title')}),
+        ('AMP Information', {'fields': ('first_name', 'last_name', 'company', 'title')}),
         ('Change Password', {'fields': ('new_password',)}),
         ('Permissions', {'fields': ('is_admin',)}),
     )
 
     add_fieldsets = (
         (None, {'classes': ('wide',),
-                'fields': ('email', 'first_name', 'last_name', 'title', 'password1', 'password2')}),
+                'fields': ('email', 'first_name', 'last_name', 'company', 'title', 'password1', 'password2')}),
     )
 
     search_fields = ('email',)
-    ordering = ('email',)
+    ordering = ('company', 'email')
     filter_horizontal = ()
 
 
