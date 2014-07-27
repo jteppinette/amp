@@ -145,6 +145,9 @@ class Command(BaseCommand):
                     request.permissions.add(permission.id)
                     request.save()
                     print request
+
+                    Log.objects.create(author='Fixture Data Script', **request.log())
+
                     break
 
         """
@@ -173,4 +176,7 @@ class Command(BaseCommand):
                     request.permissions.add(permission.id)
                     request.save()
                     print request
+
+                    Log.objects.create(author='Fixture Data Script', **request.log())
+
                     break

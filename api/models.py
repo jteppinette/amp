@@ -100,7 +100,7 @@ class Employee(models.Model):
         permission_list = []
 
         for permission in permissions:
-            permission_list.append(str(permission))
+            permission_list.append(str(permission.name))
 
         if permission_list:
             log['description'] = 'Employee %s, %s added to the system with permissions %s.' % (self.last_name, self.first_name, ', '.join(permission_list))
@@ -144,7 +144,7 @@ class Contractor(models.Model):
         permission_list = []
 
         for permission in permissions:
-            permission_list.append(str(permission))
+            permission_list.append(str(permission.name))
 
         if permission_list:
             log['description'] = 'Contractor %s, %s from %s has been added to the system with permissions %s.' % (self.last_name, self.first_name, self.employer, ', '.join(permission_list))
@@ -235,6 +235,22 @@ class EmployeeRequest(models.Model):
         """
         return 'Employee request by %s' % (str(self.employee))
 
+    def log(self):
+        """
+        Generate the log description for a newly created EmployeeRequest object.
+        """
+        log = {'category': 'New Employee Permission Request', 'accessor': '%s, %s' % (self.employee.last_name, self.employee.first_name)}
+
+        permissions = self.permissions.all()
+        permission_list = []
+
+        for permission in permissions:
+            permission_list.append(str(permission.name))
+
+        log['description'] = 'New employee request for %s, %s requesting the following permissions: %s.' % (self.employee.last_name, self.employee.first_name, ', '.join(permission_list))
+
+        return log
+
 
 class ContractorRequest(models.Model):
     """
@@ -256,3 +272,20 @@ class ContractorRequest(models.Model):
         Provide a unicode representation of this model.
         """
         return 'Contractor request by Contractor %s, %s' % (self.last_name, self.first_name)
+
+    def log(self):
+        """
+        Generate the log description for a newly created ContractorRequest object.
+        """
+        log = {'category': 'New Contractor Permission Request', 'accessor': '%s, %s' % (self.last_name, self.first_name)}
+
+        permissions = self.permissions.all()
+        permission_list = []
+
+        for permission in permissions:
+            permission_list.append(str(permission.name))
+
+        log['description'] = 'New contractor request for %s, %s requesting the following permissions: %s.' % (self.last_name, self.first_name, ', '.join(permission_list))
+
+        return log
+
