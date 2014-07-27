@@ -79,7 +79,10 @@ class Command(BaseCommand):
         employee_info_list = json.loads(response.read())
 
         for info in employee_info_list:
-            print Employee.objects.create(company=lus, **info)
+            employee = Employee.objects.create(company=lus, **info)
+            print employee
+            
+            Log.objects.create(author='Fixture Data Script', **employee.log())
 
 
         """
@@ -99,7 +102,10 @@ class Command(BaseCommand):
             employer = random.choice(companies)
             email = '%s.%s@%s.com' % (info['first_name'], info['last_name'], employer)
 
-            print Contractor.objects.create(company=lus, employer=employer, email=email.replace(' ', '').lower(), **info)
+            contractor = Contractor.objects.create(company=lus, employer=employer, email=email.replace(' ', '').lower(), **info)
+            print contractor
+
+            Log.objects.create(author='Fixture Data Script', **contractor.log())
 
         """
         Generate Permissions.

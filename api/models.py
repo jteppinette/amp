@@ -90,6 +90,26 @@ class Employee(models.Model):
         """
         return 'Employee %s, %s' % (self.last_name, self.first_name)
 
+    def log(self):
+        """
+        Generate the log description for a newly created Employee object.
+        """
+        log = {'category': 'New Employee', 'accessor': '%s, %s' % (self.last_name, self.first_name)}
+
+        permissions = self.permissions.all()
+        permission_list = []
+
+        for permission in permissions:
+            permission_list.append(str(permission))
+
+        if permission_list:
+            log['description'] = 'Employee %s, %s added to the system with permissions %s.' % (self.last_name, self.first_name, ', '.join(permission_list))
+        else:
+            log['description'] = 'Employee %s, %s added to the system without permissions.' % (self.last_name, self.first_name)
+
+        return log
+
+
     class Meta:
         unique_together = (('first_name', 'last_name', 'company'), ('company', 'eid'))
 
@@ -113,6 +133,26 @@ class Contractor(models.Model):
         Provide a unicode representation of this model.
         """
         return 'Contractor %s, %s' % (self.last_name, self.first_name)
+
+    def log(self):
+        """
+        Generate the log description for a newly created Contractor object.
+        """
+        log = {'category': 'New Contractor', 'accessor': '%s, %s' % (self.last_name, self.first_name)}
+
+        permissions = self.permissions.all()
+        permission_list = []
+
+        for permission in permissions:
+            permission_list.append(str(permission))
+
+        if permission_list:
+            log['description'] = 'Contractor %s, %s from %s has been added to the system with permissions %s.' % (self.last_name, self.first_name, self.employer, ', '.join(permission_list))
+        else:
+            log['description'] = 'Contractor %s, %s from %s has been added to the system without permissions.' % (self.last_name, self.first_name, self.employer)
+
+        return log
+
 
     class Meta:
         unique_together = ('first_name', 'last_name', 'company')
