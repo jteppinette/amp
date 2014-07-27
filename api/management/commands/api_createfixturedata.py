@@ -113,3 +113,27 @@ class Command(BaseCommand):
 
         for name in permission_names:
             print Permission.objects.create(name=name, company=lus)
+
+        """
+        Generate EmployeeRequests.
+        """
+        # Delete pre-existing objects
+        EmployeeRequest.objects.all().delete()
+        
+        employee_list = Employee.objects.all()
+        permission_list = Permission.objects.all()
+
+        for i in range(10):
+            while True:
+                employee = random.choice(employee_list)
+                permission = random.choice(permission_list)
+
+                if permission in employee.permissions.all():
+                    print 'Failure to maintain unique integrity.'
+                    continue
+                else:
+                    request = EmployeeRequest.objects.create(employee=employee)
+                    request.permissions.add(permission.id)
+                    request.save()
+                    print request
+                    break
