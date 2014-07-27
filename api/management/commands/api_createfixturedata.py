@@ -97,3 +97,19 @@ class Command(BaseCommand):
 
         for info in contractor_info_list:
             print Contractor.objects.create(company=lus, employer=random.choice(companies), **info)
+
+        """
+        Generate Permissions.
+        """
+        # Delete pre-existing objects
+        Permission.objects.all().delete()
+
+        permission_names = [
+            'Admin EMS Access',
+            'Read-Only PACS Access',
+            'Regular User Firewall Accounts Access',
+            'Physical PCC Access',
+        ]
+
+        for name in permission_names:
+            print Permission.objects.create(name=name, company=lus)
