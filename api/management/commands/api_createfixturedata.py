@@ -64,4 +64,18 @@ class Command(BaseCommand):
 
         # Create new users
         for idx, title in enumerate(get_user_model().TITLES):
-            print get_user_model().objects.create_user(email=users[idx]['email'], password='lus', first_name=users[idx]['first_name'], last_name=users[idx]['last_name'], title=title[0], company=lus)
+            get_user_model().objects.create_user(email=users[idx]['email'], password='lus', first_name=users[idx]['first_name'], last_name=users[idx]['last_name'], title=title[0], company=lus)
+
+        """
+        Generate Employees.
+        """
+        # Delete pre-existing objects
+        Employee.objects.all().delete()
+
+        # Get employee information
+        response = urllib2.urlopen('http://www.json-generator.com/api/json/get/bSIuhdYYZe?indent=2') 
+        employee_info_list = json.loads(response.read())
+
+        for info in employee_info_list:
+            print Employee.objects.create(company=lus, **info)
+
