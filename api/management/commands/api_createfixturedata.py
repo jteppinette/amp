@@ -3,6 +3,7 @@ from django.conf import settings
 
 import urllib2
 import json
+import random
 
 # Custom User Model
 from django.contrib.auth import get_user_model
@@ -47,6 +48,7 @@ class Command(BaseCommand):
         Company.objects.all().delete()
 
         lus = Company.objects.create(name='LUS')
+        print lus
 
         """
         Generate Users.
@@ -64,7 +66,7 @@ class Command(BaseCommand):
 
         # Create new users
         for idx, title in enumerate(get_user_model().TITLES):
-            get_user_model().objects.create_user(email=users[idx]['email'], password='lus', first_name=users[idx]['first_name'], last_name=users[idx]['last_name'], title=title[0], company=lus)
+            print get_user_model().objects.create_user(email=users[idx]['email'], password='lus', first_name=users[idx]['first_name'], last_name=users[idx]['last_name'], title=title[0], company=lus)
 
         """
         Generate Employees.
@@ -79,3 +81,19 @@ class Command(BaseCommand):
         for info in employee_info_list:
             print Employee.objects.create(company=lus, **info)
 
+
+        """
+        Generate Contractors.
+        """
+        # Delete pre-existing objects
+        Contractor.objects.all().delete()
+
+        # Contractor Companies
+        companies = ['Engineering United', 'American Electric', 'Southern Engineering', 'Microsoft Computers']
+
+        # Get contractor information
+        response = urllib2.urlopen('http://www.json-generator.com/api/json/get/bWOaYaiesy?indent=2') 
+        contractor_info_list = json.loads(response.read())
+
+        for info in contractor_info_list:
+            print Contractor.objects.create(company=lus, employer=random.choice(companies), **info)

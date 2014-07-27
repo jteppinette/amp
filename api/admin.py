@@ -59,7 +59,7 @@ class ContractorAdmin(admin.ModelAdmin):
     """
     Define the custom characteristics for the `Contractor` model.
     """
-    list_display = ('__unicode__', 'first_name', 'last_name', 'company')
+    list_display = ('__unicode__', 'first_name', 'last_name', 'employer', 'company')
     search_fields = ['first_name', 'last_name']
 
 """

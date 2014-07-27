@@ -102,6 +102,7 @@ class Contractor(models.Model):
     first_name = models.CharField(max_length=80)
     last_name = models.CharField(max_length=80)
 
+    employer = models.CharField(max_length=80)
     company = models.ForeignKey(Company, help_text="This field represents the company that the contractor is requesting access to.")
 
     permissions = models.ManyToManyField('Permission', blank=True, null=True)
