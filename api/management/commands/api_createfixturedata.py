@@ -69,6 +69,22 @@ class Command(BaseCommand):
             print get_user_model().objects.create_user(email=users[idx]['email'], password='lus', first_name=users[idx]['first_name'], last_name=users[idx]['last_name'], title=title[0], company=lus)
 
         """
+        Generate Permissions.
+        """
+        # Delete pre-existing objects
+        Permission.objects.all().delete()
+
+        permission_names = [
+            'Admin EMS Access',
+            'Read-Only PACS Access',
+            'Regular User Firewall Accounts Access',
+            'Physical PCC Access',
+        ]
+
+        for name in permission_names:
+            print Permission.objects.create(name=name, company=lus)
+
+        """
         Generate Employees.
         """
         # Delete pre-existing objects
@@ -84,6 +100,21 @@ class Command(BaseCommand):
             
             Log.objects.create(author='Fixture Data Script', **employee.creation_log())
 
+        # Add permissions to random Employees
+        employee_list = Employee.objects.all()
+        permissions_list = Permission.objects.all()
+
+        for i in range(10):
+            employee = random.choice(employee_list)
+            permission = random.choice(permissions_list)
+
+            old_permissions = employee.permissions.all()
+            length = len(old_permissions)
+            employee.permissions.add(permission.id)
+            
+            employee.save()
+
+            Log.objects.create(author='Fixture Data Script', **employee.permission_change_log(old_permissions))
 
         """
         Generate Contractors.
@@ -107,22 +138,22 @@ class Command(BaseCommand):
 
             Log.objects.create(author='Fixture Data Script', **contractor.creation_log())
 
-        """
-        Generate Permissions.
-        """
-        # Delete pre-existing objects
-        Permission.objects.all().delete()
+        # Add permissions to random Contractors
+        contractor_list = Contractor.objects.all()
+        permissions_list = Permission.objects.all()
 
-        permission_names = [
-            'Admin EMS Access',
-            'Read-Only PACS Access',
-            'Regular User Firewall Accounts Access',
-            'Physical PCC Access',
-        ]
+        for i in range(10):
+            contractor = random.choice(contractor_list)
+            permission = random.choice(permissions_list)
 
-        for name in permission_names:
-            print Permission.objects.create(name=name, company=lus)
+            old_permissions = contractor.permissions.all()
+            length = len(old_permissions)
+            contractor.permissions.add(permission.id)
+            
+            contractor.save()
 
+            Log.objects.create(author='Fixture Data Script', **contractor.permission_change_log(old_permissions))
+        
         """
         Generate EmployeeRequests.
         """

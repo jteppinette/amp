@@ -90,6 +90,41 @@ class Employee(models.Model):
         """
         return 'Employee %s, %s' % (self.last_name, self.first_name)
 
+    def permission_change_log(self, old_permissions):
+        """
+        Generate the log for a change in this Employee's permissions.
+        """
+        log = {'category': 'Permission Change', 'accessor': '%s, %s' % (self.last_name, self.first_name)}
+
+        permissions = self.permissions.all()
+
+        new_permissions_list = []
+
+        for permission in permissions:
+            new_permissions_list.append(str(permission.name))
+
+        old_permissions_list = []
+
+        for permission in old_permissions:
+            old_permissions_list.append(str(permission.name))
+
+        old_permissions_msg = None
+        new_permissions_msg = None
+
+        if old_permissions_list:
+            old_permissions_msg = ', '.join(old_permissions_list)
+        else:
+            old_permissions_msg = 'No Permissions'
+
+        if new_permissions_list:
+            new_permissions_msg = ', '.join(new_permissions_list)
+        else:
+            new_permissions_msg = 'No Permissions'
+
+        log['description'] = "Employee %s %s's permissions have been changed from [%s] to [%s]." % (self.first_name, self.last_name, old_permissions_msg, new_permissions_msg)
+
+        return log
+
     def creation_log(self):
         """
         Generate the log description for a newly created Employee object.
@@ -133,6 +168,42 @@ class Contractor(models.Model):
         Provide a unicode representation of this model.
         """
         return 'Contractor %s, %s' % (self.last_name, self.first_name)
+
+    def permission_change_log(self, old_permissions):
+        """
+        Generate the log for a change in this Contractor's permissions.
+        """
+        log = {'category': 'Permission Change', 'accessor': '%s, %s' % (self.last_name, self.first_name)}
+
+        permissions = self.permissions.all()
+
+        new_permissions_list = []
+
+        for permission in permissions:
+            new_permissions_list.append(str(permission.name))
+
+        old_permissions_list = []
+
+        for permission in old_permissions:
+            old_permissions_list.append(str(permission.name))
+
+        old_permissions_msg = None
+        new_permissions_msg = None
+
+        if old_permissions_list:
+            old_permissions_msg = ', '.join(old_permissions_list)
+        else:
+            old_permissions_msg = 'No Permissions'
+
+        if new_permissions_list:
+            new_permissions_msg = ', '.join(new_permissions_list)
+        else:
+            new_permissions_msg = 'No Permissions'
+
+        log['description'] = "Contractor %s %s's permissions have been changed from [%s] to [%s]." % (self.first_name, self.last_name, old_permissions_msg, new_permissions_msg)
+
+        return log
+
 
     def creation_log(self):
         """
