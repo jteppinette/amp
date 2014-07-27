@@ -82,7 +82,7 @@ class Command(BaseCommand):
             employee = Employee.objects.create(company=lus, **info)
             print employee
             
-            Log.objects.create(author='Fixture Data Script', **employee.log())
+            Log.objects.create(author='Fixture Data Script', **employee.creation_log())
 
 
         """
@@ -105,7 +105,7 @@ class Command(BaseCommand):
             contractor = Contractor.objects.create(company=lus, employer=employer, email=email.replace(' ', '').lower(), **info)
             print contractor
 
-            Log.objects.create(author='Fixture Data Script', **contractor.log())
+            Log.objects.create(author='Fixture Data Script', **contractor.creation_log())
 
         """
         Generate Permissions.
@@ -146,7 +146,7 @@ class Command(BaseCommand):
                     request.save()
                     print request
 
-                    Log.objects.create(author='Fixture Data Script', **request.log())
+                    Log.objects.create(author='Fixture Data Script', **request.creation_log())
 
                     break
 
@@ -177,6 +177,6 @@ class Command(BaseCommand):
                     request.save()
                     print request
 
-                    Log.objects.create(author='Fixture Data Script', **request.log())
+                    Log.objects.create(author='Fixture Data Script', **request.creation_log())
 
                     break

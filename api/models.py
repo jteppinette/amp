@@ -90,7 +90,7 @@ class Employee(models.Model):
         """
         return 'Employee %s, %s' % (self.last_name, self.first_name)
 
-    def log(self):
+    def creation_log(self):
         """
         Generate the log description for a newly created Employee object.
         """
@@ -134,7 +134,7 @@ class Contractor(models.Model):
         """
         return 'Contractor %s, %s' % (self.last_name, self.first_name)
 
-    def log(self):
+    def creation_log(self):
         """
         Generate the log description for a newly created Contractor object.
         """
@@ -235,7 +235,7 @@ class EmployeeRequest(models.Model):
         """
         return 'Employee request by %s' % (str(self.employee))
 
-    def log(self):
+    def creation_log(self):
         """
         Generate the log description for a newly created EmployeeRequest object.
         """
@@ -273,7 +273,7 @@ class ContractorRequest(models.Model):
         """
         return 'Contractor request by Contractor %s, %s' % (self.last_name, self.first_name)
 
-    def log(self):
+    def creation_log(self):
         """
         Generate the log description for a newly created ContractorRequest object.
         """
