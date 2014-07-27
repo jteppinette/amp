@@ -141,24 +141,41 @@ class Log(models.Model):
     """
     Represents a change log of permissions.
     """
+    CATEGORIES = (
+        ('New Employee', 'New Employee'),
+        ('New Contractor', 'New Contractor'),
+        ('Permission Change', 'Permission Change'),
+        ('New Employee Permission Request', 'New Employee Permission Request'),
+        ('New Contractor Permission Request', 'New Contractor Permission Request')
+    )
+
     ACCESSORS = (
         ('Employee', 'Employee'),
         ('Contractor', 'Contractor')
     )
 
+    category = models.CharField(max_length=160, choices=CATEGORIES)
+
     author = models.CharField(max_length=160)
 
-    accessor_type = models.CharField(max_length=160, choices=ACCESSORS)
     accessor = models.CharField(max_length=160)
 
-    change = models.TextField()
+    description = models.TextField()
     creation_time = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
         """
         Provide a unicode representation of this model.
         """
-        return 'Change to %s %s by %s' % (self.accessor_type, self.accessor, self.author)
+        description = self.description
+        if len(description) >= 35:
+            description = description[:32]
+            elipse = '...'
+            message = description + elipse
+        else:
+            message = description
+
+        return 'Log: %s' % (message)
 
 """
                              REQUEST MODELS
