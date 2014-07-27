@@ -137,3 +137,27 @@ class Command(BaseCommand):
                     request.save()
                     print request
                     break
+
+        """
+        Generate ContractorRequests.
+        """
+        # Delete pre-existing objects
+        ContractorRequest.objects.all().delete()
+        
+        contractor_list = Contractor.objects.all()
+        permission_list = Permission.objects.all()
+
+        for i in range(10):
+            while True:
+                contractor = random.choice(contractor_list)
+                permission = random.choice(permission_list)
+
+                if permission in contractor.permissions.all():
+                    print 'Failure to maintain unique integrity.'
+                    continue
+                else:
+                    request = ContractorRequest.objects.create(contractor=contractor, remote=random.choice([True, False]))
+                    request.permissions.add(permission.id)
+                    request.save()
+                    print request
+                    break
