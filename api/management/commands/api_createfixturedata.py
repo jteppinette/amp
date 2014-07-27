@@ -96,7 +96,10 @@ class Command(BaseCommand):
         contractor_info_list = json.loads(response.read())
 
         for info in contractor_info_list:
-            print Contractor.objects.create(company=lus, employer=random.choice(companies), **info)
+            employer = random.choice(companies)
+            email = '%s.%s@%s.com' % (info['first_name'], info['last_name'], employer)
+
+            print Contractor.objects.create(company=lus, employer=employer, email=email.replace(' ', '').lower(), **info)
 
         """
         Generate Permissions.
@@ -156,7 +159,11 @@ class Command(BaseCommand):
                     print 'Failure to maintain unique integrity.'
                     continue
                 else:
-                    request = ContractorRequest.objects.create(contractor=contractor, remote=random.choice([True, False]))
+                    request = ContractorRequest.objects.create(first_name=contractor.first_name,
+                                                               last_name=contractor.last_name,
+                                                               employer=contractor.employer,
+                                                               email=contractor.email,
+                                                               remote=random.choice([True, False]))
                     request.permissions.add(permission.id)
                     request.save()
                     print request

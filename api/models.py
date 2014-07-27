@@ -101,6 +101,7 @@ class Contractor(models.Model):
     """
     first_name = models.CharField(max_length=80)
     last_name = models.CharField(max_length=80)
+    email = models.EmailField()
 
     employer = models.CharField(max_length=80)
     company = models.ForeignKey(Company, help_text="This field represents the company that the contractor is requesting access to.")
@@ -182,7 +183,11 @@ class ContractorRequest(models.Model):
     """
     Represents a request made to gain permissions by a contractor.
     """
-    contractor = models.ForeignKey(Contractor)
+    first_name = models.CharField(max_length=80)
+    last_name = models.CharField(max_length=80)
+    email = models.EmailField()
+    employer = models.CharField(max_length=80)
+
     permissions = models.ManyToManyField(Permission)
 
     remote = models.BooleanField()
@@ -193,4 +198,4 @@ class ContractorRequest(models.Model):
         """
         Provide a unicode representation of this model.
         """
-        return 'Contractor request by %s' % (str(self.contractor))
+        return 'Contractor request by Contractor %s, %s' % (self.last_name, self.first_name)
