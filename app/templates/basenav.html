@@ -16,7 +16,7 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 {% if user.is_authenticated %}
-                <p class="navbar-text">Welcome, <a href="#" class="navbar-link">{{user.email}}</a></a>
+                <p class="navbar-text">Welcome, <a href="{% url 'update_account' %}" class="navbar-link">{{user.email}}</a></a>
                 <li><a href="{% url 'app.views.auth_logout' %}">Logout</a></li>
                 {% else %}
                 <li><a href="{% url 'app.views.auth_login' %}">Login</a></li>
