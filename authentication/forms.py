@@ -64,6 +64,24 @@ class UserChangeForm(forms.ModelForm):
         """
         return self.initial['password']
 
+    def clean_is_admin(self):
+        """
+        If nothing is passed, return the initial value.
+        """
+        if self.cleaned_data['is_admin']:
+            return self.cleaned_data['is_admin']
+        else:
+            return self.initial['is_admin']
+
+    def clean_is_active(self):
+        """
+        If nothin is passed, return the initial value.
+        """
+        if self.cleaned_data['is_active']:
+            return self.cleaned_data['is_active']
+        else:
+            return self.initial['is_active']
+
     def save(self, commit=True):
         """
         Save the form and if the user has provided a new password, set it.

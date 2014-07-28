@@ -67,6 +67,7 @@
             </div>
         </div>
 
+        {% if user.title == "CIP Manager" %}
         <div class="form-group">
             {% if form.company.errors %}
             <div class="col-sm-offset-2 col-sm-10 alert alert-danger">{{form.company.errors}}</div>
@@ -86,6 +87,7 @@
                 {{form.title}}
             </div>
         </div>
+        {% endif %}
 
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
