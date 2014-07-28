@@ -19,5 +19,6 @@ urlpatterns = patterns('',
 
     # Requests
     url(r'^requests/employee/new/$', views.NewEmployeeRequest.as_view(), name='new_employee_request'),
+    url(r'^requests/contractor/new/$', views.NewContractorRequest.as_view(), name='new_contractor_request'),
     url(r'^requests/success/$', views.request_success),
 )

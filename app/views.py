@@ -97,3 +97,22 @@ class NewEmployeeRequest(CreateView):
         Log.objects.create(author='Anonymous', **obj.creation_log())
 
         return redirect(self.success_url)
+
+
+class NewContractorRequest(CreateView):
+    """
+    Create a new contractor request.
+    """
+    template_name = 'new_contractor_request.html'
+    model = ContractorRequest
+    success_url = reverse_lazy(request_success)
+
+    def form_valid(self, form):
+        """
+        Save the form and generate a proper log.
+        """
+        obj = form.save()
+
+        Log.objects.create(author='Anonymous', **obj.creation_log())
+
+        return redirect(self.success_url)
