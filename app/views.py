@@ -73,13 +73,20 @@ def dashboard(request):
 """
                              REQUESTS
 """
+def request_success(request):
+    """
+    Render the request success page.
+    """
+    return render(request, 'request_success.html')
+
+
 class NewEmployeeRequest(CreateView):
     """
     Create a new employee request.
     """
     template_name = 'new_employee_request.html'
     model = EmployeeRequest
-    success_url = reverse_lazy(home)
+    success_url = reverse_lazy(request_success)
 
     def form_valid(self, form):
         """

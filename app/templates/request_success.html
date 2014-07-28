@@ -1,0 +1,17 @@
+{% extends "basenav.html" %}
+
+{% block title %}Successful Request | AMP{% endblock %}
+
+{% block content %}
+
+<!-- Jumbotron -->
+<div class="jumbotron">
+    <div class="container">
+        <h1>Success!</h1>
+        <p>Your permissions request was successful! Click the button below to proceed to the AMP home page.</p>
+        <p><a href="{% url 'app.views.home' %}" class="btn btn-primary btn-lg" role="button">Home &raquo;</a></p>
+
+    </div>
+</div>
+
+{% endblock %}
