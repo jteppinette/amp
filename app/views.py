@@ -80,3 +80,13 @@ class NewEmployeeRequest(CreateView):
     template_name = 'new_employee_request.html'
     model = EmployeeRequest
     success_url = reverse_lazy(home)
+
+    def form_valid(self, form):
+        """
+        Save the form and generate a proper log.
+        """
+        obj = form.save()
+
+        Log.objects.create(author='Anonymous', **obj.creation_log())
+
+        return redirect(self.success_url)
