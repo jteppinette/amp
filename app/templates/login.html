@@ -11,11 +11,12 @@
     </div>
     {% endif %}
 
-    <form class="form-signin" role="form" method="post" action="{% url 'app.views.auth_login' %}">
+    <form class="form-signin" role="form" method="post">
         {% csrf_token %}
         <h2 class="text-center form-signin-heading">Please login</h2>
         <input type="email" class="form-control" placeholder="Email address" name="email" required autofocus>
         <input type="password" class="form-control" placeholder="Password" name="password" required>
+
         <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
     </form>
 </div>

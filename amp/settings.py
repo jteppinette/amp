@@ -34,6 +34,10 @@ ALLOWED_HOSTS = []
 # Authentication
 AUTH_USER_MODEL = 'authentication.User'
 
+LOGIN_REDIRECT_URL = '/dashboard/'
+LOGIN_URL = '/login/'
+LOGOUT_URL = '/logout/'
+
 # Application definition
 
 INSTALLED_APPS = (

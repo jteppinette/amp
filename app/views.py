@@ -43,7 +43,9 @@ def auth_login(request):
 
         if user is not None:
             login(request, user)
-            return redirect(dashboard)
+
+            next_page = request.GET.get('next', 'dashboard')
+            return redirect(next_page)
         else:
             return render(request, 'login.html', {"error": True})
     else:
