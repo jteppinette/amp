@@ -6,9 +6,13 @@ from django.shortcuts import render, redirect
 
 from django.contrib.auth import authenticate, login, logout
 
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 
 from django.core.urlresolvers import reverse_lazy
+
+# Custom User Model
+from django.contrib.auth import get_user_model
+from authentication.forms import UserChangeForm
 
 # Company Model
 from api.models import Company
@@ -71,7 +75,7 @@ def dashboard(request):
     return render(request, 'dashboard.html')
 
 """
-                             REQUESTS
+                             NEW REQUESTS
 """
 def request_success(request):
     """
@@ -116,3 +120,20 @@ class NewContractorRequest(CreateView):
         Log.objects.create(author='Anonymous', **obj.creation_log())
 
         return super(NewContractorRequest, self).form_valid(form)
+
+"""
+                             ACCOUNT
+"""
+class UpdateAccount(UpdateView):
+    """
+    Update the currently logged in users account.
+    """
+    template_name = 'update_account.html'
+    form_class = UserChangeForm
+    success_url = reverse_lazy('update_account')
+
+    def get_object(self, queryset=None):
+        """
+        Get the object that will be updated.
+        """
+        return self.request.user
