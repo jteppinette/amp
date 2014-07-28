@@ -297,6 +297,7 @@ class EmployeeRequest(models.Model):
     """
     Represents a request made to gain permissions by an employee.
     """
+    company = models.ForeignKey(Company)
     employee = models.ForeignKey(Employee)
     permissions = models.ManyToManyField(Permission)
 
@@ -331,6 +332,8 @@ class ContractorRequest(models.Model):
     last_name = models.CharField(max_length=80)
     email = models.EmailField()
     employer = models.CharField(max_length=80)
+
+    company = models.ForeignKey(Company)
 
     permissions = models.ManyToManyField(Permission)
 

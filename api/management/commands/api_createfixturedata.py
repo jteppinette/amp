@@ -172,7 +172,7 @@ class Command(BaseCommand):
                     print 'Failure to maintain unique integrity.'
                     continue
                 else:
-                    request = EmployeeRequest.objects.create(employee=employee)
+                    request = EmployeeRequest.objects.create(employee=employee, company=lus)
                     request.permissions.add(permission.id)
                     request.save()
                     print request
@@ -203,7 +203,8 @@ class Command(BaseCommand):
                                                                last_name=contractor.last_name,
                                                                employer=contractor.employer,
                                                                email=contractor.email,
-                                                               remote=random.choice([True, False]))
+                                                               remote=random.choice([True, False]),
+                                                               company=lus)
                     request.permissions.add(permission.id)
                     request.save()
                     print request

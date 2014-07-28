@@ -91,7 +91,7 @@ class EmployeeRequestAdmin(admin.ModelAdmin):
     """
     Define the custom characteristics for the `EmployeeRequest` model.
     """
-    list_display = ('__unicode__',)
+    list_display = ('__unicode__', 'employee', 'company')
     search_fields = ['employee__first_name', 'employee__last_name']
 
 
@@ -99,8 +99,8 @@ class ContractorRequestAdmin(admin.ModelAdmin):
     """
     Define the custom characteristics for the `ContractorRequest` model.
     """
-    list_display = ('__unicode__',)
-    search_fields = ['contractor__first_name', 'contractor__last_name']
+    list_display = ('__unicode__', 'company', 'first_name', 'last_name', 'employer')
+    search_fields = ['first_name', 'last_name']
 
 # Register models to admin site
 
