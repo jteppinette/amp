@@ -20,7 +20,7 @@ def auth_login(request):
 
         if user is not None:
             login(request, user)
-            return redirect(home)
+            return redirect(dashboard)
         else:
             return render(request, 'login.html', {"error": True})
     else:
@@ -42,3 +42,11 @@ def home(request):
     """
     return render(request, 'home.html')
 
+"""
+                             APP
+"""
+def dashboard(request):
+    """
+    Main dashboard for AMP application.
+    """
+    return render(request, 'dashboard.html')
