@@ -8,4 +8,5 @@ from app import views
 
 urlpatterns = patterns('',
     url(r'^$', views.home),
+    url(r'^login/$', views.login),
 )
