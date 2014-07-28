@@ -94,7 +94,9 @@ class Employee(models.Model):
         """
         Generate the log for a change in this Employee's permissions.
         """
-        log = {'category': 'Permission Change', 'accessor': '%s, %s' % (self.last_name, self.first_name)}
+        log = {'category': 'Permission Change',
+               'accessor': '%s, %s' % (self.last_name, self.first_name),
+               'company': self.company}
 
         permissions = self.permissions.all()
 
@@ -129,7 +131,9 @@ class Employee(models.Model):
         """
         Generate the log description for a newly created Employee object.
         """
-        log = {'category': 'New Employee', 'accessor': '%s, %s' % (self.last_name, self.first_name)}
+        log = {'category': 'New Employee',
+               'accessor': '%s, %s' % (self.last_name, self.first_name),
+               'company': self.company}
 
         permissions = self.permissions.all()
         permission_list = []
@@ -173,7 +177,9 @@ class Contractor(models.Model):
         """
         Generate the log for a change in this Contractor's permissions.
         """
-        log = {'category': 'Permission Change', 'accessor': '%s, %s' % (self.last_name, self.first_name)}
+        log = {'category': 'Permission Change',
+               'accessor': '%s, %s' % (self.last_name, self.first_name),
+               'company': self.company}
 
         permissions = self.permissions.all()
 
@@ -209,7 +215,9 @@ class Contractor(models.Model):
         """
         Generate the log description for a newly created Contractor object.
         """
-        log = {'category': 'New Contractor', 'accessor': '%s, %s' % (self.last_name, self.first_name)}
+        log = {'category': 'New Contractor',
+               'accessor': '%s, %s' % (self.last_name, self.first_name),
+               'company': self.company}
 
         permissions = self.permissions.all()
         permission_list = []
@@ -265,6 +273,8 @@ class Log(models.Model):
         ('Contractor', 'Contractor')
     )
 
+    company = models.ForeignKey(Company)
+
     category = models.CharField(max_length=160, choices=CATEGORIES)
 
     author = models.CharField(max_length=160)
@@ -311,7 +321,9 @@ class EmployeeRequest(models.Model):
         """
         Generate the log description for a newly created EmployeeRequest object.
         """
-        log = {'category': 'New Employee Permission Request', 'accessor': '%s, %s' % (self.employee.last_name, self.employee.first_name)}
+        log = {'category': 'New Employee Permission Request',
+               'accessor': '%s, %s' % (self.employee.last_name, self.employee.first_name),
+               'company': self.company}
 
         permissions = self.permissions.all()
         permission_list = []
@@ -351,7 +363,9 @@ class ContractorRequest(models.Model):
         """
         Generate the log description for a newly created ContractorRequest object.
         """
-        log = {'category': 'New Contractor Permission Request', 'accessor': '%s, %s' % (self.last_name, self.first_name)}
+        log = {'category': 'New Contractor Permission Request',
+               'accessor': '%s, %s' % (self.last_name, self.first_name),
+               'company': self.company}
 
         permissions = self.permissions.all()
         permission_list = []
