@@ -15,7 +15,7 @@
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet"> 
 
         <!-- Custom CSS -->
-        <link href="{{STATIC_URL}}angular/css/styles.css" rel="stylesheet">
+        <link href="{{STATIC_URL}}app/css/styles.css" rel="stylesheet">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -63,7 +63,15 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
     <!-- Fastclick -->
-    <script src="{{BOWER_URL}}fastclick/lib/fastclick.js"></script>
+    <script src="{{STATIC_URL}}app/js/fastclick.js"></script>
+
+    <!-- Instantiate FastClick --> 
+
+    <script>
+        $(document).ready(function () {
+            FastClick.attach(document.body)
+        })
+    </script>
 
     </body>
 

@@ -7,5 +7,5 @@ from django.conf.urls import patterns, url, include
 from app import views
 
 urlpatterns = patterns('',
-    url('$', views.home),
+    url(r'^$', views.home),
 )
