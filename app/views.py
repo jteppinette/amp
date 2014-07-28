@@ -2,16 +2,36 @@
 Define the views used to render the AMP application.
 """
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+
+from django.contrib.auth import authenticate, login, logout
 
 """
                              AUTHENTICATION
 """
-def login(request):
+def auth_login(request):
     """
     Login in a user based on the provided email and password.
     """
-    return render(request, 'login.html')
+    if request.method == 'POST':
+        email = request.POST['email']
+        password = request.POST['password']
+        user = authenticate(username=email, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect(home)
+        else:
+            return render(request, 'login.html', {"error": True})
+    else:
+        return render(request, 'login.html')
+
+def auth_logout(request):
+    """
+    Logout the currently logged in user.
+    """
+    logout(request)
+    return redirect(home)
 
 """
                              GENERAL
