@@ -1,79 +1,40 @@
-<!-- app.html -->
+{% extends "base.html" %}
 
-<!DOCTYPE html>
-<html lang="en">
-    <head>
+{% block title %}Home | AMP{% endblock %}
 
-        <!-- Meta (set charset, ie-compatability, mobile viewport) -->
-        <meta charset="utf-8">
-        <meta http-equic="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no;">
+{% block content %}
 
-        <title>MARS</title> 
+<!-- Jumbotron | Allows login-->
+<div class="jumbotron">
+    <div class="container">
+        <h1>Welcome to AMP!</h1>
+        <p>If you are already a user of AMP, press the button below to login.</p>
+        <p><a class="btn btn-primary btn-lg" role="button">Login &raquo;</a></p>
 
-        <!-- Bootstrap -->
-        <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet"> 
-
-        <!-- Custom CSS -->
-        <link href="{{STATIC_URL}}app/css/styles.css" rel="stylesheet">
-
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-    </head>
-
-    <!-- BODY -->
-    <body ng-app="app">
-
-    <!-- Navigation -->
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand">AMP</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Dashboard</a></li>
-                    <li><a href="#">Settings</a></li>
-                    <li><a href="#">Login</a></li>
-                </ul>
-            </div>
-        </div>
+        <p><strong>Otherwise</strong>, if you are an employee or contractor, choose the corresponding option below to submit a request to gain permissions to an AMP company.
     </div>
+</div>
 
-    <!-- Main Content -->
-    <div>
+<!-- Permission Requests -->
+<div class="container">
+    <div class="row">
+        
+        <!-- Employee -->
+            <div class="col-md-6">
+                <h2>Employee Requests</h2>
+                <p>If you are a current employee at a company using AMP, and you would like to make a request for specific permissions, click the button below.</p>
+                <p><a class="btn btn-default" href="#" role="button">Make Employee Request &raquo;</a></p>
+            </div>   
+
+        <!-- Contractor -->
+            <div class="col-md-6">
+                <h2>Contractor Requests</h2>
+                <p>If you are a contractor and would like to make a request for specific permissions at a company using AMP, click the button below.</p>
+                <p><a class="btn btn-default" href="#" role="button">Make Contractor Request &raquo;</a></p>
+
+            </div>   
 
     </div>
+</div>
 
-    <!-- JavaScript Imports -->
-
-    <!-- JQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-
-    <!-- Bootstrap -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
-    <!-- Fastclick -->
-    <script src="{{STATIC_URL}}app/js/fastclick.js"></script>
-
-    <!-- Instantiate FastClick --> 
-
-    <script>
-        $(document).ready(function () {
-            FastClick.attach(document.body)
-        })
-    </script>
-
-    </body>
-
-</html>
-
+{% endblock %}
