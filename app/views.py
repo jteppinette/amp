@@ -5,6 +5,7 @@ Define the views used to render the AMP application.
 from django.shortcuts import render, redirect
 
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.messages.views import SuccessMessageMixin
 
 from django.views.generic.edit import CreateView, UpdateView
 
@@ -82,20 +83,14 @@ def dashboard(request):
 """
                              NEW REQUESTS
 """
-def request_success(request):
-    """
-    Render the request success page.
-    """
-    return render(request, 'request_success.html')
-
-
-class NewEmployeeRequest(CreateView):
+class NewEmployeeRequest(SuccessMessageMixin, CreateView):
     """
     Create a new employee request.
     """
     template_name = 'new_employee_request.html'
     model = EmployeeRequest
-    success_url = reverse_lazy(request_success)
+    success_url = reverse_lazy('home')
+    success_message = "Employee request submision was successful! You will be contacted soon."
 
     def form_valid(self, form):
         """
@@ -105,16 +100,17 @@ class NewEmployeeRequest(CreateView):
 
         Log.objects.create(author='Anonymous', **obj.creation_log())
 
-        return redirect(self.success_url)
+        return super(NewEmployeeRequest, self).form_valid(form)
 
 
-class NewContractorRequest(CreateView):
+class NewContractorRequest(SuccessMessageMixin, CreateView):
     """
     Create a new contractor request.
     """
     template_name = 'new_contractor_request.html'
     model = ContractorRequest
-    success_url = reverse_lazy(request_success)
+    success_url = reverse_lazy('home')
+    success_message = "Contractor request submision was successful! You will be contacted soon."
 
     def form_valid(self, form):
         """
@@ -129,13 +125,14 @@ class NewContractorRequest(CreateView):
 """
                              ACCOUNT
 """
-class UpdateAccount(UpdateView):
+class UpdateAccount(SuccessMessageMixin, UpdateView):
     """
     Update the currently logged in users account.
     """
     template_name = 'update_account.html'
     form_class = UserChangeForm
     success_url = reverse_lazy('update_account')
+    success_message = "Your account was updated successfully!"
 
     def get_object(self, queryset=None):
         """

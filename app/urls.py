@@ -22,7 +22,6 @@ urlpatterns = patterns('',
     # New Requests
     url(r'^requests/employee/new/$', views.NewEmployeeRequest.as_view(), name='new_employee_request'),
     url(r'^requests/contractor/new/$', views.NewContractorRequest.as_view(), name='new_contractor_request'),
-    url(r'^requests/success/$', views.request_success, name="request_success"),
 
     # Account
     url(r'^dashboard/account/$', login_required(views.UpdateAccount.as_view()), name='update_account'),
