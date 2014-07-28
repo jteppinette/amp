@@ -7,7 +7,81 @@
 <!-- Jumbotron | Allows login-->
 <div class="jumbotron">
     <div class="container">
-        <h1>Dashboard!</h1>
+      <h1>{{user.company}} Dashboard!</h1>
+        <p>Use these dashboard options to choose a feature of AMP that you would like to explore.
+    </div>
+</div>
+
+<div class="container">
+    <!-- Dashboard Options -->
+    <div class="row">
+        
+        <!-- Employees -->
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Employees</div>
+                <div class="panel-body">
+                    <p>Create, Read, Update, and Delete Employees. This feature allows you to manipulate all aspects of an Employee including its permissions and requests.
+                    <p><a href="{% url 'app.views.auth_login' %}" class="btn btn-default" role="button">Employees &raquo;</a></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contractors -->
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Contractors</div>
+                <div class="panel-body">
+                    <p>Create, Read, Update, and Delete Contractors. This feature allows you to manipulate all aspects of a Contractor including its permissions and requests.
+                    <p><a href="{% url 'app.views.auth_login' %}" class="btn btn-default" role="button">Contractors &raquo;</a></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Requests -->
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Requests</div>
+                <div class="panel-body">
+                    <p>Create, Read, Update, and Delete Requests. This feature allows you to manipulate all aspects of a Request.
+                    <p><a href="{% url 'app.views.auth_login' %}" class="btn btn-default" role="button">Requests &raquo;</a></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Permissions -->
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Permissions</div>
+                <div class="panel-body">
+                    <p>Create, Read, Update, and Delete Permissions. This feature allows you to manipulate all aspects of a Permission.
+                    <p><a href="{% url 'app.views.auth_login' %}" class="btn btn-default" role="button">Permissions &raquo;</a></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Logs -->
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Logs</div>
+                <div class="panel-body">
+                    <p>Create, Read, Update, and Delete Logs. This feature allows you to view and filter the logs that have been generated for you.
+                    <p><a href="{% url 'app.views.auth_login' %}" class="btn btn-default" role="button">Logs &raquo;</a></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Account -->
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Account</div>
+                <div class="panel-body">
+                    <p>Manipulate your account. This includes: changing your password, changing your email address, etc..</p>
+                    <p><a href="{% url 'app.views.auth_login' %}" class="btn btn-default" role="button">Account &raquo;</a></p>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
 
