@@ -16,4 +16,7 @@ urlpatterns = patterns('',
 
     # App
     url(r'^dashboard/$', views.dashboard),
+
+    # Requests
+    url(r'^requests/employee/new/$', views.NewEmployeeRequest.as_view(), name='new_employee_request'),
 )
