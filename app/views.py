@@ -111,8 +111,8 @@ class NewContractorRequest(CreateView):
         """
         Save the form and generate a proper log.
         """
-        obj = form.save()
+        obj = form.save(commit=True)
 
         Log.objects.create(author='Anonymous', **obj.creation_log())
 
-        return redirect(self.success_url)
+        return super(NewContractorRequest, self).form_valid(form)
