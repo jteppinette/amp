@@ -8,6 +8,8 @@ from django.contrib.auth import authenticate, login, logout
 
 from django.views.generic.edit import CreateView
 
+from django.core.urlresolvers import reverse_lazy
+
 # Company Model
 from api.models import Company
 
@@ -77,4 +79,4 @@ class NewEmployeeRequest(CreateView):
     """
     template_name = 'new_employee_request.html'
     model = EmployeeRequest
-    success_url = '/'
+    success_url = reverse_lazy(home)
