@@ -14,7 +14,7 @@ from django.core.urlresolvers import reverse_lazy
 
 # Custom User Model
 from django.contrib.auth import get_user_model
-from authentication.forms import UserChangeForm
+from authentication.forms import UserChangeForm, UserCreationForm
 
 # Company Model
 from api.models import Company
@@ -183,3 +183,38 @@ def company(request):
         'training_coordinator': training_coordinator,
         'human_resources': human_resources,
     })
+
+class NewCompanyUser(SuccessMessageMixin, CreateView):
+    """
+    Create a new contractor request.
+    """
+    template_name = 'new_company_user.html'
+    model = get_user_model()
+    form_class = UserCreationForm
+    success_url = reverse_lazy('company')
+    success_message = "Company user has been successfully created!"
+
+    def get_context_data(self, **kwargs):
+        """
+        Add title to context.
+        """
+        context = super(NewCompanyUser, self).get_context_data(**kwargs)
+        context['title'] = self.request.GET.get('title', None)
+        context['company'] = self.request.user.company.id
+        return context
+
+    def get_initial(self):
+        """
+        Set initial data.
+        """
+        return {'company': self.request.user.company,
+                'title': self.request.GET.get('title', None)}
+
+    def form_valid(self, form):
+        """
+        Save the form and generate a proper log.
+        """
+        form.cleaned_data['company'] = self.request.user.company
+        form.save()
+
+        return super(NewCompanyUser, self).form_valid(form)

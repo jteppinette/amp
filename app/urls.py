@@ -28,4 +28,5 @@ urlpatterns = patterns('',
 
     # Company
     url(r'^dashboard/company/$', login_required(views.company), name='company'),
+    url(r'^dashboard/company/user/new/$', login_required(views.NewCompanyUser.as_view()), name='new_company_user'),
 )

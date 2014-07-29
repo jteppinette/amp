@@ -3,7 +3,7 @@ body {
     padding-bottom: 20px;
 }
 
-.alert {
+.message {
     top: 47px;
     position: fixed;
     width: 100%;
