@@ -328,3 +328,21 @@ class UpdatePermission(SuccessMessageMixin, UpdateView):
         context['name'] = self.get_object().name
         context['company'] = self.get_object().company.id
         return context
+
+class NewPermission(SuccessMessageMixin, CreateView):
+    """
+    Create a new permission.
+    """
+    template_name = 'new_permission.html'
+    model = Permission
+    success_url = reverse_lazy('permissions')
+    success_message = "Permissions creation was a success!"
+
+    def get_context_data(self, **kwargs):
+        """
+        Add some stuff to context.
+        """
+        context = super(NewPermission, self).get_context_data(**kwargs)
+        context['company'] = self.request.user.company.id
+        return context
+

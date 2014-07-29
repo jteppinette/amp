@@ -1,0 +1,43 @@
+{% extends "basenav.html" %}
+
+{% block title %}New Permission | AMP{% endblock %}
+
+{% block content %}
+
+<!-- Jumbotron -->
+<div class="jumbotron">
+    <div class="container">
+        <h1>New Permission!</h1>
+        <p>After supplying the required information  succesfuly sending this form, a new permission will be created.</p>
+    </div>
+</div>
+
+<div class="container">
+    <form class="form-horizontal" role="form" method="post">
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+        <div class="alert alert-danger" role="alert">{{form.non_field_errors}}</div>
+        {% endif %}
+
+        <div class="form-group">
+            {% if form.name.errors %}
+            <div class="col-sm-offset-2 col-sm-10 alert alert-danger">{{form.name.errors}}</div>
+            {% endif %}
+            <label for="id_name" class="col-sm-2 control-label">Name:</label>
+            <div class="col-sm-10">
+                {{form.name}}
+            </div>
+        </div>
+
+        <input type="hidden" name="company" value="{{company}}" />
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="submit" class="btn btn-default">Submit Request</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

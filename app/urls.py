@@ -44,5 +44,6 @@ urlpatterns = patterns('',
     # Permissions
     url(r'^dashboard/permissions/$', login_required(views.ListPermissions.as_view()), name='permissions'),
     url(r'^dashboard/permissions/(?P<pk>\d+)/$', login_required(views.UpdatePermission.as_view()), name='update_permission'),
+    url(r'^dashboard/permissions/new/$', login_required(views.NewPermission.as_view()), name='new_permission'),
 
 )
