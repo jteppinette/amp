@@ -358,3 +358,19 @@ def delete_permission(request, pk):
     else:
         messages.add_message(request, messages.ERROR, 'Permission does not exist.')
         return redirect('permissions')
+
+"""
+                             REQUESTS
+"""
+
+def requests(request):
+    """
+    Load the Employee and Contractor requests into context.
+    """
+    employee_requests = EmployeeRequest.objects.all().prefetch_related('employee', 'permissions')
+    contractor_requests = ContractorRequest.objects.all().prefetch_related('permissions')
+
+    return render(request, 'requests.html', {
+        'employee_requests': employee_requests,
+        'contractor_requests': contractor_requests,
+    })

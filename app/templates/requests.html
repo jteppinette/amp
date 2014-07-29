@@ -1,0 +1,98 @@
+{% extends "basenav.html" %}
+
+{% block title %}Requests | AMP{% endblock %}
+
+{% block content %}
+
+<!-- Jumbotron -->
+<div class="jumbotron">
+    <div class="container">
+        <h1>Requests</h1>
+        <p>This page allows you to view and approve both contractor and employee requests.</p>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Breadcrumbs -->
+    <ol class="breadcrumb">
+      <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+      <li class="active">Requests</li>
+    </ol>
+
+    <!-- Employee Requests-->
+    <div class="panel panel-primary">
+        <div class="panel-heading">Employee Requests</div>
+        <div class="panel-body">
+            <table class="table table-striped">
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Requested Permissions</th>
+                    <th>Approve</th>
+                    <th>Reject</th>
+                </tr>
+                {% for request in employee_requests %}
+                <tr>
+                    <td>{{request.employee.first_name}}</td>
+                    <td>{{request.employee.last_name}}</td>
+                    <td>
+                        {% if request.permissions %}
+                        <ul>
+                            {% for permission in request.permissions.all %}
+                            <li>{{permission.name}}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </td>
+                    <td><a href="{% url 'auth_login' %}">Approve</a></td>
+                    <td><a href="{% url 'auth_login' %}">Reject</a></td>
+                </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+    </div>
+
+    <!-- Contractor Requests-->
+    <div class="panel panel-primary">
+        <div class="panel-heading">Contractor Requests</div>
+        <div class="panel-body">
+            <table class="table table-striped">
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Employer</th>
+                    <th>Requested Permissions</th>
+                    <th>Remote</th>
+                    <th>Approve</th>
+                    <th>Reject</th>
+                </tr>
+                {% for request in contractor_requests %}
+                <tr>
+                    <td>{{request.first_name}}</td>
+                    <td>{{request.last_name}}</td>
+                    <td>{{request.email}}</td>
+                    <td>{{request.employer}}</td>
+                    <td>
+                        {% if request.permissions %}
+                        <ul>
+                            {% for permission in request.permissions.all %}
+                            <li>{{permission.name}}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </td>
+                    <td>{{request.remote}}</td>
+                    <td><a href="{% url 'auth_login'%}?pk={{employee.pk}}">Approve</a></td>
+                    <td><a href="{% url 'auth_login'%}">Reject</a></td>
+                </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

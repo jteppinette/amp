@@ -13,6 +13,14 @@
 </div>
 
 <div class="container">
+
+    <!-- Breadcrumbs -->
+    <ol class="breadcrumb">
+      <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+      <li><a href="{% url 'permissions' %}">Permissions</a></li>
+      <li class="active">New</li>
+    </ol>
+
     <form class="form-horizontal" role="form" method="post">
         {% csrf_token %}
 

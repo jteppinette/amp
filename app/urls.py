@@ -47,4 +47,7 @@ urlpatterns = patterns('',
     url(r'^dashboard/permissions/new/$', login_required(views.NewPermission.as_view()), name='new_permission'),
     url(r'^dashboard/permissions/(?P<pk>\d+)/delete/$', login_required(views.delete_permission), name='delete_permission'),
 
+    # Requests
+    url(r'^dashboard/requests/$', login_required(views.requests), name='requests'),
+
 )
