@@ -9,7 +9,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 
 from django.views.generic.edit import CreateView, UpdateView
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 from django.core.urlresolvers import reverse_lazy
 
@@ -244,3 +244,22 @@ class ListEmployees(ListView):
         Refine the queryset.
         """
         return Employee.objects.filter(company=self.request.user.company)
+
+class UpdateEmployee(SuccessMessageMixin, UpdateView):
+    """
+    Update an employee.
+    """
+    template_name = 'update_employee.html'
+    model = Employee
+    success_url = reverse_lazy('employees')
+    success_message = "Employee was updated successfully!"
+
+    def get_context_data(self, **kwargs):
+        """
+        Add some stuff to context.
+        """
+        context = super(UpdateEmployee, self).get_context_data(**kwargs)
+        context['name'] = '%s %s' % (self.get_object().first_name, self.get_object().last_name)
+        context['company'] = self.get_object().company.id
+        return context
+

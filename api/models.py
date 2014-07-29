@@ -80,7 +80,7 @@ class Employee(models.Model):
     last_name = models.CharField(max_length=80)
 
     company = models.ForeignKey(Company)
-    eid = models.IntegerField()
+    eid = models.IntegerField(unique=True)
 
     permissions = models.ManyToManyField('Permission', blank=True, null=True)
 
