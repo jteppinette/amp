@@ -44,7 +44,7 @@
                         </ul>
                         {% endif %}
                     </td>
-                    <td><a href="{% url 'auth_login' %}">Approve</a></td>
+                    <td><a href="{% url 'approve_employee_request' request.pk %}">Approve</a></td>
                     <td><a href="{% url 'auth_login' %}">Reject</a></td>
                 </tr>
                 {% endfor %}

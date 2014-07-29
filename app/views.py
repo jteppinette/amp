@@ -374,3 +374,18 @@ def requests(request):
         'employee_requests': employee_requests,
         'contractor_requests': contractor_requests,
     })
+
+def approve_employee_request(request, pk):
+    """
+    Approve an employee request based on the provided pk.
+    """
+    employee_request = EmployeeRequest.objects.get(pk=pk)
+    employee = employee_request.employee
+
+    employee.permissions.add(*employee_request.permissions.all())
+    employee.save()
+
+    employee_request.delete()
+
+    messages.add_message(request, messages.SUCCESS, 'Request has been successfully approved.')
+    return redirect('requests')

@@ -49,5 +49,6 @@ urlpatterns = patterns('',
 
     # Requests
     url(r'^dashboard/requests/$', login_required(views.requests), name='requests'),
+    url(r'^dashboard/requests/employee/(?P<pk>\d+)/approve/$', login_required(views.approve_employee_request), name='approve_employee_request'),
 
 )
