@@ -1,0 +1,48 @@
+{% extends "basenav.html" %}
+
+{% block title %}Contractors | AMP{% endblock %}
+
+{% block content %}
+
+<!-- Jumbotron -->
+<div class="jumbotron">
+    <div class="container">
+        <h1>Conctractors</h1>
+        <p>This page allows you to create, read, update and delete contractors. You can also view their individual profiles showing their permissions and requests. Click the button below to add a new contractor.</p>
+        <p><a href="{% url 'auth_login' %}" class="btn btn-primary btn-lg" role="button">Add a Contractor &raquo;</a></p>
+
+    </div>
+</div>
+
+<div class="container">
+    <!-- Breadcrumbs -->
+    <ol class="breadcrumb">
+      <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+      <li class="active">Conctractors</li>
+    </ol>
+
+    <!-- Contractors -->
+    <table class="table table-striped">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Employer</th>
+            <th>Read/Update</th>
+            <th>Delete</th>
+        </tr>
+        {% for contractor in object_list %}
+        <tr>
+            <td>{{contractor.first_name}}</td>
+            <td>{{contractor.last_name}}</td>
+            <td>{{contractor.email}}</td>
+            <td>{{contractor.employer}}</td>
+            <td><a href="{% url 'update_contractor' contractor.pk %}">Read/Update</a></td>
+            <td><a href="{% url 'auth_login'%}?pk={{employee.pk}}">Delete</a></td>
+        </tr>
+        {% endfor %}
+
+    </table>
+</div>
+
+{% endblock %}

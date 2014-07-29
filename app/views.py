@@ -263,3 +263,35 @@ class UpdateEmployee(SuccessMessageMixin, UpdateView):
         context['company'] = self.get_object().company.id
         return context
 
+"""
+                             CONTRACTORS
+"""
+class ListContractors(ListView):
+    """
+    List the contractors that are owned by the requestors company.
+    """
+    template_name = 'contractors.html'
+
+    def get_queryset(self):
+        """
+        Refine the queryset.
+        """
+        return Contractor.objects.filter(company=self.request.user.company)
+
+class UpdateContractor(SuccessMessageMixin, UpdateView):
+    """
+    Update an employee.
+    """
+    template_name = 'update_contractor.html'
+    model = Contractor
+    success_url = reverse_lazy('contractors')
+    success_message = "Contractor was updated successfully!"
+
+    def get_context_data(self, **kwargs):
+        """
+        Add some stuff to context.
+        """
+        context = super(UpdateContractor, self).get_context_data(**kwargs)
+        context['name'] = '%s %s' % (self.get_object().first_name, self.get_object().last_name)
+        context['company'] = self.get_object().company.id
+        return context

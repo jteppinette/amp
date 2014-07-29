@@ -1,0 +1,92 @@
+{% extends "basenav.html" %}
+
+{% block title %}Read/Update Contractor | AMP{% endblock %}
+
+{% block content %}
+
+<!-- Jumbotron -->
+<div class="jumbotron">
+    <div class="container">
+        <h1>Read/Update Contractor</h1>
+        <p>This page allows you to read and update a Contractor.</p>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Breadcrumbs -->
+    <ol class="breadcrumb">
+      <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+      <li><a href="{% url 'contractors' %}">Contractor</a></li>
+      <li class="active">{{name}}</li>
+    </ol>
+
+    <!-- Contractor Update Form -->
+    <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+        <div class="alert alert-danger" role="alert">{{form.non_field_errors}}</div>
+        {% endif %}
+
+        <div class="form-group">
+            {% if form.first_name.errors %}
+            <div class="col-sm-offset-2 col-sm-10 alert alert-danger">{{form.first_name.errors}}</div>
+            {% endif %}
+            <label for="id_first_name" class="col-sm-2 control-label">First Name:</label>
+            <div class="col-sm-10">
+                {{form.first_name}}
+            </div>
+        </div>
+
+        <div class="form-group">
+            {% if form.last_name.errors %}
+            <div class="col-sm-offset-2 col-sm-10 alert alert-danger">{{form.last_name.errors}}</div>
+            {% endif %}
+            <label for="id_last_name" class="col-sm-2 control-label">Last Name:</label>
+            <div class="col-sm-10">
+                {{form.last_name}}
+            </div>
+        </div>
+
+        <div class="form-group">
+            {% if form.email.errors %}
+            <div class="col-sm-offset-2 col-sm-10 alert alert-danger">{{form.email.errors}}</div>
+            {% endif %}
+            <label for="id_email" class="col-sm-2 control-label">Email:</label>
+            <div class="col-sm-10">
+                {{form.email}}
+            </div>
+        </div>
+
+        <div class="form-group">
+            {% if form.employer.errors %}
+            <div class="col-sm-offset-2 col-sm-10 alert alert-danger">{{form.employer.errors}}</div>
+            {% endif %}
+            <label for="id_employer" class="col-sm-2 control-label">Employer:</label>
+            <div class="col-sm-10">
+                {{form.employer}}
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            {% if form.permissions.errors %}
+            <div class="col-sm-offset-2 col-sm-10 alert alert-danger">{{form.permissions.errors}}</div>
+            {% endif %}
+            <label for="id_permissions" class="col-sm-2 control-label">Permissions:</label>
+            <div class="col-sm-10">
+                {{form.permissions}}
+            </div>
+        </div>
+
+        <input type="hidden" name="company" value="{{company}}" />
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="submit" class="btn btn-default">Submit Request</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
