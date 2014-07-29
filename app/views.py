@@ -488,10 +488,15 @@ def approve_employee_request(request, pk):
     employee_request = EmployeeRequest.objects.get(pk=pk)
     employee = employee_request.employee
 
+    old_permissions = employee.permissions.all()
+    length = len(old_permissions)
+
     employee.permissions.add(*employee_request.permissions.all())
     employee.save()
 
     employee_request.delete()
+
+    Log.objects.create(author=request.user.email, **employee.permission_change_log(old_permissions))
 
     messages.add_message(request, messages.SUCCESS, 'Request has been successfully approved.')
     return redirect('requests')
