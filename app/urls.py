@@ -31,5 +31,8 @@ urlpatterns = patterns('',
     url(r'^dashboard/company/user/new/$', login_required(views.NewCompanyUser.as_view()), name='new_company_user'),
 
     # Logs
-    url(r'^dashboard/logs/$', login_required(views.ListLogs.as_view()), name='logs')
+    url(r'^dashboard/logs/$', login_required(views.ListLogs.as_view()), name='logs'),
+
+    # Employees
+    url(r'^dashboard/employees/$', login_required(views.ListEmployees.as_view()), name='employees'),
 )

@@ -229,3 +229,18 @@ class ListLogs(ListView):
     """
     queryset = Log.objects.all()
     template_name = 'logs.html'
+
+"""
+                             EMPLOYEES
+"""
+class ListEmployees(ListView):
+    """
+    List the employees that are owned by the requestors company.
+    """
+    template_name = 'employees.html'
+
+    def get_queryset(self):
+        """
+        Refine the queryset.
+        """
+        return Employee.objects.filter(company=self.request.user.company)
