@@ -1,16 +1,10 @@
-{% extends "base.html" %}
+{% extends "basenav.html" %}
 
 {% block title %}Login | AMP{% endblock %}
 
 {% block content %}
 
-<div class="container">
-    {% if error %}
-    <div class="alert alert-danger" role="alert">
-        <p class="text-center">Your username and password didn't match. Please try again.</p>
-    </div>
-    {% endif %}
-
+<div style="margin-top: 50px;" class="container">
     <form class="form-signin" role="form" method="post">
         {% csrf_token %}
         <h2 class="text-center form-signin-heading">Please login</h2>

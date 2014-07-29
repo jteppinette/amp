@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib import messages
 
 from django.views.generic.edit import CreateView, UpdateView
 
@@ -48,7 +49,8 @@ def auth_login(request):
             next_page = request.GET.get('next', 'dashboard')
             return redirect(next_page)
         else:
-            return render(request, 'login.html', {"error": True})
+            messages.add_message(request, messages.ERROR, 'Your username and password did not match. Please try again.')
+            return render(request, 'login.html')
     else:
         return render(request, 'login.html')
 

@@ -4,6 +4,7 @@ body {
 }
 
 .alert {
+    top: 47px;
     position: fixed;
     width: 100%;
     text-align: center;
