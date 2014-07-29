@@ -351,6 +351,36 @@ class UpdateContractor(SuccessMessageMixin, UpdateView):
         context['company'] = self.get_object().company.id
         return context
 
+class NewContractor(SuccessMessageMixin, CreateView):
+    """
+    Create a new contractor.
+    """
+    template_name = 'new_contractor.html'
+    model = Contractor
+    success_url = reverse_lazy('contractors')
+    success_message = "Contractor creation was a success!"
+
+    def get_context_data(self, **kwargs):
+        """
+        Add some stuff to context.
+        """
+        context = super(NewContractor, self).get_context_data(**kwargs)
+        context['company'] = self.request.user.company.id
+        return context
+
+def delete_contractor(request, pk):
+    """
+    Delete a contractor based on pk.
+    """
+    qs = Contractor.objects.filter(pk=pk)
+    if qs:
+        qs[0].delete()
+        messages.add_message(request, messages.SUCCESS, 'Contractor has been successfully deleted.')
+        return redirect('contractors')
+    else:
+        messages.add_message(request, messages.ERROR, 'Contractor does not exist.')
+        return redirect('contractors')
+
 """
                              PERMISSIONS
 """

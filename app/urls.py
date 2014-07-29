@@ -43,6 +43,8 @@ urlpatterns = patterns('',
     # Contractors
     url(r'^dashboard/contractors/$', login_required(views.ListContractors.as_view()), name='contractors'),
     url(r'^dashboard/contractors/(?P<pk>\d+)/$', login_required(views.UpdateContractor.as_view()), name='update_contractor'),
+    url(r'^dashboard/contractors/new/$', login_required(views.NewContractor.as_view()), name='new_contractor'),
+    url(r'^dashboard/contractors/(?P<pk>\d+)/delete/$', login_required(views.delete_contractor), name='delete_contractor'),
 
     # Permissions
     url(r'^dashboard/permissions/$', login_required(views.ListPermissions.as_view()), name='permissions'),
