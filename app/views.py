@@ -295,3 +295,36 @@ class UpdateContractor(SuccessMessageMixin, UpdateView):
         context['name'] = '%s %s' % (self.get_object().first_name, self.get_object().last_name)
         context['company'] = self.get_object().company.id
         return context
+
+"""
+                             PERMISSIONS
+"""
+class ListPermissions(ListView):
+    """
+    List the permissions that are owned by the requestors company.
+    """
+    template_name = 'permissions.html'
+
+    def get_queryset(self):
+        """
+        Refine the queryset.
+        """
+        return Permission.objects.filter(company=self.request.user.company)
+
+class UpdatePermission(SuccessMessageMixin, UpdateView):
+    """
+    Update a permission.
+    """
+    template_name = 'update_permission.html'
+    model = Permission
+    success_url = reverse_lazy('permissions')
+    success_message = "Permission was updated successfully!"
+
+    def get_context_data(self, **kwargs):
+        """
+        Add some stuff to context.
+        """
+        context = super(UpdatePermission, self).get_context_data(**kwargs)
+        context['name'] = self.get_object().name
+        context['company'] = self.get_object().company.id
+        return context
