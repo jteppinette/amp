@@ -287,6 +287,23 @@ class UpdateEmployee(SuccessMessageMixin, UpdateView):
         context['company'] = self.get_object().company.id
         return context
 
+class NewEmployee(SuccessMessageMixin, CreateView):
+    """
+    Create a new employee.
+    """
+    template_name = 'new_employee.html'
+    model = Employee
+    success_url = reverse_lazy('employees')
+    success_message = "Employee creation was a success!"
+
+    def get_context_data(self, **kwargs):
+        """
+        Add some stuff to context.
+        """
+        context = super(NewEmployee, self).get_context_data(**kwargs)
+        context['company'] = self.request.user.company.id
+        return context
+
 """
                              CONTRACTORS
 """
