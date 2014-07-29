@@ -25,4 +25,7 @@ urlpatterns = patterns('',
 
     # Account
     url(r'^dashboard/account/$', login_required(views.UpdateAccount.as_view()), name='update_account'),
+
+    # Company
+    url(r'^dashboard/company/$', login_required(views.company), name='company'),
 )

@@ -139,3 +139,45 @@ class UpdateAccount(SuccessMessageMixin, UpdateView):
         Get the object that will be updated.
         """
         return self.request.user
+
+"""
+                             COMPANY
+"""
+def company(request):
+    """
+    Show the four other users in the CIP Manager's company.
+    """
+    if request.user.title != 'CIP Manager':
+        return redirect('dashboard')
+
+    company = request.user.company
+
+    obj_mng = get_user_model().objects
+    
+    qs = obj_mng.filter(company=company, title='Alternate CIP Manager')
+    if qs:
+        alternate_cip_manager = qs[0]
+    else:
+        alternate_cip_manager = None
+    qs = obj_mng.filter(company=company, title='Access Control Engineer')
+    if qs:
+        access_control_engineer = qs[0]
+    else:
+        access_control_engineer = None
+    qs = obj_mng.filter(company=company, title='Training Coordinator')
+    if qs:
+        training_coordinator = qs[0]
+    else:
+        training_coordinator = None
+    qs = obj_mng.filter(company=company, title='Human Resources')
+    if qs:
+        human_resources = qs[0]
+    else:
+        human_resources = None
+
+    return render(request, 'company.html', {
+        'alternate_cip_manager': alternate_cip_manager,
+        'access_control_engineer': access_control_engineer,
+        'training_coordinator': training_coordinator,
+        'human_resources': human_resources,
+    })

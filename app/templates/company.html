@@ -1,0 +1,151 @@
+{% extends "basenav.html" %}
+
+{% block title %}Company | AMP{% endblock %}
+
+{% block content %}
+
+<!-- Jumbotron -->
+<div class="jumbotron">
+    <div class="container">
+        <h1>Company</h1>
+        <p>This page allows you to update the users who have access to your company.</p>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Breadcrumbs -->
+    <ol class="breadcrumb">
+      <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+      <li class="active">Company</li>
+    </ol>
+
+    <!-- Users -->
+    <div class="row">
+        
+        <!-- Alternate CIP Manager -->
+        <div class="col-md-6 col-md-height">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Alternate CIP Manager</div>
+                <div class="panel-body">
+                    {% if alternate_cip_manager %}
+                    <div class="form-horizontal">
+                        <div class="row">
+                            <label class="col-sm-3 text-right">Email:</label>
+                            <div class="col-sm-9">{{alternate_cip_manager.email}}</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 text-right">First Name:</label>
+                            <div class="col-sm-9">{{alternate_cip_manager.first_name}}</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 text-right">Last Name:</label>
+                            <div class="col-sm-9">{{alternate_cip_manager.last_name}}</div>
+                        </div>
+                    </div>
+                    <hr>
+                    <p><a href="{% url 'app.views.auth_login' %}" class="btn-block btn btn-default" role="button">Update User &raquo;</a></p>
+                    {% else %}
+                    <p>You do not have an Alternate CIP Manager. Click the button below to create one.</p>
+                    <p><a href="{% url 'app.views.auth_login' %}" class="btn btn-default" role="button">Create User &raquo;</a></p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Access Control Engineer -->
+        <div class="col-md-6 col-md-height">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Access Control Engineer</div>
+                <div class="panel-body">
+                    {% if access_control_engineer %}
+                    <div class="form-horizontal">
+                        <div class="row">
+                            <label class="col-sm-3 text-right">Email:</label>
+                            <div class="col-sm-9">{{access_control_engineer.email}}</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 text-right">First Name:</label>
+                            <div class="col-sm-9">{{access_control_engineer.first_name}}</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 text-right">Last Name:</label>
+                            <div class="col-sm-9">{{access_control_engineer.last_name}}</div>
+                        </div>
+                    </div>
+                    <hr>
+                    <p><a href="{% url 'app.views.auth_login' %}" class="btn-block btn btn-default" role="button">Update User &raquo;</a></p>
+                    {% else %}
+                    <p>You do not have an Access Control Engineer. Click the button below to create one.</p>
+                    <p><a href="{% url 'app.views.auth_login' %}" class="btn btn-default" role="button">Create User &raquo;</a></p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+
+        <!-- Training Coordinator -->
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Training Coordinator</div>
+                <div class="panel-body">
+                    {% if training_coordinator %}
+                    <div class="form-horizontal">
+                        <div class="row">
+                            <label class="col-sm-3 text-right">Email:</label>
+                            <div class="col-sm-9">{{training_coordinator.email}}</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 text-right">First Name:</label>
+                            <div class="col-sm-9">{{training_coordinator.first_name}}</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 text-right">Last Name:</label>
+                            <div class="col-sm-9">{{training_coordinator.last_name}}</div>
+                        </div>
+                    </div>
+                    <hr>
+                    <p><a href="{% url 'app.views.auth_login' %}" class="btn-block btn btn-default" role="button">Update User &raquo;</a></p>
+                    {% else %}
+                    <p>You do not have an Training Coordinator. Click the button below to create one.</p>
+                    <p><a href="{% url 'app.views.auth_login' %}" class="btn btn-default" role="button">Create User &raquo;</a></p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Human Resources -->
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Human Resources</div>
+                <div class="panel-body">
+                    {% if human_resources %}
+                    <div class="form-horizontal">
+                        <div class="row">
+                            <label class="col-sm-3 text-right">Email:</label>
+                            <div class="col-sm-9">{{human_resources.email}}</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 text-right">First Name:</label>
+                            <div class="col-sm-9">{{human_resources.first_name}}</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 text-right">Last Name:</label>
+                            <div class="col-sm-9">{{human_resources.last_name}}</div>
+                        </div>
+                    </div>
+                    <hr>
+                    <p><a href="{% url 'app.views.auth_login' %}" class="btn-block btn btn-default" role="button">Update User &raquo;</a></p>
+                    {% else %}
+                    <p>You do not have a Human Resouces user. Click the button below to create one.</p>
+                    <p><a href="{% url 'app.views.auth_login' %}" class="btn btn-default" role="button">Create User &raquo;</a></p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
