@@ -36,7 +36,7 @@
             <td>{{employee.first_name}}</td>
             <td>{{employee.last_name}}</td>
             <td><a href="{% url 'update_employee' employee.pk %}">Read/Update</a></td>
-            <td><a href="{% url 'auth_login'%}?pk={{employee.pk}}">Delete</a></td>
+            <td><a href="{% url 'delete_employee' employee.pk %}">Delete</a></td>
         </tr>
         {% endfor %}
 

@@ -304,6 +304,20 @@ class NewEmployee(SuccessMessageMixin, CreateView):
         context['company'] = self.request.user.company.id
         return context
 
+def delete_employee(request, pk):
+    """
+    Delete an employee based on pk.
+    """
+    qs = Employee.objects.filter(pk=pk)
+    if qs:
+        qs[0].delete()
+        messages.add_message(request, messages.SUCCESS, 'Employee has been successfully deleted.')
+        return redirect('employees')
+    else:
+        messages.add_message(request, messages.ERROR, 'Employee does not exist.')
+        return redirect('employees')
+
+
 """
                              CONTRACTORS
 """
