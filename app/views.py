@@ -346,3 +346,15 @@ class NewPermission(SuccessMessageMixin, CreateView):
         context['company'] = self.request.user.company.id
         return context
 
+def delete_permission(request, pk):
+    """
+    Delete a permission based on its pk.
+    """
+    qs = Permission.objects.filter(pk=pk)
+    if qs:
+        qs[0].delete()
+        messages.add_message(request, messages.SUCCESS, 'Permission has been successfully deleted.')
+        return redirect('permissions')
+    else:
+        messages.add_message(request, messages.ERROR, 'Permission does not exist.')
+        return redirect('permissions')

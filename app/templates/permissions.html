@@ -32,7 +32,7 @@
         <tr>
             <td>{{permission.name}}</td>
             <td><a href="{% url 'update_permission' permission.pk %}">Read/Update</a></td>
-            <td><a href="{% url 'auth_login'%}?pk={{employee.pk}}">Delete</a></td>
+            <td><a href="{% url 'delete_permission' permission.pk %}">Delete</a></td>
         </tr>
         {% endfor %}
 
