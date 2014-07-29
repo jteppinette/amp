@@ -43,7 +43,7 @@
                         </div>
                     </div>
                     <hr>
-                    <p><a href="{% url 'app.views.auth_login' %}" class="btn-block btn btn-default" role="button">Update User &raquo;</a></p>
+                    <p><a href="{% url 'update_company_user' %}?title=Alternate CIP Manager" class="btn-block btn btn-default" role="button">Update User &raquo;</a></p>
                     {% else %}
                     <p>You do not have an Alternate CIP Manager. Click the button below to create one.</p>
                     <p><a href="{% url 'new_company_user' %}?title=Alternate CIP Manager" class="btn btn-default" role="button">Create User &raquo;</a></p>
@@ -73,7 +73,7 @@
                         </div>
                     </div>
                     <hr>
-                    <p><a href="{% url 'app.views.auth_login' %}" class="btn-block btn btn-default" role="button">Update User &raquo;</a></p>
+                    <p><a href="{% url 'update_company_user' %}?title=Access Control Engineer" class="btn-block btn btn-default" role="button">Update User &raquo;</a></p>
                     {% else %}
                     <p>You do not have an Access Control Engineer. Click the button below to create one.</p>
                     <p><a href="{% url 'new_company_user' %}?title=Access Control Engineer" class="btn btn-default" role="button">Create User &raquo;</a></p>
@@ -106,7 +106,7 @@
                         </div>
                     </div>
                     <hr>
-                    <p><a href="{% url 'app.views.auth_login' %}" class="btn-block btn btn-default" role="button">Update User &raquo;</a></p>
+                    <p><a href="{% url 'update_company_user' %}?title=Training Coordinator"" class="btn-block btn btn-default" role="button">Update User &raquo;</a></p>
                     {% else %}
                     <p>You do not have an Training Coordinator. Click the button below to create one.</p>
                     <p><a href="{% url 'new_company_user' %}?title=Training Coordinator" class="btn btn-default" role="button">Create User &raquo;</a></p>
@@ -136,7 +136,7 @@
                         </div>
                     </div>
                     <hr>
-                    <p><a href="{% url 'app.views.auth_login' %}" class="btn-block btn btn-default" role="button">Update User &raquo;</a></p>
+                    <p><a href="{% url 'update_company_user' %}?title=Human Resources" class="btn-block btn btn-default" role="button">Update User &raquo;</a></p>
                     {% else %}
                     <p>You do not have a Human Resouces user. Click the button below to create one.</p>
                     <p><a href="{% url 'new_company_user' %}?title=Human Resources" class="btn btn-default" role="button">Create User &raquo;</a></p>

@@ -29,6 +29,7 @@ urlpatterns = patterns('',
     # Company
     url(r'^dashboard/company/$', login_required(views.company), name='company'),
     url(r'^dashboard/company/user/new/$', login_required(views.NewCompanyUser.as_view()), name='new_company_user'),
+    url(r'^dashboard/company/user/update/$', login_required(views.UpdateCompanyUser.as_view()), name='update_company_user'),
 
     # Logs
     url(r'^dashboard/logs/$', login_required(views.ListLogs.as_view()), name='logs'),

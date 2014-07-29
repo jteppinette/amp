@@ -220,6 +220,30 @@ class NewCompanyUser(SuccessMessageMixin, CreateView):
 
         return super(NewCompanyUser, self).form_valid(form)
 
+class UpdateCompanyUser(SuccessMessageMixin, UpdateView):
+    """
+    Update a company user.
+    """
+    template_name = 'update_company_user.html'
+    form_class = UserChangeForm
+    success_url = reverse_lazy('company')
+    success_message = "Company user was updated successfuly!"
+
+    def get_object(self, queryset=None):
+        """
+        Get the object that will be updated.
+        """
+        return get_user_model().objects.get(company=self.request.user.company, title=self.request.GET.get('title', None))
+
+    def get_context_data(self, **kwargs):
+        """
+        Add title to context.
+        """
+        context = super(UpdateCompanyUser, self).get_context_data(**kwargs)
+        context['title'] = self.request.GET.get('title', None)
+        context['company'] = self.request.user.company.id
+        return context
+
 """
                              LOGS
 """
