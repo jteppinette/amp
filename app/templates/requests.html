@@ -45,7 +45,7 @@
                         {% endif %}
                     </td>
                     <td><a href="{% url 'approve_employee_request' request.pk %}">Approve</a></td>
-                    <td><a href="{% url 'auth_login' %}">Reject</a></td>
+                    <td><a href="{% url 'login' %}">Reject</a></td>
                 </tr>
                 {% endfor %}
 
@@ -84,8 +84,8 @@
                         {% endif %}
                     </td>
                     <td>{{request.remote}}</td>
-                    <td><a href="{% url 'auth_login'%}?pk={{employee.pk}}">Approve</a></td>
-                    <td><a href="{% url 'auth_login'%}">Reject</a></td>
+                    <td><a href="{% url 'login'%}?pk={{employee.pk}}">Approve</a></td>
+                    <td><a href="{% url 'login'%}">Reject</a></td>
                 </tr>
                 {% endfor %}
 

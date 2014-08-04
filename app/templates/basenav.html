@@ -11,15 +11,15 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="{% url 'app.views.home' %}" class="navbar-brand">AMP</a>
+            <a href="{% url 'home' %}" class="navbar-brand">AMP</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 {% if user.is_authenticated %}
                 <p class="navbar-text">Welcome, <a href="{% url 'update_account' %}" class="navbar-link">{{user.email}}</a></a>
-                <li><a href="{% url 'app.views.auth_logout' %}">Logout</a></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
                 {% else %}
-                <li><a href="{% url 'app.views.auth_login' %}">Login</a></li>
+                <li><a href="{% url 'login' %}">Login</a></li>
                 {% endif %}
             </ul>
         </div>
