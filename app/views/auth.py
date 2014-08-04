@@ -3,6 +3,7 @@ Define the views used to render the AMP Authentication pages.
 """
 
 from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 
 from django.shortcuts import render, redirect
 

@@ -7,6 +7,7 @@ from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView
 
 from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib import messages
 
 from django.core.urlresolvers import reverse_lazy
 
