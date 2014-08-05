@@ -1,14 +1,14 @@
-{% extends "basenav.html" %}
+{% extends "base/basenav.html" %}
 
-{% block title %}New Conctractor | AMP{% endblock %}
+{% block title %}Account | AMP{% endblock %}
 
 {% block content %}
 
 <!-- Jumbotron -->
 <div class="jumbotron">
     <div class="container">
-        <h1>New Contractor!</h1>
-        <p>This page allows you to create a new Contractor.</p>
+        <h1>Account</h1>
+        <p>This page allows you to update your Account.</p>
     </div>
 </div>
 
@@ -16,11 +16,11 @@
     <!-- Breadcrumbs -->
     <ol class="breadcrumb">
       <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-      <li><a href="{% url 'contractors' %}">Contractors</a></li>
-      <li class="active">New</li>
+      <li class="active">Account</li>
     </ol>
 
-    <form class="form-horizontal" role="form" method="post">
+    <!-- Account Update Form -->
+    <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
         {% if form.non_field_errors %}
@@ -34,6 +34,16 @@
             <label for="id_email" class="col-sm-2 control-label">Email:</label>
             <div class="col-sm-10">
                 {{form.email}}
+            </div>
+        </div>
+
+        <div class="form-group">
+            {% if form.new_password.errors %}
+            <div class="col-sm-offset-2 col-sm-10 alert alert-danger">{{form.new_password.errors}}</div>
+            {% endif %}
+            <label for="id_first_name" class="col-sm-2 control-label">New Password:</label>
+            <div class="col-sm-10">
+                {{form.new_password}}
             </div>
         </div>
 
@@ -57,27 +67,27 @@
             </div>
         </div>
 
+        {% if user.title == "CIP Manager" %}
         <div class="form-group">
-            {% if form.employer.errors %}
-            <div class="col-sm-offset-2 col-sm-10 alert alert-danger">{{form.employer.errors}}</div>
+            {% if form.company.errors %}
+            <div class="col-sm-offset-2 col-sm-10 alert alert-danger">{{form.company.errors}}</div>
             {% endif %}
-            <label for="id_employer" class="col-sm-2 control-label">Employer:</label>
+            <label for="id_company" class="col-sm-2 control-label">Company:</label>
             <div class="col-sm-10">
-                {{form.employer}}
+                {{form.company}}
             </div>
         </div>
 
         <div class="form-group">
-            {% if form.permissions.errors %}
-            <div class="col-sm-offset-2 col-sm-10 alert alert-danger">{{form.permissions.errors}}</div>
+            {% if form.title.errors %}
+            <div class="col-sm-offset-2 col-sm-10 alert alert-danger">{{form.title.errors}}</div>
             {% endif %}
-            <label for="id_permissions" class="col-sm-2 control-label">Permissions:</label>
+            <label for="id_title" class="col-sm-2 control-label">Title:</label>
             <div class="col-sm-10">
-                {{form.permissions}}
+                {{form.title}}
             </div>
         </div>
-
-        <input type="hidden" name="company" value="{{company}}" />
+        {% endif %}
 
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">

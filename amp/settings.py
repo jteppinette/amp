@@ -26,7 +26,6 @@ TEMPLATE_DEBUG = True
 
 TEMPLATE_DIRS = [
     os.path.join(BASE_DIR, 'templates'),
-    os.path.join(BASE_DIR, 'app', 'templates')
 ]
 
 ALLOWED_HOSTS = []
@@ -41,6 +40,7 @@ LOGOUT_URL = '/logout/'
 # Application definition
 
 INSTALLED_APPS = (
+    'app',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

@@ -1,14 +1,14 @@
-{% extends "basenav.html" %}
+{% extends "base/basenav.html" %}
 
-{% block title %}Read/Update Contractor | AMP{% endblock %}
+{% block title %}New Conctractor | AMP{% endblock %}
 
 {% block content %}
 
 <!-- Jumbotron -->
 <div class="jumbotron">
     <div class="container">
-        <h1>Read/Update Contractor</h1>
-        <p>This page allows you to read and update a Contractor.</p>
+        <h1>New Contractor!</h1>
+        <p>This page allows you to create a new Contractor.</p>
     </div>
 </div>
 
@@ -16,17 +16,26 @@
     <!-- Breadcrumbs -->
     <ol class="breadcrumb">
       <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-      <li><a href="{% url 'contractors' %}">Contractor</a></li>
-      <li class="active">{{name}}</li>
+      <li><a href="{% url 'contractors' %}">Contractors</a></li>
+      <li class="active">New</li>
     </ol>
 
-    <!-- Contractor Update Form -->
-    <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data">
+    <form class="form-horizontal" role="form" method="post">
         {% csrf_token %}
 
         {% if form.non_field_errors %}
         <div class="alert alert-danger" role="alert">{{form.non_field_errors}}</div>
         {% endif %}
+
+        <div class="form-group">
+            {% if form.email.errors %}
+            <div class="col-sm-offset-2 col-sm-10 alert alert-danger">{{form.email.errors}}</div>
+            {% endif %}
+            <label for="id_email" class="col-sm-2 control-label">Email:</label>
+            <div class="col-sm-10">
+                {{form.email}}
+            </div>
+        </div>
 
         <div class="form-group">
             {% if form.first_name.errors %}
@@ -49,16 +58,6 @@
         </div>
 
         <div class="form-group">
-            {% if form.email.errors %}
-            <div class="col-sm-offset-2 col-sm-10 alert alert-danger">{{form.email.errors}}</div>
-            {% endif %}
-            <label for="id_email" class="col-sm-2 control-label">Email:</label>
-            <div class="col-sm-10">
-                {{form.email}}
-            </div>
-        </div>
-
-        <div class="form-group">
             {% if form.employer.errors %}
             <div class="col-sm-offset-2 col-sm-10 alert alert-danger">{{form.employer.errors}}</div>
             {% endif %}
@@ -67,7 +66,6 @@
                 {{form.employer}}
             </div>
         </div>
-
 
         <div class="form-group">
             {% if form.permissions.errors %}

@@ -19,7 +19,7 @@ class ListEmployees(ListView):
     """
     List the employees that are owned by the requestors company.
     """
-    template_name = 'employees.html'
+    template_name = 'employees/employees.html'
 
     def get_queryset(self):
         """
@@ -31,7 +31,7 @@ class UpdateEmployee(SuccessMessageMixin, UpdateView):
     """
     Update an employee.
     """
-    template_name = 'update_employee.html'
+    template_name = 'employees/update_employee.html'
     model = Employee
     success_url = reverse_lazy('employees')
     success_message = "Employee was updated successfully!"
@@ -49,7 +49,7 @@ class NewEmployee(SuccessMessageMixin, CreateView):
     """
     Create a new employee.
     """
-    template_name = 'new_employee.html'
+    template_name = 'employees/new_employee.html'
     model = Employee
     success_url = reverse_lazy('employees')
     success_message = "Employee creation was a success!"

@@ -1,14 +1,14 @@
-{% extends "basenav.html" %}
+{% extends "base/basenav.html" %}
 
-{% block title %}Account | AMP{% endblock %}
+{% block title %}New Employee | AMP{% endblock %}
 
 {% block content %}
 
 <!-- Jumbotron -->
 <div class="jumbotron">
     <div class="container">
-        <h1>Account</h1>
-        <p>This page allows you to update your Account.</p>
+        <h1>New Employee!</h1>
+        <p>This page allows you to create a new Employee.</p>
     </div>
 </div>
 
@@ -16,11 +16,12 @@
     <!-- Breadcrumbs -->
     <ol class="breadcrumb">
       <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-      <li class="active">Account</li>
+      <li><a href="{% url 'employees' %}">Employees</a></li>
+      <li class="active">New</li>
     </ol>
 
-    <!-- Account Update Form -->
-    <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data">
+ 
+    <form class="form-horizontal" role="form" method="post">
         {% csrf_token %}
 
         {% if form.non_field_errors %}
@@ -28,22 +29,12 @@
         {% endif %}
 
         <div class="form-group">
-            {% if form.email.errors %}
-            <div class="col-sm-offset-2 col-sm-10 alert alert-danger">{{form.email.errors}}</div>
+            {% if form.eid.errors %}
+            <div class="col-sm-offset-2 col-sm-10 alert alert-danger">{{form.eid.errors}}</div>
             {% endif %}
-            <label for="id_email" class="col-sm-2 control-label">Email:</label>
+            <label for="id_eid" class="col-sm-2 control-label">EID:</label>
             <div class="col-sm-10">
-                {{form.email}}
-            </div>
-        </div>
-
-        <div class="form-group">
-            {% if form.new_password.errors %}
-            <div class="col-sm-offset-2 col-sm-10 alert alert-danger">{{form.new_password.errors}}</div>
-            {% endif %}
-            <label for="id_first_name" class="col-sm-2 control-label">New Password:</label>
-            <div class="col-sm-10">
-                {{form.new_password}}
+                {{form.eid}}
             </div>
         </div>
 
@@ -67,27 +58,17 @@
             </div>
         </div>
 
-        {% if user.title == "CIP Manager" %}
         <div class="form-group">
-            {% if form.company.errors %}
-            <div class="col-sm-offset-2 col-sm-10 alert alert-danger">{{form.company.errors}}</div>
+            {% if form.permissions.errors %}
+            <div class="col-sm-offset-2 col-sm-10 alert alert-danger">{{form.permissions.errors}}</div>
             {% endif %}
-            <label for="id_company" class="col-sm-2 control-label">Company:</label>
+            <label for="id_permissions" class="col-sm-2 control-label">Permissions:</label>
             <div class="col-sm-10">
-                {{form.company}}
+                {{form.permissions}}
             </div>
         </div>
 
-        <div class="form-group">
-            {% if form.title.errors %}
-            <div class="col-sm-offset-2 col-sm-10 alert alert-danger">{{form.title.errors}}</div>
-            {% endif %}
-            <label for="id_title" class="col-sm-2 control-label">Title:</label>
-            <div class="col-sm-10">
-                {{form.title}}
-            </div>
-        </div>
-        {% endif %}
+        <input type="hidden" name="company" value="{{company}}" />
 
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">

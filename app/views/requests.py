@@ -18,7 +18,7 @@ class NewEmployeeRequest(SuccessMessageMixin, CreateView):
     """
     Create a new employee request.
     """
-    template_name = 'new_employee_request.html'
+    template_name = 'requests/new_employee_request.html'
     model = EmployeeRequest
     success_url = reverse_lazy('home')
     success_message = "Employee request submision was successful! You will be contacted soon."
@@ -38,7 +38,7 @@ class NewContractorRequest(SuccessMessageMixin, CreateView):
     """
     Create a new contractor request.
     """
-    template_name = 'new_contractor_request.html'
+    template_name = 'requests/new_contractor_request.html'
     model = ContractorRequest
     success_url = reverse_lazy('home')
     success_message = "Contractor request submision was successful! You will be contacted soon."
@@ -60,7 +60,7 @@ def requests(request):
     employee_requests = EmployeeRequest.objects.all().prefetch_related('employee', 'permissions')
     contractor_requests = ContractorRequest.objects.all().prefetch_related('permissions')
 
-    return render(request, 'requests.html', {
+    return render(request, 'requests/requests.html', {
         'employee_requests': employee_requests,
         'contractor_requests': contractor_requests,
     })

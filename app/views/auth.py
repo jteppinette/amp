@@ -23,9 +23,9 @@ def auth_login(request):
             return redirect(next_page)
         else:
             messages.add_message(request, messages.ERROR, 'Your username and password did not match. Please try again.')
-            return render(request, 'login.html')
+            return render(request, 'auth/login.html')
     else:
-        return render(request, 'login.html')
+        return render(request, 'auth/login.html')
 
 def auth_logout(request):
     """

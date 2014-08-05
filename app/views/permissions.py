@@ -19,7 +19,7 @@ class ListPermissions(ListView):
     """
     List the permissions that are owned by the requestors company.
     """
-    template_name = 'permissions.html'
+    template_name = 'permissions/permissions.html'
 
     def get_queryset(self):
         """
@@ -32,7 +32,7 @@ class UpdatePermission(SuccessMessageMixin, UpdateView):
     """
     Update a permission.
     """
-    template_name = 'update_permission.html'
+    template_name = 'permissions/update_permission.html'
     model = Permission
     success_url = reverse_lazy('permissions')
     success_message = "Permission was updated successfully!"
@@ -50,7 +50,7 @@ class NewPermission(SuccessMessageMixin, CreateView):
     """
     Create a new permission.
     """
-    template_name = 'new_permission.html'
+    template_name = 'permissions/new_permission.html'
     model = Permission
     success_url = reverse_lazy('permissions')
     success_message = "Permissions creation was a success!"

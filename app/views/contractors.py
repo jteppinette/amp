@@ -19,7 +19,7 @@ class ListContractors(ListView):
     """
     List the contractors that are owned by the requestors company.
     """
-    template_name = 'contractors.html'
+    template_name = 'contractors/contractors.html'
 
     def get_queryset(self):
         """
@@ -31,7 +31,7 @@ class UpdateContractor(SuccessMessageMixin, UpdateView):
     """
     Update an employee.
     """
-    template_name = 'update_contractor.html'
+    template_name = 'contractors/update_contractor.html'
     model = Contractor
     success_url = reverse_lazy('contractors')
     success_message = "Contractor was updated successfully!"
@@ -49,7 +49,7 @@ class NewContractor(SuccessMessageMixin, CreateView):
     """
     Create a new contractor.
     """
-    template_name = 'new_contractor.html'
+    template_name = 'contractors/new_contractor.html'
     model = Contractor
     success_url = reverse_lazy('contractors')
     success_message = "Contractor creation was a success!"
