@@ -9,3 +9,8 @@ body {
     width: 100%;
     text-align: center;
 }
+
+.jumbotron {
+    background-image: url('http://www.cinemaparadiz.com/wp-content/uploads/2013/07/WhiteBg1.jpg');
+    background-size: cover;
+}
