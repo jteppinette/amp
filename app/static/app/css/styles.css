@@ -14,3 +14,7 @@ body {
     background-image: url('http://www.cinemaparadiz.com/wp-content/uploads/2013/07/WhiteBg1.jpg');
     background-size: cover;
 }
+
+.jumbotron h1 {
+    color: #222;
+}
