@@ -9,12 +9,8 @@ from django.contrib.auth.decorators import login_required
 from app import views
 
 urlpatterns = patterns('',
-    # Authentication
-    url(r'^login/$', views.auth_login, name="login"),
-    url(r'^logout/$', views.auth_logout, name="logout"),
-    
     # General
-    url(r'^$', views.home, name="home"),
+    url(r'^$', views.home, name='home'),
 
     # App
     url(r'^dashboard/$', login_required(views.dashboard), name="dashboard"),
