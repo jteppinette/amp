@@ -13,13 +13,15 @@ from django.core.urlresolvers import reverse_lazy
 
 from api.models import EmployeeRequest, ContractorRequest, Log
 
+from app.forms import NewEmployeeRequestForm, NewContractorRequestForm
+
 
 class NewEmployeeRequest(SuccessMessageMixin, CreateView):
     """
     Create a new employee request.
     """
     template_name = 'requests/new_employee_request.html'
-    model = EmployeeRequest
+    form_class = NewEmployeeRequestForm
     success_url = reverse_lazy('home')
     success_message = "Employee request submision was successful! You will be contacted soon."
 
@@ -39,7 +41,7 @@ class NewContractorRequest(SuccessMessageMixin, CreateView):
     Create a new contractor request.
     """
     template_name = 'requests/new_contractor_request.html'
-    model = ContractorRequest
+    form_class = NewContractorRequestForm
     success_url = reverse_lazy('home')
     success_message = "Contractor request submision was successful! You will be contacted soon."
 
