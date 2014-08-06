@@ -14,7 +14,7 @@ class UpdateAccount(SuccessMessageMixin, UpdateView):
     """
     Update the currently logged in users account.
     """
-    template_name = 'account/update_account.html'
+    template_name = 'account/update.html'
     form_class = UserChangeForm
     success_url = reverse_lazy('update_account')
     success_message = "Your account was updated successfully!"

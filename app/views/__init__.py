@@ -6,5 +6,4 @@ from .discover import *
 from .permissions import *
 from .company import *
 from .requests import *
-from .auth import *
 from .logs import *

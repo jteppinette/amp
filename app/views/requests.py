@@ -62,7 +62,7 @@ def requests(request):
     employee_requests = EmployeeRequest.objects.all().prefetch_related('employee', 'permissions')
     contractor_requests = ContractorRequest.objects.all().prefetch_related('permissions')
 
-    return render(request, 'requests/requests.html', {
+    return render(request, 'requests/list.html', {
         'employee_requests': employee_requests,
         'contractor_requests': contractor_requests,
     })

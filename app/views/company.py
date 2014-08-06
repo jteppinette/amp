@@ -45,7 +45,7 @@ def company(request):
     else:
         human_resources = None
 
-    return render(request, 'company/company.html', {
+    return render(request, 'company/list.html', {
         'alternate_cip_manager': alternate_cip_manager,
         'access_control_engineer': access_control_engineer,
         'training_coordinator': training_coordinator,
@@ -56,7 +56,7 @@ class NewCompanyUser(SuccessMessageMixin, CreateView):
     """
     Create a new contractor request.
     """
-    template_name = 'company/new_company_user.html'
+    template_name = 'company/new.html'
     model = get_user_model()
     form_class = UserCreationForm
     success_url = reverse_lazy('company')
@@ -91,7 +91,7 @@ class UpdateCompanyUser(SuccessMessageMixin, UpdateView):
     """
     Update a company user.
     """
-    template_name = 'company/update_company_user.html'
+    template_name = 'company/update.html'
     form_class = UserChangeForm
     success_url = reverse_lazy('company')
     success_message = "Company user was updated successfuly!"

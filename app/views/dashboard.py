@@ -8,5 +8,5 @@ def dashboard(request):
     """
     Main dashboard for AMP application.
     """
-    return render(request, 'dashboard/dashboard.html')
+    return render(request, 'dashboard/home.html')
 
