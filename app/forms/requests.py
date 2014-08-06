@@ -1,10 +1,11 @@
 """
-Define the forms that will be used in the AMP app.
+Define the forms that will be used by the Requests views.
 """
 
 from bootstrapforms.forms import BootstrapModelForm
 
 from api.models import EmployeeRequest, ContractorRequest
+
 
 class NewEmployeeRequestForm(BootstrapModelForm):
     """

@@ -14,6 +14,8 @@ from django.core.urlresolvers import reverse_lazy
 
 from api.models import Employee, Log
 
+from app.forms.employees import NewEmployeeForm, UpdateEmployeeForm
+
 
 class ListEmployees(ListView):
     """
@@ -32,44 +34,32 @@ class UpdateEmployee(SuccessMessageMixin, UpdateView):
     Update an employee.
     """
     template_name = 'employees/update.html'
+    form_class = UpdateEmployeeForm
     model = Employee
     success_url = reverse_lazy('list-employees')
     success_message = "Employee was updated successfully!"
 
-    def get_context_data(self, **kwargs):
-        """
-        Add some stuff to context.
-        """
-        context = super(UpdateEmployee, self).get_context_data(**kwargs)
-        context['name'] = '%s %s' % (self.get_object().first_name, self.get_object().last_name)
-        context['company'] = self.get_object().company.id
-        return context
 
 class NewEmployee(SuccessMessageMixin, CreateView):
     """
     Create a new employee.
     """
     template_name = 'employees/new.html'
-    model = Employee
+    form_class = NewEmployeeForm
     success_url = reverse_lazy('list-employees')
     success_message = "Employee creation was a success!"
 
-    def get_context_data(self, **kwargs):
-        """
-        Add some stuff to context.
-        """
-        context = super(NewEmployee, self).get_context_data(**kwargs)
-        context['company'] = self.request.user.company.id
-        return context
+    def get_form_kwargs(self):
+        kwargs = super(NewEmployee, self).get_form_kwargs()
+        kwargs.update({'company': self.request.user.company.pk})
+        return kwargs
 
     def form_valid(self, form):
         """
         Save the form and generate a proper log.
         """
-        obj = form.save(commit=True)
-
+        obj = form.save()
         Log.objects.create(author=self.request.user.email, **obj.creation_log())
-
         return super(NewEmployee, self).form_valid(form)
 
 
