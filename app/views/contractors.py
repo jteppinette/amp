@@ -5,7 +5,7 @@ Define the views used to render the AMP Contractors pages.
 from django.shortcuts import redirect
 
 from django.views.generic.edit import UpdateView, CreateView
-from django.views.generic import ListView
+from django.views.generic import ListView, DeleteView
 
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
@@ -33,7 +33,7 @@ class UpdateContractor(SuccessMessageMixin, UpdateView):
     """
     template_name = 'contractors/update.html'
     model = Contractor
-    success_url = reverse_lazy('contractors')
+    success_url = reverse_lazy('list-contractors')
     success_message = "Contractor was updated successfully!"
 
     def get_context_data(self, **kwargs):
@@ -51,7 +51,7 @@ class NewContractor(SuccessMessageMixin, CreateView):
     """
     template_name = 'contractors/new.html'
     model = Contractor
-    success_url = reverse_lazy('contractors')
+    success_url = reverse_lazy('list-contractors')
     success_message = "Contractor creation was a success!"
 
     def get_context_data(self, **kwargs):
@@ -73,17 +73,7 @@ class NewContractor(SuccessMessageMixin, CreateView):
         return super(NewContractor, self).form_valid(form)
 
 
-def delete_contractor(request, pk):
-    """
-    Delete a contractor based on pk.
-    """
-    qs = Contractor.objects.filter(pk=pk)
-    if qs:
-        qs[0].delete()
-        messages.add_message(request, messages.SUCCESS, 'Contractor has been successfully deleted.')
-        return redirect('contractors')
-    else:
-        messages.add_message(request, messages.ERROR, 'Contractor does not exist.')
-        return redirect('contractors')
-
-
+class DeleteContractor(DeleteView):
+    model = Contractor
+    template_name = 'base/delete.html'
+    success_url = reverse_lazy('list-contractors')

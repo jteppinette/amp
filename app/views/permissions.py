@@ -5,7 +5,7 @@ Define the views used to render the AMP Permissions pages.
 from django.shortcuts import redirect
 
 from django.views.generic.edit import UpdateView, CreateView
-from django.views.generic import ListView
+from django.views.generic import ListView, DeleteView
 
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
@@ -34,7 +34,7 @@ class UpdatePermission(SuccessMessageMixin, UpdateView):
     """
     template_name = 'permissions/update.html'
     model = Permission
-    success_url = reverse_lazy('permissions')
+    success_url = reverse_lazy('list-permissions')
     success_message = "Permission was updated successfully!"
 
     def get_context_data(self, **kwargs):
@@ -52,7 +52,7 @@ class NewPermission(SuccessMessageMixin, CreateView):
     """
     template_name = 'permissions/new.html'
     model = Permission
-    success_url = reverse_lazy('permissions')
+    success_url = reverse_lazy('list-permissions')
     success_message = "Permissions creation was a success!"
 
     def get_context_data(self, **kwargs):
@@ -63,17 +63,7 @@ class NewPermission(SuccessMessageMixin, CreateView):
         context['company'] = self.request.user.company.id
         return context
 
-def delete_permission(request, pk):
-    """
-    Delete a permission based on its pk.
-    """
-    qs = Permission.objects.filter(pk=pk)
-    if qs:
-        qs[0].delete()
-        messages.add_message(request, messages.SUCCESS, 'Permission has been successfully deleted.')
-        return redirect('permissions')
-    else:
-        messages.add_message(request, messages.ERROR, 'Permission does not exist.')
-        return redirect('permissions')
-
-
+class DeletePermission(DeleteView):
+    model = Permission
+    template_name = 'base/delete.html'
+    success_url = reverse_lazy('list-permissions')

@@ -15,7 +15,7 @@
 <div class="container">
     <!-- Breadcrumbs -->
     <ol class="breadcrumb">
-      <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+      <li><a href="{% url 'dashboard-home' %}">Dashboard</a></li>
       <li class="active">Requests</li>
     </ol>
 
@@ -44,7 +44,7 @@
                         </ul>
                         {% endif %}
                     </td>
-                    <td><a href="{% url 'approve_employee_request' request.pk %}">Approve</a></td>
+                    <td><a href="{% url 'approve-employee-request' request.pk %}">Approve</a></td>
                     <td><a href="{% url 'login' %}">Reject</a></td>
                 </tr>
                 {% endfor %}

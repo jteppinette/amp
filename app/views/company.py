@@ -18,7 +18,7 @@ def company(request):
     Show the four other users in the CIP Manager's company.
     """
     if request.user.title != 'CIP Manager':
-        return redirect('dashboard')
+        return redirect('dashboard-home')
 
     company = request.user.company
 
@@ -59,7 +59,7 @@ class NewCompanyUser(SuccessMessageMixin, CreateView):
     template_name = 'company/new.html'
     model = get_user_model()
     form_class = UserCreationForm
-    success_url = reverse_lazy('company')
+    success_url = reverse_lazy('list-company-users')
     success_message = "Company user has been successfully created!"
 
     def get_context_data(self, **kwargs):
@@ -93,7 +93,7 @@ class UpdateCompanyUser(SuccessMessageMixin, UpdateView):
     """
     template_name = 'company/update.html'
     form_class = UserChangeForm
-    success_url = reverse_lazy('company')
+    success_url = reverse_lazy('list-company-users')
     success_message = "Company user was updated successfuly!"
 
     def get_object(self, queryset=None):

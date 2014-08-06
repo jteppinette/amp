@@ -10,46 +10,45 @@ from app import views
 
 urlpatterns = patterns('',
     # General
-    url(r'^$', views.home, name='home'),
+    url(r'^$', views.home, name='discover-home'),
 
     # App
-    url(r'^dashboard/$', login_required(views.dashboard), name="dashboard"),
+    url(r'^dashboard/$', login_required(views.dashboard), name="dashboard-home"),
 
     # New Requests
-    url(r'^requests/employee/new/$', views.NewEmployeeRequest.as_view(), name='new_employee_request'),
-    url(r'^requests/contractor/new/$', views.NewContractorRequest.as_view(), name='new_contractor_request'),
+    url(r'^requests/employee/new/$', views.NewEmployeeRequest.as_view(), name='new-employee-request'),
+    url(r'^requests/contractor/new/$', views.NewContractorRequest.as_view(), name='new-contractor-request'),
 
     # Account
-    url(r'^dashboard/account/$', login_required(views.UpdateAccount.as_view()), name='update_account'),
+    url(r'^dashboard/account/$', login_required(views.UpdateAccount.as_view()), name='update-account'),
 
     # Company
-    url(r'^dashboard/company/$', login_required(views.company), name='company'),
-    url(r'^dashboard/company/user/new/$', login_required(views.NewCompanyUser.as_view()), name='new_company_user'),
-    url(r'^dashboard/company/user/update/$', login_required(views.UpdateCompanyUser.as_view()), name='update_company_user'),
+    url(r'^dashboard/company/users/$', login_required(views.company), name='list-company-users'),
+    url(r'^dashboard/company/users/new/$', login_required(views.NewCompanyUser.as_view()), name='new-company-user'),
+    url(r'^dashboard/company/users/update/$', login_required(views.UpdateCompanyUser.as_view()), name='update-company-user'),
 
     # Logs
-    url(r'^dashboard/logs/$', login_required(views.ListLogs.as_view()), name='logs'),
+    url(r'^dashboard/logs/$', login_required(views.ListLogs.as_view()), name='list-logs'),
 
     # Employees
-    url(r'^dashboard/employees/$', login_required(views.ListEmployees.as_view()), name='employees'),
-    url(r'^dashboard/employees/(?P<pk>\d+)/$', login_required(views.UpdateEmployee.as_view()), name='update_employee'),
-    url(r'^dashboard/employees/new/$', login_required(views.NewEmployee.as_view()), name='new_employee'),
-    url(r'^dashboard/employees/(?P<pk>\d+)/delete/$', login_required(views.delete_employee), name='delete_employee'),
+    url(r'^dashboard/employees/$', login_required(views.ListEmployees.as_view()), name='list-employees'),
+    url(r'^dashboard/employees/(?P<pk>\d+)/$', login_required(views.UpdateEmployee.as_view()), name='update-employee'),
+    url(r'^dashboard/employees/new/$', login_required(views.NewEmployee.as_view()), name='new-employee'),
+    url(r'^dashboard/employees/(?P<pk>\d+)/delete/$', login_required(views.DeleteEmployee.as_view()), name='delete-employee'),
 
     # Contractors
-    url(r'^dashboard/contractors/$', login_required(views.ListContractors.as_view()), name='contractors'),
-    url(r'^dashboard/contractors/(?P<pk>\d+)/$', login_required(views.UpdateContractor.as_view()), name='update_contractor'),
-    url(r'^dashboard/contractors/new/$', login_required(views.NewContractor.as_view()), name='new_contractor'),
-    url(r'^dashboard/contractors/(?P<pk>\d+)/delete/$', login_required(views.delete_contractor), name='delete_contractor'),
+    url(r'^dashboard/contractors/$', login_required(views.ListContractors.as_view()), name='list-contractors'),
+    url(r'^dashboard/contractors/(?P<pk>\d+)/$', login_required(views.UpdateContractor.as_view()), name='update-contractor'),
+    url(r'^dashboard/contractors/new/$', login_required(views.NewContractor.as_view()), name='new-contractor'),
+    url(r'^dashboard/contractors/(?P<pk>\d+)/delete/$', login_required(views.DeleteContractor.as_view()), name='delete-contractor'),
 
     # Permissions
-    url(r'^dashboard/permissions/$', login_required(views.ListPermissions.as_view()), name='permissions'),
-    url(r'^dashboard/permissions/(?P<pk>\d+)/$', login_required(views.UpdatePermission.as_view()), name='update_permission'),
-    url(r'^dashboard/permissions/new/$', login_required(views.NewPermission.as_view()), name='new_permission'),
-    url(r'^dashboard/permissions/(?P<pk>\d+)/delete/$', login_required(views.delete_permission), name='delete_permission'),
+    url(r'^dashboard/permissions/$', login_required(views.ListPermissions.as_view()), name='list-permissions'),
+    url(r'^dashboard/permissions/(?P<pk>\d+)/$', login_required(views.UpdatePermission.as_view()), name='update-permission'),
+    url(r'^dashboard/permissions/new/$', login_required(views.NewPermission.as_view()), name='new-permission'),
+    url(r'^dashboard/permissions/(?P<pk>\d+)/delete/$', login_required(views.DeletePermission.as_view()), name='delete-permission'),
 
     # Requests
-    url(r'^dashboard/requests/$', login_required(views.requests), name='requests'),
-    url(r'^dashboard/requests/employee/(?P<pk>\d+)/approve/$', login_required(views.approve_employee_request), name='approve_employee_request'),
-
+    url(r'^dashboard/requests/$', login_required(views.requests), name='list-requests'),
+    url(r'^dashboard/requests/employees/(?P<pk>\d+)/approve/$', login_required(views.approve_employee_request), name='approve-employee-request'),
 )

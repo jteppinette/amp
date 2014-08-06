@@ -11,12 +11,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="{% url 'home' %}" class="navbar-brand">AMP</a>
+            <a href="{% url 'discover-home' %}" class="navbar-brand">AMP</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 {% if user.is_authenticated %}
-                <p class="hidden-xs navbar-text">Welcome, <a href="{% url 'update_account' %}" class="navbar-link">{{user.email}}</a></a>
+                <p class="hidden-xs navbar-text">Welcome, <a href="{% url 'update-account' %}" class="navbar-link">{{user.email}}</a></a>
                 <li><a href="{% url 'logout' %}">Logout</a></li>
                 {% else %}
                 <li><a href="{% url 'login' %}">Login</a></li>

@@ -9,7 +9,7 @@
     <div class="container">
         <h1>Employees</h1>
         <p>This page allows you to create, read, update and delete employees. You can also view their individual profiles showing their permissions and requests. Click the button below to add a new employee.</p>
-        <p><a href="{% url 'new_employee' %}" class="btn btn-primary btn-lg" role="button">Add an Employee &raquo;</a></p>
+        <p><a href="{% url 'new-employee' %}" class="btn btn-primary btn-lg" role="button">Add an Employee &raquo;</a></p>
 
     </div>
 </div>
@@ -17,7 +17,7 @@
 <div class="container">
     <!-- Breadcrumbs -->
     <ol class="breadcrumb">
-      <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+      <li><a href="{% url 'dashboard-home' %}">Dashboard</a></li>
       <li class="active">Employees</li>
     </ol>
 
@@ -35,8 +35,8 @@
             <td>{{employee.eid}}</td>
             <td>{{employee.first_name}}</td>
             <td>{{employee.last_name}}</td>
-            <td><a href="{% url 'update_employee' employee.pk %}">Read/Update</a></td>
-            <td><a href="{% url 'delete_employee' employee.pk %}">Delete</a></td>
+            <td><a href="{% url 'update-employee' employee.pk %}">Read/Update</a></td>
+            <td><a href="{% url 'delete-employee' employee.pk %}">Delete</a></td>
         </tr>
         {% endfor %}
 

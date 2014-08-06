@@ -5,7 +5,7 @@ Define the views used to render the AMP Employees pages.
 from django.shortcuts import redirect
 
 from django.views.generic.edit import UpdateView, CreateView
-from django.views.generic import ListView
+from django.views.generic import ListView, DeleteView
 
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
@@ -33,7 +33,7 @@ class UpdateEmployee(SuccessMessageMixin, UpdateView):
     """
     template_name = 'employees/update.html'
     model = Employee
-    success_url = reverse_lazy('employees')
+    success_url = reverse_lazy('list-employees')
     success_message = "Employee was updated successfully!"
 
     def get_context_data(self, **kwargs):
@@ -51,7 +51,7 @@ class NewEmployee(SuccessMessageMixin, CreateView):
     """
     template_name = 'employees/new.html'
     model = Employee
-    success_url = reverse_lazy('employees')
+    success_url = reverse_lazy('list-employees')
     success_message = "Employee creation was a success!"
 
     def get_context_data(self, **kwargs):
@@ -72,15 +72,8 @@ class NewEmployee(SuccessMessageMixin, CreateView):
 
         return super(NewEmployee, self).form_valid(form)
 
-def delete_employee(request, pk):
-    """
-    Delete an employee based on pk.
-    """
-    qs = Employee.objects.filter(pk=pk)
-    if qs:
-        qs[0].delete()
-        messages.add_message(request, messages.SUCCESS, 'Employee has been successfully deleted.')
-        return redirect('employees')
-    else:
-        messages.add_message(request, messages.ERROR, 'Employee does not exist.')
-        return redirect('employees')
+
+class DeleteEmployee(DeleteView):
+    model = Employee
+    template_name = 'base/delete.html'
+    success_url = reverse_lazy('list-employees')

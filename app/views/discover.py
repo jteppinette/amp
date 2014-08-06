@@ -9,6 +9,6 @@ def home(request):
     Home page for the AMP application.
     """
     if request.user.is_authenticated():
-        return redirect('dashboard')
+        return redirect('dashboard-home')
 
     return render(request, 'discover/home.html')
