@@ -41,6 +41,7 @@ LOGOUT_URL = '/logout/'
 # Application definition
 
 INSTALLED_APPS = (
+    'bootstrapforms',
     'app',
     'django.contrib.admin',
     'django.contrib.auth',

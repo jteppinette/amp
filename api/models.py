@@ -349,7 +349,7 @@ class ContractorRequest(models.Model):
 
     permissions = models.ManyToManyField(Permission)
 
-    remote = models.BooleanField()
+    remote = models.BooleanField(help_text="Will you be accessing remotely?")
 
     background_check = models.FileField(upload_to='background', blank=True, null=True)
 
