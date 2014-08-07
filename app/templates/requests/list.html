@@ -26,16 +26,14 @@
         <div class="panel-body">
             <table class="table table-striped">
                 <tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
+                    <th>Name</th>
                     <th>Requested Permissions</th>
                     <th>Approve</th>
                     <th>Reject</th>
                 </tr>
                 {% for request in employee_requests %}
                 <tr>
-                    <td>{{request.employee.first_name}}</td>
-                    <td>{{request.employee.last_name}}</td>
+                    <td>{{request.employee.first_name}} {{request.employee.last_name}}</td>
                     <td>
                         {% if request.permissions %}
                         <ul>
@@ -60,9 +58,7 @@
         <div class="panel-body">
             <table class="table table-striped">
                 <tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
+                    <th>Name</th>
                     <th>Employer</th>
                     <th>Requested Permissions</th>
                     <th>Remote</th>
@@ -71,9 +67,7 @@
                 </tr>
                 {% for request in contractor_requests %}
                 <tr>
-                    <td>{{request.first_name}}</td>
-                    <td>{{request.last_name}}</td>
-                    <td>{{request.email}}</td>
+                    <td>{{request.first_name}} {{request.last_name}}</td>
                     <td>{{request.employer}}</td>
                     <td>
                         {% if request.permissions %}

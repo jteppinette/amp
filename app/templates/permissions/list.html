@@ -26,13 +26,13 @@
     <table class="table table-striped">
         <tr>
             <th>Name</th>
-            <th>Read/Update</th>
+            <th>Update</th>
             <th>Delete</th>
         </tr>
         {% for permission in object_list %}
         <tr>
             <td>{{permission.name}}</td>
-            <td><a href="{% url 'update-permission' permission.pk %}">Read/Update</a></td>
+            <td><a href="{% url 'update-permission' permission.pk %}">Update</a></td>
             <td><a href="{% url 'delete-permission' permission.pk %}">Delete</a></td>
         </tr>
         {% endfor %}

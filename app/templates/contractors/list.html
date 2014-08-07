@@ -25,20 +25,18 @@
     <!-- List -->
     <table class="table table-striped">
         <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
+            <th>Name</th>
             <th>Email</th>
             <th>Employer</th>
-            <th>Read/Update</th>
+            <th>Update</th>
             <th>Delete</th>
         </tr>
         {% for contractor in object_list %}
         <tr>
-            <td>{{contractor.first_name}}</td>
-            <td>{{contractor.last_name}}</td>
+            <td>{{contractor.first_name}} {{contractor.last_name}}</td>
             <td>{{contractor.email}}</td>
             <td>{{contractor.employer}}</td>
-            <td><a href="{% url 'update-contractor' contractor.pk %}">Read/Update</a></td>
+            <td><a href="{% url 'update-contractor' contractor.pk %}">Update</a></td>
             <td><a href="{% url 'delete-contractor' contractor.pk %}">Delete</a></td>
         </tr>
         {% endfor %}

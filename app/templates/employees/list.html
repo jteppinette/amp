@@ -26,17 +26,15 @@
     <table class="table table-striped">
         <tr>
             <th>#</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Read/Update</th>
+            <th>Name</th>
+            <th>Update</th>
             <th>Delete</th>
         </tr>
         {% for employee in object_list %}
         <tr>
             <td>{{employee.eid}}</td>
-            <td>{{employee.first_name}}</td>
-            <td>{{employee.last_name}}</td>
-            <td><a href="{% url 'update-employee' employee.pk %}">Read/Update</a></td>
+            <td>{{employee.first_name}} {{employee.last_name}}</td>
+            <td><a href="{% url 'update-employee' employee.pk %}">Update</a></td>
             <td><a href="{% url 'delete-employee' employee.pk %}">Delete</a></td>
         </tr>
         {% endfor %}
