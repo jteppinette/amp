@@ -35,8 +35,8 @@ AUTH_USER_MODEL = 'authentication.User'
 
 LOGIN_REDIRECT_URL = '/dashboard/'
 LOGOUT_REDIRECT_URL = '/'
-LOGIN_URL = '/login/'
-LOGOUT_URL = '/logout/'
+LOGIN_URL = '/auth/login/'
+LOGOUT_URL = '/auth/logout/'
 
 # Application definition
 
