@@ -25,9 +25,10 @@ class NewCompanyUserForm(BootstrapModelForm):
         }
 
     def __init__(self, *args, **kwargs):
-        company = kwargs.pop('company')
+        request = kwargs.pop('request')
         super(NewCompanyUserForm, self).__init__(*args, **kwargs)
-        self.fields['company'].initial = company
+        self.fields['company'].initial = request.user.company.pk
+        self.request = request
 
     def clean_password2(self):
         """
@@ -39,6 +40,20 @@ class NewCompanyUserForm(BootstrapModelForm):
             raise forms.ValidationError('Password do not match.')
         
         return password2
+
+    def clean_title(self):
+        """
+        Check that if the title is not Access Control Engineer there is only 1.
+        """
+        title = self.cleaned_data.get('title')
+        if title == 'Access Control Engineer':
+            return title
+        else:
+            users = User.objects.filter(company=self.request.user.company, title=title)
+            if users:
+                raise forms.ValidationError('A user with this title already exists. "Access Control Engineer" is the only position that can be held by multiple Users.')
+            else:
+                return title
 
     def save(self, commit=True):
         """

@@ -35,7 +35,7 @@ class NewCompanyUser(SuccessMessageMixin, CreateView):
 
     def get_form_kwargs(self):
         kwargs = super(NewCompanyUser, self).get_form_kwargs()
-        kwargs.update({'company': self.request.user.company})
+        kwargs.update({'request': self.request})
         return kwargs
 
 
