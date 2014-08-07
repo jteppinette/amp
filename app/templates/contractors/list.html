@@ -22,25 +22,33 @@
       <li class="active">Conctractors</li>
     </ol>
 
-    <!-- List -->
-    <table class="table table-striped">
-        <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Employer</th>
-            <th>Update</th>
-            <th>Delete</th>
-        </tr>
-        {% for contractor in object_list %}
-        <tr>
-            <td>{{contractor.first_name}} {{contractor.last_name}}</td>
-            <td>{{contractor.email}}</td>
-            <td>{{contractor.employer}}</td>
-            <td><a href="{% url 'update-contractor' contractor.pk %}">Update</a></td>
-            <td><a href="{% url 'delete-contractor' contractor.pk %}">Delete</a></td>
-        </tr>
-        {% endfor %}
-    </table>
+    <!-- Panel -->
+    <div class="panel panel-default">
+        <div class="panel-heading">Contractors</div>
+        <div class="panel-body">
+
+            <!-- List -->
+            <table class="table table-striped">
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Employer</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+                {% for contractor in object_list %}
+                <tr>
+                    <td>{{contractor.first_name}} {{contractor.last_name}}</td>
+                    <td>{{contractor.email}}</td>
+                    <td>{{contractor.employer}}</td>
+                    <td><a href="{% url 'update-contractor' contractor.pk %}">Update</a></td>
+                    <td><a href="{% url 'delete-contractor' contractor.pk %}">Delete</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+
+        </div>
+    </div>
 
 </div>
 

@@ -18,27 +18,35 @@
 
     <!-- Breadcrumbs -->
     <ol class="breadcrumb">
-      <li><a href="{% url 'dashboard-home' %}">Dashboard</a></li>
-      <li class="active">Employees</li>
+        <li><a href="{% url 'dashboard-home' %}">Dashboard</a></li>
+        <li class="active">Employees</li>
     </ol>
 
-    <!-- List -->
-    <table class="table table-striped">
-        <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Update</th>
-            <th>Delete</th>
-        </tr>
-        {% for employee in object_list %}
-        <tr>
-            <td>{{employee.eid}}</td>
-            <td>{{employee.first_name}} {{employee.last_name}}</td>
-            <td><a href="{% url 'update-employee' employee.pk %}">Update</a></td>
-            <td><a href="{% url 'delete-employee' employee.pk %}">Delete</a></td>
-        </tr>
-        {% endfor %}
-    </table>
+    <!-- Panel -->
+    <div class="panel panel-default">
+        <div class="panel-heading">Employees</div>
+        <div class="panel-body">
+
+            <!-- List -->
+            <table class="table table-striped">
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+                {% for employee in object_list %}
+                <tr>
+                    <td>{{employee.eid}}</td>
+                    <td>{{employee.first_name}} {{employee.last_name}}</td>
+                    <td><a href="{% url 'update-employee' employee.pk %}">Update</a></td>
+                    <td><a href="{% url 'delete-employee' employee.pk %}">Delete</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+
+        </div>
+    </div>
 
 </div>
 

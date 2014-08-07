@@ -20,25 +20,32 @@
       <li class="active">Logs</li>
     </ol>
 
-    <!-- List -->
-    <table class="table table-striped">
-        <tr>
-            <th>Category</th>
-            <th>Author</th>
-            <th>Accessor</th>
-            <th>Description</th>
-            <th>Creation Time</th>
-        </tr>
-        {% for log in object_list %}
-        <tr>
-            <td>{{log.category}}</td>
-            <td>{{log.author}}</td>
-            <td>{{log.accessor}}</td>
-            <td>{{log.description}}</td>
-            <td>{{log.creation_time}}</td>
-        </tr>
-        {% endfor %}
-    </table>
+    <!-- Panel -->
+    <div class="panel panel-default">
+        <div class="panel-heading">Contractors</div>
+        <div class="panel-body">
+
+            <!-- List -->
+            <table class="table table-striped">
+                <tr>
+                    <th>Category</th>
+                    <th>Author</th>
+                    <th>Accessor</th>
+                    <th>Description</th>
+                    <th>Creation Time</th>
+                </tr>
+                {% for log in object_list %}
+                <tr>
+                    <td>{{log.category}}</td>
+                    <td>{{log.author}}</td>
+                    <td>{{log.accessor}}</td>
+                    <td>{{log.description}}</td>
+                    <td>{{log.creation_time}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
 
 </div>
 

@@ -22,21 +22,28 @@
       <li class="active">Permissions</li>
     </ol>
 
-    <!-- List -->
-    <table class="table table-striped">
-        <tr>
-            <th>Name</th>
-            <th>Update</th>
-            <th>Delete</th>
-        </tr>
-        {% for permission in object_list %}
-        <tr>
-            <td>{{permission.name}}</td>
-            <td><a href="{% url 'update-permission' permission.pk %}">Update</a></td>
-            <td><a href="{% url 'delete-permission' permission.pk %}">Delete</a></td>
-        </tr>
-        {% endfor %}
-    </table>
+    <!-- Panel -->
+    <div class="panel panel-default">
+        <div class="panel-heading">Permissions</div>
+        <div class="panel-body">
+
+            <!-- List -->
+            <table class="table table-striped">
+                <tr>
+                    <th>Name</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+                {% for permission in object_list %}
+                <tr>
+                    <td>{{permission.name}}</td>
+                    <td><a href="{% url 'update-permission' permission.pk %}">Update</a></td>
+                    <td><a href="{% url 'delete-permission' permission.pk %}">Delete</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
 
 </div>
 

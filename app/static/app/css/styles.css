@@ -18,3 +18,8 @@ body {
 .jumbotron h1 {
     color: #222;
 }
+
+.panel-default .panel-body {
+    padding: 0px;
+    margin-bottom: -20px;
+}

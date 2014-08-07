@@ -21,25 +21,33 @@
       <li class="active">Company</li>
     </ol>
 
-    <!-- List -->
-    <table class="table table-striped">
-        <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Title</th>
-            <th>Update</th>
-            <th>Delete</th>
-        </tr>
-        {% for user in object_list %}
-        <tr>
-            <td>{{user.first_name}} {{user.last_name}}</td>
-            <td>{{user.email}}</td>
-            <td>{{user.title}}</td>
-            <td><a href="{% url 'update-company-user' user.pk %}">Update</a></td>
-            <td><a href="{% url 'delete-company-user' user.pk %}">Delete</a></td>
-        </tr>
-        {% endfor %}
-    </table>
+    <!-- Panel -->
+    <div class="panel panel-default">
+        <div class="panel-heading">Company Users</div>
+        <div class="panel-body">
+
+            <!-- List -->
+            <table class="table table-striped">
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Title</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+                {% for user in object_list %}
+                <tr>
+                    <td>{{user.first_name}} {{user.last_name}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.title}}</td>
+                    <td><a href="{% url 'update-company-user' user.pk %}">Update</a></td>
+                    <td><a href="{% url 'delete-company-user' user.pk %}">Delete</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+
+        </div>
+    </div>
 
 </div>
 
