@@ -28,6 +28,9 @@ class NewCompanyUserForm(BootstrapModelForm):
         request = kwargs.pop('request')
         super(NewCompanyUserForm, self).__init__(*args, **kwargs)
         self.fields['company'].initial = request.user.company.pk
+        self.fields['first_name'].required = True
+        self.fields['last_name'].required = True
+        self.fields['title'].required = True
         self.request = request
 
     def clean_password2(self):
@@ -75,6 +78,12 @@ class UpdateCompanyUserForm(BootstrapModelForm):
     class Meta:
         model = User
         fields = ('email', 'first_name', 'last_name', 'title')
+
+    def __init__(self, *args, **kwargs):
+        super(UpdateCompanyUserForm, self).__init__(*args, **kwargs)
+        self.fields['first_name'].required = True
+        self.fields['last_name'].required = True
+        self.fields['title'].required = True
 
     def save(self, commit=True):
         """
