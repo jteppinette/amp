@@ -13,6 +13,7 @@
 </div>
 
 <div class="container">
+
     <!-- Breadcrumbs -->
     <ol class="breadcrumb">
       <li><a href="{% url 'dashboard-home' %}">Dashboard</a></li>
@@ -20,6 +21,7 @@
       <li class="active">{{form.first_name.value}} {{form.last_name.value}}</li>
     </ol>
 
+    <!-- Form -->
     {% include "form_template.html" %}
 
 </div>

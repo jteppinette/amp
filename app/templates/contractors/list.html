@@ -15,13 +15,14 @@
 </div>
 
 <div class="container">
+
     <!-- Breadcrumbs -->
     <ol class="breadcrumb">
       <li><a href="{% url 'dashboard-home' %}">Dashboard</a></li>
       <li class="active">Conctractors</li>
     </ol>
 
-    <!-- Contractors -->
+    <!-- List -->
     <table class="table table-striped">
         <tr>
             <th>First Name</th>
@@ -41,8 +42,8 @@
             <td><a href="{% url 'delete-contractor' contractor.pk %}">Delete</a></td>
         </tr>
         {% endfor %}
-
     </table>
+
 </div>
 
 {% endblock %}
