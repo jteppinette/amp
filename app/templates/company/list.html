@@ -7,12 +7,14 @@
 <!-- Jumbotron -->
 <div class="jumbotron">
     <div class="container">
-        <h1>Company</h1>
+        <h1>Company Users</h1>
         <p>This page allows you to update the users who have access to your company.</p>
+        <p><a href="{% url 'new-company-user' %}" class="btn btn-primary btn-lg" role="button">Add a Company User &raquo;</a></p>
     </div>
 </div>
 
 <div class="container">
+
     <!-- Breadcrumbs -->
     <ol class="breadcrumb">
       <li><a href="{% url 'dashboard-home' %}">Dashboard</a></li>
@@ -20,132 +22,25 @@
     </ol>
 
     <!-- List -->
-    <div class="row">
-        
-        <!-- Alternate CIP Manager -->
-        <div class="col-md-6 col-md-height">
-            <div class="panel panel-primary">
-                <div class="panel-heading">Alternate CIP Manager</div>
-                <div class="panel-body">
-                    {% if alternate_cip_manager %}
-                    <div class="form-horizontal">
-                        <div class="row">
-                            <label class="col-sm-3 text-right">Email:</label>
-                            <div class="col-sm-9">{{alternate_cip_manager.email}}</div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 text-right">First Name:</label>
-                            <div class="col-sm-9">{{alternate_cip_manager.first_name}}</div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 text-right">Last Name:</label>
-                            <div class="col-sm-9">{{alternate_cip_manager.last_name}}</div>
-                        </div>
-                    </div>
-                    <hr>
-                    <a href="{% url 'update-company-user' alternate_cip_manager.pk %}" type="button" class="btn-block btn btn-default" role="button">Update User &raquo;</a>
-                    {% else %}
-                    <p>You do not have an Alternate CIP Manager. Click the button below to create one.</p>
-                    <p><a href="{% url 'new-company-user' %}" class="btn btn-default" role="button">Create User &raquo;</a></p>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
+    <table class="table table-striped">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Title</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+        {% for user in object_list %}
+        <tr>
+            <td>{{user.first_name}} {{user.last_name}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.title}}</td>
+            <td><a href="{% url 'update-company-user' user.pk %}">Update</a></td>
+            <td><a href="{% url 'delete-company-user' user.pk %}">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>
 
-        <!-- Access Control Engineer -->
-        <div class="col-md-6 col-md-height">
-            <div class="panel panel-primary">
-                <div class="panel-heading">Access Control Engineer</div>
-                <div class="panel-body">
-                    {% if access_control_engineer %}
-                    <div class="form-horizontal">
-                        <div class="row">
-                            <label class="col-sm-3 text-right">Email:</label>
-                            <div class="col-sm-9">{{access_control_engineer.email}}</div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 text-right">First Name:</label>
-                            <div class="col-sm-9">{{access_control_engineer.first_name}}</div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 text-right">Last Name:</label>
-                            <div class="col-sm-9">{{access_control_engineer.last_name}}</div>
-                        </div>
-                    </div>
-                    <hr>
-                    <p><a href="{% url 'update-company-user' access_control_engineer.pk %}?title=Access Control Engineer" class="btn-block btn btn-default" role="button">Update User &raquo;</a></p>
-                    {% else %}
-                    <p>You do not have an Access Control Engineer. Click the button below to create one.</p>
-                    <p><a href="{% url 'new-company-user' %}" class="btn btn-default" role="button">Create User &raquo;</a></p>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-
-    </div>
-    <div class="row">
-
-        <!-- Training Coordinator -->
-        <div class="col-md-6">
-            <div class="panel panel-primary">
-                <div class="panel-heading">Training Coordinator</div>
-                <div class="panel-body">
-                    {% if training_coordinator %}
-                    <div class="form-horizontal">
-                        <div class="row">
-                            <label class="col-sm-3 text-right">Email:</label>
-                            <div class="col-sm-9">{{training_coordinator.email}}</div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 text-right">First Name:</label>
-                            <div class="col-sm-9">{{training_coordinator.first_name}}</div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 text-right">Last Name:</label>
-                            <div class="col-sm-9">{{training_coordinator.last_name}}</div>
-                        </div>
-                    </div>
-                    <hr>
-                    <p><a href="{% url 'update-company-user' training_coordinator.pk %}?title=Training Coordinator"" class="btn-block btn btn-default" role="button">Update User &raquo;</a></p>
-                    {% else %}
-                    <p>You do not have an Training Coordinator. Click the button below to create one.</p>
-                    <p><a href="{% url 'new-company-user' %}" class="btn btn-default" role="button">Create User &raquo;</a></p>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-
-        <!-- Human Resources -->
-        <div class="col-md-6">
-            <div class="panel panel-primary">
-                <div class="panel-heading">Human Resources</div>
-                <div class="panel-body">
-                    {% if human_resources %}
-                    <div class="form-horizontal">
-                        <div class="row">
-                            <label class="col-sm-3 text-right">Email:</label>
-                            <div class="col-sm-9">{{human_resources.email}}</div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 text-right">First Name:</label>
-                            <div class="col-sm-9">{{human_resources.first_name}}</div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 text-right">Last Name:</label>
-                            <div class="col-sm-9">{{human_resources.last_name}}</div>
-                        </div>
-                    </div>
-                    <hr>
-                    <p><a href="{% url 'update-company-user' human_resources.pk %}?title=Human Resources" class="btn-block btn btn-default" role="button">Update User &raquo;</a></p>
-                    {% else %}
-                    <p>You do not have a Human Resouces user. Click the button below to create one.</p>
-                    <p><a href="{% url 'new-company-user' %}" class="btn btn-default" role="button">Create User &raquo;</a></p>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-
-    </div>
 </div>
 
 {% endblock %}

@@ -2,11 +2,8 @@
 Define the views used to render the AMP Company pages.
 """
 
-from authentication.forms import UserChangeForm, UserCreationForm
-
-from django.shortcuts import redirect, render
-
 from django.views.generic.edit import UpdateView, CreateView
+from django.views.generic import ListView, DeleteView
 
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth import get_user_model
@@ -15,44 +12,16 @@ from django.core.urlresolvers import reverse_lazy
 
 from app.forms.company import NewCompanyUserForm, UpdateCompanyUserForm
 
-def company(request):
+
+class ListCompanyUsers(ListView):
     """
-    Show the four other users in the CIP Manager's company.
+    List the company users that are owned by the requestors company.
     """
-    if request.user.title != 'CIP Manager':
-        return redirect('dashboard-home')
+    template_name = 'company/list.html'
 
-    company = request.user.company
+    def get_queryset(self):
+        return get_user_model().objects.filter(company=self.request.user.company).exclude(title='CIP Manager')
 
-    obj_mng = get_user_model().objects
-    
-    qs = obj_mng.filter(company=company, title='Alternate CIP Manager')
-    if qs:
-        alternate_cip_manager = qs[0]
-    else:
-        alternate_cip_manager = None
-    qs = obj_mng.filter(company=company, title='Access Control Engineer')
-    if qs:
-        access_control_engineer = qs[0]
-    else:
-        access_control_engineer = None
-    qs = obj_mng.filter(company=company, title='Training Coordinator')
-    if qs:
-        training_coordinator = qs[0]
-    else:
-        training_coordinator = None
-    qs = obj_mng.filter(company=company, title='Human Resources')
-    if qs:
-        human_resources = qs[0]
-    else:
-        human_resources = None
-
-    return render(request, 'company/list.html', {
-        'alternate_cip_manager': alternate_cip_manager,
-        'access_control_engineer': access_control_engineer,
-        'training_coordinator': training_coordinator,
-        'human_resources': human_resources,
-    })
 
 class NewCompanyUser(SuccessMessageMixin, CreateView):
     """
@@ -79,3 +48,9 @@ class UpdateCompanyUser(SuccessMessageMixin, UpdateView):
     form_class = UpdateCompanyUserForm
     success_url = reverse_lazy('list-company-users')
     success_message = "Company user was updated successfuly!"
+
+
+class DeleteCompanyUser(DeleteView):
+    model = get_user_model()
+    template_name = 'base/delete.html'
+    success_url = reverse_lazy('list-company-users')
