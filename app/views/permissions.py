@@ -14,6 +14,8 @@ from django.core.urlresolvers import reverse_lazy
 
 from api.models import Permission
 
+from app.forms.permissions import NewPermissionForm, UpdatePermissionForm
+
 
 class ListPermissions(ListView):
     """
@@ -33,35 +35,26 @@ class UpdatePermission(SuccessMessageMixin, UpdateView):
     Update a permission.
     """
     template_name = 'permissions/update.html'
+    form_class = UpdatePermissionForm
     model = Permission
     success_url = reverse_lazy('list-permissions')
     success_message = "Permission was updated successfully!"
 
-    def get_context_data(self, **kwargs):
-        """
-        Add some stuff to context.
-        """
-        context = super(UpdatePermission, self).get_context_data(**kwargs)
-        context['name'] = self.get_object().name
-        context['company'] = self.get_object().company.id
-        return context
 
 class NewPermission(SuccessMessageMixin, CreateView):
     """
     Create a new permission.
     """
     template_name = 'permissions/new.html'
-    model = Permission
+    form_class = NewPermissionForm
     success_url = reverse_lazy('list-permissions')
     success_message = "Permissions creation was a success!"
 
-    def get_context_data(self, **kwargs):
-        """
-        Add some stuff to context.
-        """
-        context = super(NewPermission, self).get_context_data(**kwargs)
-        context['company'] = self.request.user.company.id
-        return context
+    def get_form_kwargs(self):
+        kwargs = super(NewPermission, self).get_form_kwargs()
+        kwargs.update({'company': self.request.user.company.pk})
+        return kwargs
+
 
 class DeletePermission(DeleteView):
     model = Permission

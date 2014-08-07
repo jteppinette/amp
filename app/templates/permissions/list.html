@@ -15,13 +15,14 @@
 </div>
 
 <div class="container">
+
     <!-- Breadcrumbs -->
     <ol class="breadcrumb">
       <li><a href="{% url 'dashboard-home' %}">Dashboard</a></li>
       <li class="active">Permissions</li>
     </ol>
 
-    <!-- Permissions -->
+    <!-- List -->
     <table class="table table-striped">
         <tr>
             <th>Name</th>
@@ -35,7 +36,6 @@
             <td><a href="{% url 'delete-permission' permission.pk %}">Delete</a></td>
         </tr>
         {% endfor %}
-
     </table>
 </div>
 
