@@ -8,14 +8,15 @@ from django.contrib.messages.views import SuccessMessageMixin
 
 from django.core.urlresolvers import reverse_lazy
 
-from authentication.forms import UserChangeForm
+from app.forms.account import UpdateAccountForm
+
 
 class UpdateAccount(SuccessMessageMixin, UpdateView):
     """
     Update the currently logged in users account.
     """
     template_name = 'account/update.html'
-    form_class = UserChangeForm
+    form_class = UpdateAccountForm
     success_url = reverse_lazy('update-account')
     success_message = "Your account was updated successfully!"
 
