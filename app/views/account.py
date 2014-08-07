@@ -18,7 +18,7 @@ class UpdateAccount(SuccessMessageMixin, UpdateView):
     template_name = 'account/update.html'
     form_class = UpdateAccountForm
     success_url = reverse_lazy('update-account')
-    success_message = "Your account was updated successfully!"
+    success_message = "Your account was successfully updated."
 
     def get_object(self, queryset=None):
         """

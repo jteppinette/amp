@@ -23,7 +23,7 @@ class NewEmployeeRequest(SuccessMessageMixin, CreateView):
     template_name = 'requests/new_employee_request.html'
     form_class = NewEmployeeRequestForm
     success_url = reverse_lazy('discover-home')
-    success_message = "Employee request submision was successful! You will be contacted soon."
+    success_message = "Employee Request submision was successful. You will be contacted soon."
 
     def form_valid(self, form):
         """
@@ -43,7 +43,7 @@ class NewContractorRequest(SuccessMessageMixin, CreateView):
     template_name = 'requests/new_contractor_request.html'
     form_class = NewContractorRequestForm
     success_url = reverse_lazy('discover-home')
-    success_message = "Contractor request submision was successful! You will be contacted soon."
+    success_message = "Contractor Request submision was successful. You will be contacted soon."
 
     def form_valid(self, form):
         """
@@ -84,5 +84,5 @@ def approve_employee_request(request, pk):
 
     Log.objects.create(author=request.user.email, **employee.permission_change_log(old_permissions))
 
-    messages.add_message(request, messages.SUCCESS, 'Request has been successfully approved.')
+    messages.add_message(request, messages.SUCCESS, "Employee %s %s's request was successfully approved." % (employee.first_name, employee.last_name))
     return redirect('list-requests')

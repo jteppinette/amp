@@ -31,7 +31,7 @@ class NewCompanyUser(SuccessMessageMixin, CreateView):
     model = get_user_model()
     form_class = NewCompanyUserForm
     success_url = reverse_lazy('list-company-users')
-    success_message = "Company user has been successfully created!"
+    success_message = '%(title)s %(first_name)s %(last_name)s was successfully created.'
 
     def get_form_kwargs(self):
         kwargs = super(NewCompanyUser, self).get_form_kwargs()
@@ -47,7 +47,7 @@ class UpdateCompanyUser(SuccessMessageMixin, UpdateView):
     model = get_user_model()
     form_class = UpdateCompanyUserForm
     success_url = reverse_lazy('list-company-users')
-    success_message = "Company user was updated successfuly!"
+    success_message = '%(title)s %(first_name)s %(last_name)s was successfully updated.'
 
 
 class DeleteCompanyUser(DeleteView):

@@ -29,16 +29,6 @@ class ListEmployees(ListView):
         """
         return Employee.objects.filter(company=self.request.user.company)
 
-class UpdateEmployee(SuccessMessageMixin, UpdateView):
-    """
-    Update an employee.
-    """
-    template_name = 'employees/update.html'
-    form_class = UpdateEmployeeForm
-    model = Employee
-    success_url = reverse_lazy('list-employees')
-    success_message = "Employee was updated successfully!"
-
 
 class NewEmployee(SuccessMessageMixin, CreateView):
     """
@@ -47,7 +37,7 @@ class NewEmployee(SuccessMessageMixin, CreateView):
     template_name = 'employees/new.html'
     form_class = NewEmployeeForm
     success_url = reverse_lazy('list-employees')
-    success_message = "Employee creation was a success!"
+    success_message = 'Employee %(first_name)s %(last_name)s was successfully created.'
 
     def get_form_kwargs(self):
         kwargs = super(NewEmployee, self).get_form_kwargs()
@@ -61,6 +51,17 @@ class NewEmployee(SuccessMessageMixin, CreateView):
         obj = form.save()
         Log.objects.create(author=self.request.user.email, **obj.creation_log())
         return super(NewEmployee, self).form_valid(form)
+
+
+class UpdateEmployee(SuccessMessageMixin, UpdateView):
+    """
+    Update an employee.
+    """
+    template_name = 'employees/update.html'
+    form_class = UpdateEmployeeForm
+    model = Employee
+    success_url = reverse_lazy('list-employees')
+    success_message = 'Employee %(first_name)s %(last_name)s was successfully updated.'
 
 
 class DeleteEmployee(DeleteView):

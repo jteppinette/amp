@@ -29,16 +29,6 @@ class ListContractors(ListView):
         """
         return Contractor.objects.filter(company=self.request.user.company)
 
-class UpdateContractor(SuccessMessageMixin, UpdateView):
-    """
-    Update an employee.
-    """
-    template_name = 'contractors/update.html'
-    form_class = UpdateContractorForm
-    model = Contractor
-    success_url = reverse_lazy('list-contractors')
-    success_message = "Contractor was updated successfully!"
-
 
 class NewContractor(SuccessMessageMixin, CreateView):
     """
@@ -47,7 +37,7 @@ class NewContractor(SuccessMessageMixin, CreateView):
     template_name = 'contractors/new.html'
     form_class = NewContractorForm
     success_url = reverse_lazy('list-contractors')
-    success_message = "Contractor creation was a success!"
+    success_message = 'Contractor %(first_name)s %(last_name)s was successfully created.'
 
     def get_form_kwargs(self):
         kwargs = super(NewContractor, self).get_form_kwargs()
@@ -61,6 +51,17 @@ class NewContractor(SuccessMessageMixin, CreateView):
         obj = form.save(commit=True)
         Log.objects.create(author=self.request.user.email, **obj.creation_log())
         return super(NewContractor, self).form_valid(form)
+
+
+class UpdateContractor(SuccessMessageMixin, UpdateView):
+    """
+    Update an employee.
+    """
+    template_name = 'contractors/update.html'
+    form_class = UpdateContractorForm
+    model = Contractor
+    success_url = reverse_lazy('list-contractors')
+    success_message = 'Contractor %(first_name)s %(last_name)s was successfully updated.'
 
 
 class DeleteContractor(DeleteView):
