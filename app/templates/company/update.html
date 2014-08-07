@@ -6,7 +6,7 @@
 <!-- Jumbotron -->
 <div class="jumbotron">
     <div class="container">
-        <h1>Update {{title}}</h1>
+      <h1>Update {{form.first_name.value}} {{form.last_name.value}}</h1>
         <p>This page allows you to update a company user.</p>
     </div>
 </div>
@@ -17,66 +17,12 @@
     <ol class="breadcrumb">
       <li><a href="{% url 'dashboard-home' %}">Dashboard</a></li>
       <li><a href="{% url 'list-company-users' %}">Company</a></li>
-      <li class="active">{{title}}</li>
+      <li class="active">{{form.first_name.value}} {{form.last_name.value}}</li>
     </ol>
 
-    <!-- Company User Update Form -->
-    <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
+    <!-- Form -->
+    {% include "form_template.html" %}
 
-        {% if form.non_field_errors %}
-        <div class="alert alert-danger" role="alert">{{form.non_field_errors}}</div>
-        {% endif %}
-
-        <div class="form-group">
-            {% if form.email.errors %}
-            <div class="col-sm-offset-2 col-sm-10 alert alert-danger">{{form.email.errors}}</div>
-            {% endif %}
-            <label for="id_email" class="col-sm-2 control-label">Email:</label>
-            <div class="col-sm-10">
-                {{form.email}}
-            </div>
-        </div>
-
-        <div class="form-group">
-            {% if form.new_password.errors %}
-            <div class="col-sm-offset-2 col-sm-10 alert alert-danger">{{form.new_password.errors}}</div>
-            {% endif %}
-            <label for="id_first_name" class="col-sm-2 control-label">New Password:</label>
-            <div class="col-sm-10">
-                {{form.new_password}}
-            </div>
-        </div>
-
-        <div class="form-group">
-            {% if form.first_name.errors %}
-            <div class="col-sm-offset-2 col-sm-10 alert alert-danger">{{form.first_name.errors}}</div>
-            {% endif %}
-            <label for="id_first_name" class="col-sm-2 control-label">First Name:</label>
-            <div class="col-sm-10">
-                {{form.first_name}}
-            </div>
-        </div>
-
-        <div class="form-group">
-            {% if form.last_name.errors %}
-            <div class="col-sm-offset-2 col-sm-10 alert alert-danger">{{form.last_name.errors}}</div>
-            {% endif %}
-            <label for="id_last_name" class="col-sm-2 control-label">Last Name:</label>
-            <div class="col-sm-10">
-                {{form.last_name}}
-            </div>
-        </div>
-
-        <input type="hidden" name="company" value="{{company}}" />
-        <input type="hidden" name="title" value="{{title}}" />
-
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-              <button type="submit" class="btn btn-default">Submit Request</button>
-            </div>
-        </div>
-    </form>
 </div>
 
 {% endblock %}

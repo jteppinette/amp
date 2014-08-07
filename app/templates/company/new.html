@@ -18,85 +18,12 @@
     <ol class="breadcrumb">
       <li><a href="{% url 'dashboard-home' %}">Dashboard</a></li>
       <li><a href="{% url 'list-company-users' %}">Company</a></li>
-      <li class="active">{{title}}</li>
+      <li class="active">New</li>
     </ol>
 
-    <!-- Account Update Form -->
-    <form class="form-horizontal" role="form" method="post">
-        {% csrf_token %}
+    <!-- Form -->
+    {% include "form_template.html" %}
 
-        {% if form.non_field_errors %}
-        <div class="alert alert-danger" role="alert">{{form.non_field_errors}}</div>
-        {% endif %}
-
-        <div class="form-group">
-            {% if form.email.errors %}
-            <div class="col-sm-offset-2 col-sm-10 alert alert-danger">{{form.email.errors}}</div>
-            {% endif %}
-            <label for="id_email" class="col-sm-2 control-label">Email:</label>
-            <div class="col-sm-10">
-                {{form.email}}
-            </div>
-        </div>
-
-        <div class="form-group">
-            {% if form.password1.errors %}
-            <div class="col-sm-offset-2 col-sm-10 alert alert-danger">{{form.password1.errors}}</div>
-            {% endif %}
-            <label for="id_password1" class="col-sm-2 control-label">Password:</label>
-            <div class="col-sm-10">
-                {{form.password1}}
-            </div>
-        </div>
-
-        <div class="form-group">
-            {% if form.password2.errors %}
-            <div class="col-sm-offset-2 col-sm-10 alert alert-danger">{{form.password2.errors}}</div>
-            {% endif %}
-            <label for="id_password2" class="col-sm-2 control-label">Confirm Password:</label>
-            <div class="col-sm-10">
-                {{form.password2}}
-            </div>
-        </div>
-
-        <div class="form-group">
-            {% if form.first_name.errors %}
-            <div class="col-sm-offset-2 col-sm-10 alert alert-danger">{{form.first_name.errors}}</div>
-            {% endif %}
-            <label for="id_first_name" class="col-sm-2 control-label">First Name:</label>
-            <div class="col-sm-10">
-                {{form.first_name}}
-            </div>
-        </div>
-
-        <div class="form-group">
-            {% if form.last_name.errors %}
-            <div class="col-sm-offset-2 col-sm-10 alert alert-danger">{{form.last_name.errors}}</div>
-            {% endif %}
-            <label for="id_last_name" class="col-sm-2 control-label">Last Name:</label>
-            <div class="col-sm-10">
-                {{form.last_name}}
-            </div>
-        </div>
-
-        <div class="form-group">
-            {% if form.title.errors %}
-            <div class="col-sm-offset-2 col-sm-10 alert alert-danger">{{form.title.errors}}</div>
-            {% endif %}
-            <label for="id_title" class="col-sm-2 control-label">Title:</label>
-            <div class="col-sm-10">
-                {{form.title}}
-            </div>
-        </div>
-
-        <input type="hidden" name="company" value="{{company}}">
-
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-              <button type="submit" class="btn btn-default">Create {{title}}</button>
-            </div>
-        </div>
-    </form>
 </div>
 
 {% endblock %}

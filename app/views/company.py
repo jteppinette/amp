@@ -13,6 +13,8 @@ from django.contrib.auth import get_user_model
 
 from django.core.urlresolvers import reverse_lazy
 
+from app.forms.company import NewCompanyUserForm, UpdateCompanyUserForm
+
 def company(request):
     """
     Show the four other users in the CIP Manager's company.
@@ -58,55 +60,22 @@ class NewCompanyUser(SuccessMessageMixin, CreateView):
     """
     template_name = 'company/new.html'
     model = get_user_model()
-    form_class = UserCreationForm
+    form_class = NewCompanyUserForm
     success_url = reverse_lazy('list-company-users')
     success_message = "Company user has been successfully created!"
 
-    def get_context_data(self, **kwargs):
-        """
-        Add title to context.
-        """
-        context = super(NewCompanyUser, self).get_context_data(**kwargs)
-        context['title'] = self.request.GET.get('title', None)
-        context['company'] = self.request.user.company.id
-        return context
+    def get_form_kwargs(self):
+        kwargs = super(NewCompanyUser, self).get_form_kwargs()
+        kwargs.update({'company': self.request.user.company})
+        return kwargs
 
-    def get_initial(self):
-        """
-        Set initial data.
-        """
-        return {'company': self.request.user.company,
-                'title': self.request.GET.get('title', None)}
-
-    def form_valid(self, form):
-        """
-        Save the form and generate a proper log.
-        """
-        form.cleaned_data['company'] = self.request.user.company
-        form.save()
-
-        return super(NewCompanyUser, self).form_valid(form)
 
 class UpdateCompanyUser(SuccessMessageMixin, UpdateView):
     """
     Update a company user.
     """
     template_name = 'company/update.html'
-    form_class = UserChangeForm
+    model = get_user_model()
+    form_class = UpdateCompanyUserForm
     success_url = reverse_lazy('list-company-users')
     success_message = "Company user was updated successfuly!"
-
-    def get_object(self, queryset=None):
-        """
-        Get the object that will be updated.
-        """
-        return get_user_model().objects.get(company=self.request.user.company, title=self.request.GET.get('title', None))
-
-    def get_context_data(self, **kwargs):
-        """
-        Add title to context.
-        """
-        context = super(UpdateCompanyUser, self).get_context_data(**kwargs)
-        context['title'] = self.request.GET.get('title', None)
-        context['company'] = self.request.user.company.id
-        return context

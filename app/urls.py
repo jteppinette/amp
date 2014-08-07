@@ -25,7 +25,7 @@ urlpatterns = patterns('',
     # Company
     url(r'^dashboard/company/users/$', login_required(views.company), name='list-company-users'),
     url(r'^dashboard/company/users/new/$', login_required(views.NewCompanyUser.as_view()), name='new-company-user'),
-    url(r'^dashboard/company/users/update/$', login_required(views.UpdateCompanyUser.as_view()), name='update-company-user'),
+    url(r'^dashboard/company/users/(?P<pk>\d+)/update/$', login_required(views.UpdateCompanyUser.as_view()), name='update-company-user'),
 
     # Logs
     url(r'^dashboard/logs/$', login_required(views.ListLogs.as_view()), name='list-logs'),

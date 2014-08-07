@@ -43,10 +43,10 @@
                         </div>
                     </div>
                     <hr>
-                    <p><a href="{% url 'update-company-user' %}?title=Alternate CIP Manager" class="btn-block btn btn-default" role="button">Update User &raquo;</a></p>
+                    <a href="{% url 'update-company-user' alternate_cip_manager.pk %}" type="button" class="btn-block btn btn-default" role="button">Update User &raquo;</a>
                     {% else %}
                     <p>You do not have an Alternate CIP Manager. Click the button below to create one.</p>
-                    <p><a href="{% url 'new-company-user' %}?title=Alternate CIP Manager" class="btn btn-default" role="button">Create User &raquo;</a></p>
+                    <p><a href="{% url 'new-company-user' %}" class="btn btn-default" role="button">Create User &raquo;</a></p>
                     {% endif %}
                 </div>
             </div>
@@ -73,10 +73,10 @@
                         </div>
                     </div>
                     <hr>
-                    <p><a href="{% url 'update-company-user' %}?title=Access Control Engineer" class="btn-block btn btn-default" role="button">Update User &raquo;</a></p>
+                    <p><a href="{% url 'update-company-user' access_control_engineer.pk %}?title=Access Control Engineer" class="btn-block btn btn-default" role="button">Update User &raquo;</a></p>
                     {% else %}
                     <p>You do not have an Access Control Engineer. Click the button below to create one.</p>
-                    <p><a href="{% url 'new-company-user' %}?title=Access Control Engineer" class="btn btn-default" role="button">Create User &raquo;</a></p>
+                    <p><a href="{% url 'new-company-user' %}" class="btn btn-default" role="button">Create User &raquo;</a></p>
                     {% endif %}
                 </div>
             </div>
@@ -106,10 +106,10 @@
                         </div>
                     </div>
                     <hr>
-                    <p><a href="{% url 'update-company-user' %}?title=Training Coordinator"" class="btn-block btn btn-default" role="button">Update User &raquo;</a></p>
+                    <p><a href="{% url 'update-company-user' training_coordinator.pk %}?title=Training Coordinator"" class="btn-block btn btn-default" role="button">Update User &raquo;</a></p>
                     {% else %}
                     <p>You do not have an Training Coordinator. Click the button below to create one.</p>
-                    <p><a href="{% url 'new-company-user' %}?title=Training Coordinator" class="btn btn-default" role="button">Create User &raquo;</a></p>
+                    <p><a href="{% url 'new-company-user' %}" class="btn btn-default" role="button">Create User &raquo;</a></p>
                     {% endif %}
                 </div>
             </div>
@@ -136,10 +136,10 @@
                         </div>
                     </div>
                     <hr>
-                    <p><a href="{% url 'update-company-user' %}?title=Human Resources" class="btn-block btn btn-default" role="button">Update User &raquo;</a></p>
+                    <p><a href="{% url 'update-company-user' human_resources.pk %}?title=Human Resources" class="btn-block btn btn-default" role="button">Update User &raquo;</a></p>
                     {% else %}
                     <p>You do not have a Human Resouces user. Click the button below to create one.</p>
-                    <p><a href="{% url 'new-company-user' %}?title=Human Resources" class="btn btn-default" role="button">Create User &raquo;</a></p>
+                    <p><a href="{% url 'new-company-user' %}" class="btn btn-default" role="button">Create User &raquo;</a></p>
                     {% endif %}
                 </div>
             </div>
