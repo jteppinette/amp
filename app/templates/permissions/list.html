@@ -24,25 +24,45 @@
 
     <!-- Panel -->
     <div class="panel panel-default">
-        <div class="panel-heading">Permissions</div>
+        <div class="panel-heading">Search Permissions</div>
         <div class="panel-body">
 
-            <!-- List -->
-            <table class="table table-striped">
-                <tr>
-                    <th>Name</th>
-                    <th>Update</th>
-                    <th>Delete</th>
-                </tr>
-                {% for permission in object_list %}
-                <tr>
-                    <td>{{permission.name}}</td>
-                    <td><a href="{% url 'update-permission' permission.pk %}">Update</a></td>
-                    <td><a href="{% url 'delete-permission' permission.pk %}">Delete</a></td>
-                </tr>
-                {% endfor %}
-            </table>
+            <!-- Search -->
+            <form class="form-inline" method="get" role="form">
+                <div class="row">
+                    <div class="col-sm-9 form-group">
+                        <label class="sr-only" for="eid">Name</label>
+                        <input name="name" value="{{name}}" type="number" class="form-control" id="name" placeholder="Name">
+                    </div>
+
+                    <div class="col-sm-3 form-group">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+                </div>
+            </form>
+
         </div>
+
+        <div class="panel-heading">
+            <span>Results {{object_list | length}}</span>
+            <span class="pull-right"><a href="{% url 'list-permissions' %}">Reset</a></span>
+        </div>
+
+        <!-- List -->
+        <table class="table table-striped">
+            <tr>
+                <th>Name</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+            {% for permission in object_list %}
+            <tr>
+                <td>{{permission.name}}</td>
+                <td><a href="{% url 'update-permission' permission.pk %}"><span class="glyphicon glyphicon-pencil"</span></a></td>
+                <td><a href="{% url 'delete-permission' permission.pk %}"><span class="glyphicon glyphicon-remove"</span></a></td>
+            </tr>
+            {% endfor %}
+        </table>
     </div>
 
 </div>

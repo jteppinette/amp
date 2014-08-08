@@ -5,7 +5,9 @@ Define the views used to render the AMP Permissions pages.
 from django.shortcuts import redirect
 
 from django.views.generic.edit import UpdateView, CreateView
-from django.views.generic import ListView, DeleteView
+from django.views.generic import DeleteView
+
+from app.utils.views.generic import SearchListView
 
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
@@ -17,17 +19,20 @@ from api.models import Permission
 from app.forms.permissions import NewPermissionForm, UpdatePermissionForm
 
 
-class ListPermissions(ListView):
+class ListPermissions(SearchListView):
     """
     List the permissions that are owned by the requestors company.
     """
     template_name = 'permissions/list.html'
+    model = Permission
+    search_fields = {'name': 'icontains'}
 
-    def get_queryset(self):
+    def get_queryset(self, *args, **kwargs):
         """
-        Refine the queryset.
+        Filter by company.
         """
-        return Permission.objects.filter(company=self.request.user.company)
+        return super(ListPermissions, self).get_queryset(*args, **kwargs).filter(company=self.request.user.company)
+
 
 
 class NewPermission(SuccessMessageMixin, CreateView):
