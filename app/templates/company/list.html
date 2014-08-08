@@ -28,7 +28,7 @@
         <table class="table table-striped">
             <tr>
                 <th>Name</th>
-                <th>Email</th>
+                <th class="visible-lg">Email</th>
                 <th>Title</th>
                 <th>Update</th>
                 <th>Delete</th>
@@ -36,10 +36,10 @@
             {% for user in object_list %}
             <tr>
                 <td>{{user.first_name}} {{user.last_name}}</td>
-                <td>{{user.email}}</td>
+                <td class="visible-lg">{{user.email}}</td>
                 <td>{{user.title}}</td>
-                <td><a href="{% url 'update-company-user' user.pk %}">Update</a></td>
-                <td><a href="{% url 'delete-company-user' user.pk %}">Delete</a></td>
+                <td><a href="{% url 'update-company-user' user.pk %}"><span class="glyphicon glyphicon-pencil"</span></a></td>
+                <td><a href="{% url 'delete-company-user' user.pk %}"><span class="glyphicon glyphicon-remove"</span></a></td>
             </tr>
             {% endfor %}
         </table>
