@@ -24,28 +24,58 @@
 
     <!-- Panel -->
     <div class="panel panel-default">
-        <div class="panel-heading">Employees</div>
+        <div class="panel-heading">Search Employees</div>
         <div class="panel-body">
 
-            <!-- List -->
-            <table class="table table-striped">
-                <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Update</th>
-                    <th>Delete</th>
-                </tr>
-                {% for employee in object_list %}
-                <tr>
-                    <td>{{employee.eid}}</td>
-                    <td>{{employee.first_name}} {{employee.last_name}}</td>
-                    <td><a href="{% url 'update-employee' employee.pk %}">Update</a></td>
-                    <td><a href="{% url 'delete-employee' employee.pk %}">Delete</a></td>
-                </tr>
-                {% endfor %}
-            </table>
+            <!-- Search -->
+            <form class="form-inline" method="get" role="form">
+                <div class="row">
+                    <div class="col-sm-3 form-group">
+                        <label class="sr-only" for="eid">EID</label>
+                        <input name="eid" value="{{eid}}" type="number" class="form-control" id="eid" placeholder="EID">
+                    </div>
+                    <div class="col-sm-3 form-group">
+                        <label class="sr-only" for="first_name">First Name</label>
+                        <input name="first_name__icontains" value="{{first_name}}" type="text" class="form-control" id="first_name" placeholder="First Name">
+                    </div>
+                    <div class="col-sm-3 form-group">
+                        <label class="sr-only" for="last_name">Last Name</label>
+                        <input name="last_name__icontains" value="{{last_name}}" type="text" class="form-control" id="last_name" placeholder="Last Name">
+                    </div>
 
+                    <div class="col-sm-3 form-group">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+                </div>
+            </form>
+            
         </div>
+
+        <div class="panel-heading">
+            <span>{{object_list | length}} Results</span>
+            <span class="pull-right"><a href="{% url 'list-employees' %}">Reset Search</a></span>
+        </div>
+
+        <!-- List -->
+        {% if object_list %}
+        <table class="table table-striped">
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+            {% for employee in object_list %}
+            <tr>
+                <td>{{employee.eid}}</td>
+                <td>{{employee.first_name}} {{employee.last_name}}</td>
+                <td><a href="{% url 'update-employee' employee.pk %}">Update</a></td>
+                <td><a href="{% url 'delete-employee' employee.pk %}">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+
     </div>
 
 </div>

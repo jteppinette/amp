@@ -19,7 +19,8 @@ body {
     color: #222;
 }
 
-.panel-default .panel-body {
-    padding: 0px;
-    margin-bottom: -20px;
+.form-inline .row .form-group input,
+.form-inline .row .form-group select,
+.form-inline .row .form-group button {
+    width: 100%;
 }

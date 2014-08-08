@@ -27,7 +27,22 @@ class ListEmployees(ListView):
         """
         Refine the queryset.
         """
-        return Employee.objects.filter(company=self.request.user.company)
+        search = dict(self.request.GET.iteritems())
+        for term in search.keys():
+            if search[term] is None or search[term] == '':
+                del search[term]
+
+        return Employee.objects.filter(company=self.request.user.company, **search)
+
+    def get_context_data(self, **kwargs):
+        """
+        Add search terms.
+        """
+        context = super(ListEmployees, self).get_context_data(**kwargs)
+        context['eid'] = self.request.GET.get('eid', '')
+        context['first_name'] = self.request.GET.get('first_name__icontains', '')
+        context['last_name'] = self.request.GET.get('last_name__icontains', '')
+        return context
 
 
 class NewEmployee(SuccessMessageMixin, CreateView):
