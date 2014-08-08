@@ -5,7 +5,9 @@ Define the views used to render the AMP Contractors pages.
 from django.shortcuts import redirect
 
 from django.views.generic.edit import UpdateView, CreateView
-from django.views.generic import ListView, DeleteView
+from django.views.generic import DeleteView
+
+from app.utils.views.generic import SearchListView
 
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
@@ -17,17 +19,19 @@ from api.models import Contractor, Log
 from app.forms.contractors import NewContractorForm, UpdateContractorForm
 
 
-class ListContractors(ListView):
+class ListContractors(SearchListView):
     """
     List the contractors that are owned by the requestors company.
     """
     template_name = 'contractors/list.html'
+    model = Contractor
+    search_fields = {'first_name': 'icontains', 'last_name': 'icontains', 'employer': 'icontains'}
 
-    def get_queryset(self):
+    def get_queryset(self, *args, **kwargs):
         """
-        Refine the queryset.
+        Refine by company.
         """
-        return Contractor.objects.filter(company=self.request.user.company)
+        return super(ListContractors, self).get_queryset(*args, **kwargs).filter(company=self.request.user.company)
 
 
 class NewContractor(SuccessMessageMixin, CreateView):

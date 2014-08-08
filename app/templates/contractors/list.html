@@ -10,7 +10,6 @@
         <h1>Contractors</h1>
         <p>This page allows you to create, read, update and delete contractors. You can also view their individual profiles showing their permissions and requests. Click the button below to add a new contractor.</p>
         <p><a href="{% url 'new-contractor' %}" class="btn btn-primary btn-lg" role="button">Add a Contractor &raquo;</a></p>
-
     </div>
 </div>
 
@@ -24,30 +23,58 @@
 
     <!-- Panel -->
     <div class="panel panel-default">
-        <div class="panel-heading">Contractors</div>
+        <div class="panel-heading">Search Contractors</div>
         <div class="panel-body">
 
-            <!-- List -->
-            <table class="table table-striped">
-                <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Employer</th>
-                    <th>Update</th>
-                    <th>Delete</th>
-                </tr>
-                {% for contractor in object_list %}
-                <tr>
-                    <td>{{contractor.first_name}} {{contractor.last_name}}</td>
-                    <td>{{contractor.email}}</td>
-                    <td>{{contractor.employer}}</td>
-                    <td><a href="{% url 'update-contractor' contractor.pk %}">Update</a></td>
-                    <td><a href="{% url 'delete-contractor' contractor.pk %}">Delete</a></td>
-                </tr>
-                {% endfor %}
-            </table>
+            <!-- Search -->
+            <form class="form-inline" method="get" role="form">
+                <div class="row">
+                    <div class="col-sm-3 form-group">
+                        <label class="sr-only" for="first_name">First Name</label>
+                        <input name="first_name" value="{{first_name}}" type="text" class="form-control" id="first_name" placeholder="First Name">
+                    </div>
+                    <div class="col-sm-3 form-group">
+                        <label class="sr-only" for="last_name">Last Name</label>
+                        <input name="last_name" value="{{last_name}}" type="text" class="form-control" id="last_name" placeholder="Last Name">
+                    </div>
+                    <div class="col-sm-3 form-group">
+                        <label class="sr-only" for="employer">Employer</label>
+                        <input name="employer" value="{{employer}}" type="text" class="form-control" id="eid" placeholder="Employer">
+                    </div>
+
+                    <div class="col-sm-3 form-group">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+                </div>
+            </form>
 
         </div>
+
+        <div class="panel-heading">
+            <span>{{object_list | length}} Results</span>
+            <span class="pull-right"><a href="{% url 'list-contractors' %}">Reset</a></span>
+        </div>
+
+        <!-- List -->
+        {% if object_list %}
+        <table class="table table-striped">
+            <tr>
+                <th>Name</th>
+                <th>Employer</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+            {% for contractor in object_list %}
+            <tr>
+                <td>{{contractor.first_name}} {{contractor.last_name}}</td>
+                <td>{{contractor.employer}}</td>
+                <td><a href="{% url 'update-contractor' contractor.pk %}"><span class="glyphicon glyphicon-pencil"></span></a></td>
+                <td><a href="{% url 'delete-contractor' contractor.pk %}"><span class="glyphicon glyphicon-remove"></span></a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+
     </div>
 
 </div>
