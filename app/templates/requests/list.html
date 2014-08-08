@@ -23,69 +23,71 @@
     <!-- Employee Requests-->
     <div class="panel panel-default">
         <div class="panel-heading">Employee Requests</div>
-        <div class="panel-body">
-            <table class="table table-striped">
-                <tr>
-                    <th>Name</th>
-                    <th>Requested Permissions</th>
-                    <th>Approve</th>
-                    <th>Reject</th>
-                </tr>
-                {% for request in employee_requests %}
-                <tr>
-                    <td>{{request.employee.first_name}} {{request.employee.last_name}}</td>
-                    <td>
-                        {% if request.permissions %}
-                        <ul>
-                            {% for permission in request.permissions.all %}
-                            <li>{{permission.name}}</li>
-                            {% endfor %}
-                        </ul>
-                        {% endif %}
-                    </td>
-                    <td><a href="{% url 'approve-employee-request' request.pk %}">Approve</a></td>
-                    <td><a href="{% url 'login' %}">Reject</a></td>
-                </tr>
-                {% endfor %}
 
-            </table>
-        </div>
+        <!-- List -->
+        <table class="table table-striped">
+            <tr>
+                <th>Name</th>
+                <th>Requested Permissions</th>
+                <th>Approve</th>
+                <th>Reject</th>
+            </tr>
+            {% for request in employee_requests %}
+            <tr>
+                <td>{{request.employee.first_name}} {{request.employee.last_name}}</td>
+                <td>
+                    {% if request.permissions %}
+                    <ul>
+                        {% for permission in request.permissions.all %}
+                        <li>{{permission.name}}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </td>
+                <td><a href="{% url 'approve-employee-request' request.pk %}"><span class="glyphicon glyphicon-ok"></span></a></td>
+                <td><a href="{% url 'login' %}"><span class="glyphicon glyphicon-remove"></span></a></td>
+            </tr>
+            {% endfor %}
+
+        </table>
+
     </div>
 
     <!-- Contractor Requests-->
     <div class="panel panel-default">
         <div class="panel-heading">Contractor Requests</div>
-        <div class="panel-body">
-            <table class="table table-striped">
-                <tr>
-                    <th>Name</th>
-                    <th>Employer</th>
-                    <th>Requested Permissions</th>
-                    <th>Remote</th>
-                    <th>Approve</th>
-                    <th>Reject</th>
-                </tr>
-                {% for request in contractor_requests %}
-                <tr>
-                    <td>{{request.first_name}} {{request.last_name}}</td>
-                    <td>{{request.employer}}</td>
-                    <td>
-                        {% if request.permissions %}
-                        <ul>
-                            {% for permission in request.permissions.all %}
-                            <li>{{permission.name}}</li>
-                            {% endfor %}
-                        </ul>
-                        {% endif %}
-                    </td>
-                    <td>{{request.remote}}</td>
-                    <td><a href="{% url 'login'%}?pk={{employee.pk}}">Approve</a></td>
-                    <td><a href="{% url 'login'%}">Reject</a></td>
-                </tr>
-                {% endfor %}
 
-            </table>
-        </div>
+        <!-- List -->
+        <table class="table table-striped">
+            <tr>
+                <th>Name</th>
+                <th class="hidden-xs">Employer</th>
+                <th>Requested Permissions</th>
+                <th class="hidden-xs">Remote</th>
+                <th>Approve</th>
+                <th>Reject</th>
+            </tr>
+            {% for request in contractor_requests %}
+            <tr>
+                <td>{{request.first_name}} {{request.last_name}}</td>
+                <td class="hidden-xs">{{request.employer}}</td>
+                <td>
+                    {% if request.permissions %}
+                    <ul>
+                        {% for permission in request.permissions.all %}
+                        <li>{{permission.name}}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </td>
+                <td class="hidden-xs">{{request.remote}}</td>
+                <td><a href="{% url 'login'%}?pk={{employee.pk}}"><span class="glyphicon glyphicon-ok"></span></a></td>
+                <td><a href="{% url 'login'%}"><span class="glyphicon glyphicon-remove"></span></a></td>
+            </tr>
+            {% endfor %}
+
+        </table>
+
     </div>
 
 </div>
