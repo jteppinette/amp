@@ -5,7 +5,9 @@ Define the views used to render the AMP Employees pages.
 from django.shortcuts import redirect
 
 from django.views.generic.edit import UpdateView, CreateView
-from django.views.generic import ListView, DeleteView
+from django.views.generic import DeleteView
+
+from app.utils.views.generic import SearchListView
 
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
@@ -17,32 +19,19 @@ from api.models import Employee, Log
 from app.forms.employees import NewEmployeeForm, UpdateEmployeeForm
 
 
-class ListEmployees(ListView):
+class ListEmployees(SearchListView):
     """
     List the employees that are owned by the requestors company.
     """
     template_name = 'employees/list.html'
+    model = Employee
+    search_fields = {'eid': 'exact', 'first_name': 'icontains', 'last_name': 'icontains'}
 
-    def get_queryset(self):
+    def get_queryset(self, *args, **kwargs):
         """
-        Refine the queryset.
+        Filter by company.
         """
-        search = dict(self.request.GET.iteritems())
-        for term in search.keys():
-            if search[term] is None or search[term] == '':
-                del search[term]
-
-        return Employee.objects.filter(company=self.request.user.company, **search)
-
-    def get_context_data(self, **kwargs):
-        """
-        Add search terms.
-        """
-        context = super(ListEmployees, self).get_context_data(**kwargs)
-        context['eid'] = self.request.GET.get('eid', '')
-        context['first_name'] = self.request.GET.get('first_name__icontains', '')
-        context['last_name'] = self.request.GET.get('last_name__icontains', '')
-        return context
+        return super(ListEmployees, self).get_queryset(*args, **kwargs).filter(company=self.request.user.company)
 
 
 class NewEmployee(SuccessMessageMixin, CreateView):

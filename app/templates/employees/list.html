@@ -36,11 +36,11 @@
                     </div>
                     <div class="col-sm-3 form-group">
                         <label class="sr-only" for="first_name">First Name</label>
-                        <input name="first_name__icontains" value="{{first_name}}" type="text" class="form-control" id="first_name" placeholder="First Name">
+                        <input name="first_name" value="{{first_name}}" type="text" class="form-control" id="first_name" placeholder="First Name">
                     </div>
                     <div class="col-sm-3 form-group">
                         <label class="sr-only" for="last_name">Last Name</label>
-                        <input name="last_name__icontains" value="{{last_name}}" type="text" class="form-control" id="last_name" placeholder="Last Name">
+                        <input name="last_name" value="{{last_name}}" type="text" class="form-control" id="last_name" placeholder="Last Name">
                     </div>
 
                     <div class="col-sm-3 form-group">
@@ -53,7 +53,7 @@
 
         <div class="panel-heading">
             <span>{{object_list | length}} Results</span>
-            <span class="pull-right"><a href="{% url 'list-employees' %}">Reset Search</a></span>
+            <span class="pull-right"><a href="{% url 'list-employees' %}">Reset</a></span>
         </div>
 
         <!-- List -->
@@ -69,8 +69,8 @@
             <tr>
                 <td>{{employee.eid}}</td>
                 <td>{{employee.first_name}} {{employee.last_name}}</td>
-                <td><a href="{% url 'update-employee' employee.pk %}">Update</a></td>
-                <td><a href="{% url 'delete-employee' employee.pk %}">Delete</a></td>
+                <td><a href="{% url 'update-employee' employee.pk %}"><span class="glyphicon glyphicon-pencil"></span></a></td>
+                <td><a href="{% url 'delete-employee' employee.pk %}"><span class="glyphicon glyphicon-remove"></span></a></td>
             </tr>
             {% endfor %}
         </table>
