@@ -24,7 +24,10 @@ class SearchListView(ListView):
                 search[complete_filter] = search[term]
                 del search[term]
 
-        return self.model.objects.filter(**search)
+        if self.queryset:
+            return self.queryset.filter(**search)
+        else:
+            return self.model.objects.filter(**search)
 
     def get_context_data(self, **kwargs):
         """

@@ -22,29 +22,67 @@
 
     <!-- Panel -->
     <div class="panel panel-default">
-        <div class="panel-heading">Contractors</div>
+        <div class="panel-heading">Search Logs</div>
         <div class="panel-body">
 
-            <!-- List -->
-            <table class="table table-striped">
-                <tr>
-                    <th>Category</th>
-                    <th>Author</th>
-                    <th>Accessor</th>
-                    <th>Description</th>
-                    <th>Creation Time</th>
-                </tr>
-                {% for log in object_list %}
-                <tr>
-                    <td>{{log.category}}</td>
-                    <td>{{log.author}}</td>
-                    <td>{{log.accessor}}</td>
-                    <td>{{log.description}}</td>
-                    <td>{{log.creation_time}}</td>
-                </tr>
-                {% endfor %}
-            </table>
+            <!-- Search -->
+            <form class="form-inline" method="get" role="form">
+                <div class="row">
+                    <div class="col-sm-3 form-group">
+                        <label class="sr-only" for="category">Category</label>
+                        <select name="category" class="form-control" id="category">
+                            <option value="">Category</option>
+                            {% for value in categories %}
+                            {% if value|first == category %}
+                            <option selected="selected">{{value | first}}</option>
+                            {% else %}
+                            <option>{{value | first}}</option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-sm-3 form-group hidden-xs">
+                        <label class="sr-only" for="author">Author</label>
+                        <input name="author" value="{{author}}" type="text" class="form-control" id="author" placeholder="Author">
+                    </div>
+                    <div class="col-sm-3 form-group">
+                        <label class="sr-only" for="accessor">Accessor</label>
+                        <input name="accessor" value="{{accessor}}" type="text" class="form-control" id="accessor" placeholder="Accessor">
+                    </div>
+
+                    <div class="col-sm-3 form-group">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+                </div>
+            </form>
+
         </div>
+
+        <div class="panel-heading">
+            <span>Results {{object_list | length}}</span>
+            <span class="pull-right"><a href="{% url 'list-logs' %}">Reset</a></span>
+        </div>
+
+        <!-- List -->
+        <table class="table table-striped">
+            <tr>
+                <th>Category</th>
+                <th class="hidden-xs">Author</th>
+                <th>Accessor</th>
+                <th class="visible-lg">Description</th>
+                <th>Creation Time</th>
+            </tr>
+            {% for log in object_list %}
+            <tr>
+                <td>{{log.category}}</td>
+                <td class="hidden-xs">{{log.author}}</td>
+                <td>{{log.accessor}}</td>
+                <td class="visible-lg">{{log.description}}</td>
+                <td>{{log.creation_time | date:"DATE_FORMAT"}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
     </div>
 
 </div>
