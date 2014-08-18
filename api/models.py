@@ -311,6 +311,11 @@ class EmployeeRequest(models.Model):
     employee = models.ForeignKey(Employee)
     permissions = models.ManyToManyField(Permission)
 
+    hr_status = models.NullBooleanField(blank=True, null=True)
+    tc = models.NullBooleanField(blank=True, null=True)
+    ace_status = models.NullBooleanField(blank=True, null=True)
+    cip_status = models.NullBooleanField(blank=True, null=True)
+
     def __unicode__(self):
         """
         Provide a unicode representation of this model.
@@ -352,6 +357,11 @@ class ContractorRequest(models.Model):
     remote = models.BooleanField(help_text="Will you be accessing remotely?")
 
     background_check = models.FileField(upload_to='background', blank=True, null=True)
+
+    hr_status = models.NullBooleanField(blank=True, null=True)
+    tc = models.NullBooleanField(blank=True, null=True)
+    ace_status = models.NullBooleanField(blank=True, null=True)
+    cip_status = models.NullBooleanField(blank=True, null=True)
 
     def __unicode__(self):
         """

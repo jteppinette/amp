@@ -64,10 +64,37 @@
                 <th>CIP</th>
             </tr>
             <tr>
+                {% if contractorrequest.hr_status = True %}
                 <td><span class="glyphicon glyphicon-ok"</span></td>
-                <td><span class="glyphicon glyphicon-minus"</span></td>
+                {% elif contractorrequest.hr_status = False %}
                 <td><span class="glyphicon glyphicon-remove"</span></td>
+                {% else %}
                 <td><span class="glyphicon glyphicon-minus"</span></td>
+                {% endif %}
+
+                {% if contractorrequest.tc_status = True %}
+                <td><span class="glyphicon glyphicon-ok"</span></td>
+                {% elif contractorrequest.tc_status = False %}
+                <td><span class="glyphicon glyphicon-remove"</span></td>
+                {% else %}
+                <td><span class="glyphicon glyphicon-minus"</span></td>
+                {% endif %}
+
+                {% if contractorrequest.ace_status = True %}
+                <td><span class="glyphicon glyphicon-ok"</span></td>
+                {% elif contractorrequest.ace_status = False %}
+                <td><span class="glyphicon glyphicon-remove"</span></td>
+                {% else %}
+                <td><span class="glyphicon glyphicon-minus"</span></td>
+                {% endif %}
+
+                {% if contractorrequest.cip_status = True %}
+                <td><span class="glyphicon glyphicon-ok"</span></td>
+                {% elif contractorrequest.cip_status = False %}
+                <td><span class="glyphicon glyphicon-remove"</span></td>
+                {% else %}
+                <td><span class="glyphicon glyphicon-minus"</span></td>
+                {% endif %}
             </tr>
         </table>
 
