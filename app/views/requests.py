@@ -5,6 +5,7 @@ Define the views used to render the AMP Requests pages.
 from django.shortcuts import render, redirect
 
 from django.views.generic.edit import CreateView
+from django.views.generic import DetailView
 
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
@@ -66,6 +67,23 @@ def requests(request):
         'employee_requests': employee_requests,
         'contractor_requests': contractor_requests,
     })
+
+
+class DetailEmployeeRequest(DetailView):
+    """
+    Detail a Request.
+    """
+    template_name = 'requests/employee_detail.html'
+    model = EmployeeRequest
+
+
+class DetailContractorRequest(DetailView):
+    """
+    Detail a Request.
+    """
+    template_name = 'requests/contractor_detail.html'
+    model = ContractorRequest
+
 
 def approve_employee_request(request, pk):
     """

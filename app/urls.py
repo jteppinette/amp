@@ -53,4 +53,7 @@ urlpatterns = patterns('',
     # Requests
     url(r'^dashboard/requests/$', login_required(views.requests), name='list-requests'),
     url(r'^dashboard/requests/employees/(?P<pk>\d+)/approve/$', login_required(views.approve_employee_request), name='approve-employee-request'),
+    url(r'^dashboard/requests/employees/(?P<pk>\d+)/$', login_required(views.DetailEmployeeRequest.as_view()), name='detail-employee-request'),
+    url(r'^dashboard/requests/contractors/(?P<pk>\d+)/$', login_required(views.DetailContractorRequest.as_view()), name='detail-contractor-request'),
+
 )
