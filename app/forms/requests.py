@@ -13,6 +13,7 @@ class NewEmployeeRequestForm(BootstrapModelForm):
     """
     class Meta:
         model = EmployeeRequest
+        exclude = ('hr_status', 'tc_status', 'ace_status', 'cip_status')
 
 
 class NewContractorRequestForm(BootstrapModelForm):
@@ -21,3 +22,4 @@ class NewContractorRequestForm(BootstrapModelForm):
     """
     class Meta:
         model = ContractorRequest
+        exclude = ('hr_status', 'tc_status', 'ace_status', 'cip_status')

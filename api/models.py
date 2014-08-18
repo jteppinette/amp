@@ -312,7 +312,7 @@ class EmployeeRequest(models.Model):
     permissions = models.ManyToManyField(Permission)
 
     hr_status = models.NullBooleanField(blank=True, null=True)
-    tc = models.NullBooleanField(blank=True, null=True)
+    tc_status = models.NullBooleanField(blank=True, null=True)
     ace_status = models.NullBooleanField(blank=True, null=True)
     cip_status = models.NullBooleanField(blank=True, null=True)
 
@@ -359,7 +359,7 @@ class ContractorRequest(models.Model):
     background_check = models.FileField(upload_to='background', blank=True, null=True)
 
     hr_status = models.NullBooleanField(blank=True, null=True)
-    tc = models.NullBooleanField(blank=True, null=True)
+    tc_status = models.NullBooleanField(blank=True, null=True)
     ace_status = models.NullBooleanField(blank=True, null=True)
     cip_status = models.NullBooleanField(blank=True, null=True)
 

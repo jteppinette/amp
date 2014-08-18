@@ -12,7 +12,7 @@ from django.contrib import messages
 
 from django.core.urlresolvers import reverse_lazy
 
-from api.models import EmployeeRequest, ContractorRequest, Log
+from api.models import EmployeeRequest, ContractorRequest, Log, Contractor
 
 from app.forms.requests import NewEmployeeRequestForm, NewContractorRequestForm
 
@@ -63,6 +63,16 @@ def requests(request):
     employee_requests = EmployeeRequest.objects.all().prefetch_related('employee', 'permissions')
     contractor_requests = ContractorRequest.objects.all().prefetch_related('permissions')
 
+    if request.user.title == 'Access Control Engineer':
+        employee_requests.filter(ace_status=None)
+        contractor_requests.filter(ace_status=None)
+    elif request.user.title == 'Training Coordinator':
+        employee_requests.filter(tc_status=None)
+        contractor_requests.filter(tc_status=None)
+    elif request.user.title == 'Human Resources':
+        employee_requests.filter(hr_status=None)
+        contractor_requests.filter(hr_status=None)
+
     return render(request, 'requests/list.html', {
         'employee_requests': employee_requests,
         'contractor_requests': contractor_requests,
@@ -90,6 +100,20 @@ def approve_employee_request(request, pk):
     Approve an employee request based on the provided pk.
     """
     employee_request = EmployeeRequest.objects.get(pk=pk)
+
+    if request.user.title == 'Human Resources':
+        employee_request.hr_status = True
+    elif request.user.title == 'Training Coordinator':
+        employee_request.tc_status = True
+    elif request.user.title == 'Access Control Engineer':
+        employee_request.ace_status = True
+    elif request.user.title == 'CIP Manager':
+        employee_request.cip_status = True
+    elif request.user.title == 'Alternate CIP Manager':
+        employee_request.cip_status = True
+
+    employee_request.save()
+
     employee = employee_request.employee
 
     old_permissions = employee.permissions.all()
@@ -98,9 +122,87 @@ def approve_employee_request(request, pk):
     employee.permissions.add(*employee_request.permissions.all())
     employee.save()
 
-    employee_request.delete()
-
     Log.objects.create(author=request.user.email, **employee.permission_change_log(old_permissions))
 
     messages.add_message(request, messages.SUCCESS, "Employee %s %s's request was successfully approved." % (employee.first_name, employee.last_name))
-    return redirect('list-requests')
+    return redirect('detail-employee-request', employee_request.pk)
+
+def approve_contractor_request(request, pk):
+    """
+    Approve a contractor request based on the provided pk.
+    """
+    contractor_request = ContractorRequest.objects.get(pk=pk)
+
+    if request.user.title == 'Human Resources':
+        contractor_request.hr_status = True
+    elif request.user.title == 'Training Coordinator':
+        contractor_request.tc_status = True
+    elif request.user.title == 'Access Control Engineer':
+        contractor_request.ace_status = True
+    elif request.user.title == 'CIP Manager':
+        contractor_request.cip_status = True
+    elif request.user.title == 'Alternate CIP Manager':
+        contractor_request.cip_status = True
+
+    contractor_request.save()
+
+    contractor, created = Contractor.objects.get_or_create(
+        first_name=contractor_request.first_name,
+        last_name=contractor_request.last_name,
+        email=contractor_request.email,
+        employer=contractor_request.employer,
+        company=contractor_request.company
+    )
+
+    old_permissions = contractor.permissions.all()
+    length = len(old_permissions)
+
+    contractor.permissions.add(*contractor_request.permissions.all())
+    contractor.save()
+
+    Log.objects.create(author=request.user.email, **contractor.permission_change_log(old_permissions))
+
+    messages.add_message(request, messages.SUCCESS, "Contractor %s %s's request was successfully approved." % (contractor.first_name, contractor.last_name))
+    return redirect('detail-contractor-request', contractor_request.pk)
+
+def reject_employee_request(request, pk):
+    """
+    Reject a employee request based on the provided pk.
+    """
+    employee_request = EmployeeRequest.objects.get(pk=pk)
+    
+    if request.user.title == 'Human Resources':
+        employee_request.hr_status = False
+    elif request.user.title == 'Training Coordinator':
+        employee_request.tc_status = False
+    elif request.user.title == 'Access Control Engineer':
+        employee_request.ace_status = False
+    elif request.user.title == 'CIP Manager':
+        employee_request.cip_status = False
+    elif request.user.title == 'Alternate CIP Manager':
+        employee_request.cip_status = False
+
+    employee_request.save()
+
+    return redirect('detail-employee-request', employee_request.pk)
+
+def reject_contractor_request(request, pk):
+    """
+    Reject a contractor request based on the provided pk.
+    """
+    contractor_request = ContractorRequest.objects.get(pk=pk)
+    
+    if request.user.title == 'Human Resources':
+        contractor_request.hr_status = False
+    elif request.user.title == 'Training Coordinator':
+        contractor_request.tc_status = False
+    elif request.user.title == 'Access Control Engineer':
+        contractor_request.ace_status = False
+    elif request.user.title == 'CIP Manager':
+        contractor_request.cip_status = False
+    elif request.user.title == 'Alternate CIP Manager':
+        employee_request.cip_status = False
+
+    contractor_request.save()
+
+    return redirect('detail-contractor-request', contractor_request.pk)

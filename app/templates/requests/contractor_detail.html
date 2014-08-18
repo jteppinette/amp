@@ -48,8 +48,8 @@
                     {% endif %}
                 </td>
                 <td class="hidden-xs">{{contractorrequest.remote}}</td>
-                <td><a href="{% url 'approve-employee-request' contractorrequest.pk %}"><span class="glyphicon glyphicon-ok"></span></a></td>
-                <td><a href="{% url 'login' %}"><span class="glyphicon glyphicon-remove"></span></a></td>
+                <td><a href="{% url 'approve-contractor-request' contractorrequest.pk %}"><span class="glyphicon glyphicon-ok"></span></a></td>
+                <td><a href="{% url 'reject-contractor-request' contractorrequest.pk %}"><span class="glyphicon glyphicon-remove"></span></a></td>
             </tr>
         </table>
 

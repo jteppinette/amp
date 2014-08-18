@@ -45,7 +45,7 @@
                     {% endif %}
                 </td>
                 <td><a href="{% url 'approve-employee-request' employeerequest.pk %}"><span class="glyphicon glyphicon-ok"></span></a></td>
-                <td><a href="{% url 'login' %}"><span class="glyphicon glyphicon-remove"></span></a></td>
+                <td><a href="{% url 'reject-employee-request' employeerequest.pk %}"><span class="glyphicon glyphicon-remove"></span></a></td>
             </tr>
         </table>
 

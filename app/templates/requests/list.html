@@ -45,7 +45,7 @@
                     {% endif %}
                 </td>
                 <td><a href="{% url 'approve-employee-request' request.pk %}"><span class="glyphicon glyphicon-ok"></span></a></td>
-                <td><a href="{% url 'login' %}"><span class="glyphicon glyphicon-remove"></span></a></td>
+                <td><a href="{% url 'reject-employee-request' request.pk %}"><span class="glyphicon glyphicon-remove"></span></a></td>
             </tr>
             {% endfor %}
 
@@ -81,8 +81,8 @@
                     {% endif %}
                 </td>
                 <td class="hidden-xs">{{request.remote}}</td>
-                <td><a href="{% url 'login'%}?pk={{employee.pk}}"><span class="glyphicon glyphicon-ok"></span></a></td>
-                <td><a href="{% url 'login'%}"><span class="glyphicon glyphicon-remove"></span></a></td>
+                <td><a href="{% url 'approve-contractor-request' request.pk %}"><span class="glyphicon glyphicon-ok"></span></a></td>
+                <td><a href="{% url 'reject-contractor-request' request.pk %}"><span class="glyphicon glyphicon-remove"></span></a></td>
             </tr>
             {% endfor %}
 
