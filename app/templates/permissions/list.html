@@ -57,7 +57,7 @@
             </tr>
             {% for permission in object_list %}
             <tr>
-                <td>{{permission.name}}</td>
+                <td><a href="{% url 'detail-permission' permission.pk %}">{{permission.name}}</a></td>
                 <td><a href="{% url 'update-permission' permission.pk %}"><span class="glyphicon glyphicon-pencil"</span></a></td>
                 <td><a href="{% url 'delete-permission' permission.pk %}"><span class="glyphicon glyphicon-remove"</span></a></td>
             </tr>

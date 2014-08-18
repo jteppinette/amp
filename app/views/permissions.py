@@ -5,7 +5,7 @@ Define the views used to render the AMP Permissions pages.
 from django.shortcuts import redirect
 
 from django.views.generic.edit import UpdateView, CreateView
-from django.views.generic import DeleteView
+from django.views.generic import DeleteView, DetailView
 
 from app.utils.views.generic import SearchListView
 
@@ -48,6 +48,14 @@ class NewPermission(SuccessMessageMixin, CreateView):
         kwargs = super(NewPermission, self).get_form_kwargs()
         kwargs.update({'company': self.request.user.company.pk})
         return kwargs
+
+ 
+class DetailPermission(DetailView):
+    """
+    Detail a permission.
+    """
+    template_name = 'permissions/detail.html'
+    model = Permission
 
 
 class UpdatePermission(SuccessMessageMixin, UpdateView):

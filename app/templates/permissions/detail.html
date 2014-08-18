@@ -1,0 +1,73 @@
+{% extends "base/basenav.html" %}
+
+{% block title %}Detail Permission | AMP{% endblock %}
+
+{% block content %}
+
+<!-- Jumbotron -->
+<div class="jumbotron">
+    <div class="container">
+        <h1>{{permission.name}}</h1>
+        <p>This page allows you to view a more detailed view of this permission. Click the button below to update this permission.</p>
+        <p><a href="{% url 'update-permission' permission.pk %}" class="btn btn-primary btn-lg" role="button">Update {{permission.name}} &raquo;</a></p>
+    </div>
+</div>
+
+<div class="container">
+
+    <!-- Breadcrumbs -->
+    <ol class="breadcrumb">
+      <li><a href="{% url 'dashboard-home' %}">Dashboard</a></li>
+      <li><a href="{% url 'list-permissions' %}">Permissions</a></li>
+      <li class="active">{{permission.name}}</li>
+    </ol>
+
+    <!-- Panel -->
+    <div class="panel panel-default">
+
+        <!-- Employees Heading -->
+        <div class="panel-heading">
+            <span>{{permission.employee_set.all | length}} Employees with this permission</span>
+        </div>
+
+        <!-- Employees List -->
+        <table class="table table-striped">
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+            </tr>
+            {% for employee in permission.employee_set.all %}
+            <tr>
+                <td><a href="{% url 'update-employee' employee.pk %}">{{employee.id}}</a></td>
+                <td>{{employee.first_name}} {{employee.last_name}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <div class="panel-body">
+        </div>
+
+        <!-- Contractors Heading -->
+        <div class="panel-heading">
+            <span>{{permission.contractor_set.all | length}} Contractors with this permission</span>
+        </div>
+
+        <!-- Contractors List -->
+        <table class="table table-striped">
+            <tr>
+                <th>Name</th>
+                <th>Employer</th>
+            </tr>
+            {% for contractor in permission.contractor_set.all %}
+            <tr>
+                <td><a href="{% url 'update-contractor' contractor.pk %}">{{contractor.first_name}} {{contractor.last_name}}</a></td>
+                <td>{{contractor.employer}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

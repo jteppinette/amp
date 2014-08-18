@@ -33,20 +33,21 @@ urlpatterns = patterns('',
 
     # Employees
     url(r'^dashboard/employees/$', login_required(views.ListEmployees.as_view()), name='list-employees'),
-    url(r'^dashboard/employees/(?P<pk>\d+)/$', login_required(views.UpdateEmployee.as_view()), name='update-employee'),
     url(r'^dashboard/employees/new/$', login_required(views.NewEmployee.as_view()), name='new-employee'),
+    url(r'^dashboard/employees/(?P<pk>\d+)/update/$', login_required(views.UpdateEmployee.as_view()), name='update-employee'),
     url(r'^dashboard/employees/(?P<pk>\d+)/delete/$', login_required(views.DeleteEmployee.as_view()), name='delete-employee'),
 
     # Contractors
     url(r'^dashboard/contractors/$', login_required(views.ListContractors.as_view()), name='list-contractors'),
-    url(r'^dashboard/contractors/(?P<pk>\d+)/$', login_required(views.UpdateContractor.as_view()), name='update-contractor'),
     url(r'^dashboard/contractors/new/$', login_required(views.NewContractor.as_view()), name='new-contractor'),
+    url(r'^dashboard/contractors/(?P<pk>\d+)/update/$', login_required(views.UpdateContractor.as_view()), name='update-contractor'),
     url(r'^dashboard/contractors/(?P<pk>\d+)/delete/$', login_required(views.DeleteContractor.as_view()), name='delete-contractor'),
 
     # Permissions
     url(r'^dashboard/permissions/$', login_required(views.ListPermissions.as_view()), name='list-permissions'),
-    url(r'^dashboard/permissions/(?P<pk>\d+)/$', login_required(views.UpdatePermission.as_view()), name='update-permission'),
     url(r'^dashboard/permissions/new/$', login_required(views.NewPermission.as_view()), name='new-permission'),
+    url(r'^dashboard/permissions/(?P<pk>\d+)/$', login_required(views.DetailPermission.as_view()), name='detail-permission'),
+    url(r'^dashboard/permissions/(?P<pk>\d+)/update/$', login_required(views.UpdatePermission.as_view()), name='update-permission'),
     url(r'^dashboard/permissions/(?P<pk>\d+)/delete/$', login_required(views.DeletePermission.as_view()), name='delete-permission'),
 
     # Requests
