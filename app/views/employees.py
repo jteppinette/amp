@@ -67,6 +67,17 @@ class UpdateEmployee(SuccessMessageMixin, UpdateView):
     success_url = reverse_lazy('list-employees')
     success_message = 'Employee %(first_name)s %(last_name)s was successfully updated.'
 
+    def form_valid(self, form):
+        """
+        Save the form and generate a proper log.
+        """
+        old_permissions = self.object.permissions.all()
+        length = len(old_permissions)
+
+        obj = form.save()
+        Log.objects.create(author=self.request.user.email, **self.object.permission_change_log(old_permissions))
+        return super(UpdateEmployee, self).form_valid(form)
+
 
 class DeleteEmployee(DeleteView):
     model = Employee
