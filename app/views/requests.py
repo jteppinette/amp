@@ -63,16 +63,6 @@ def requests(request):
     employee_requests = EmployeeRequest.objects.all().prefetch_related('employee', 'permissions')
     contractor_requests = ContractorRequest.objects.all().prefetch_related('permissions')
 
-    if request.user.title == 'Access Control Engineer':
-        employee_requests.filter(ace_status=None)
-        contractor_requests.filter(ace_status=None)
-    elif request.user.title == 'Training Coordinator':
-        employee_requests.filter(tc_status=None)
-        contractor_requests.filter(tc_status=None)
-    elif request.user.title == 'Human Resources':
-        employee_requests.filter(hr_status=None)
-        contractor_requests.filter(hr_status=None)
-
     return render(request, 'requests/list.html', {
         'employee_requests': employee_requests,
         'contractor_requests': contractor_requests,
@@ -107,25 +97,33 @@ def approve_employee_request(request, pk):
         employee_request.tc_status = True
     elif request.user.title == 'Access Control Engineer':
         employee_request.ace_status = True
-    elif request.user.title == 'CIP Manager':
-        employee_request.cip_status = True
-    elif request.user.title == 'Alternate CIP Manager':
-        employee_request.cip_status = True
 
     employee_request.save()
 
-    employee = employee_request.employee
+    if request.user.title == 'CIP Manager' or request.user.title == 'Alternate CIP Manager':
+        if employee_request.hr_status and employee_request.tc_status and employee_request.ace_status:
 
-    old_permissions = employee.permissions.all()
-    length = len(old_permissions)
+            employee = employee_request.employee
 
-    employee.permissions.add(*employee_request.permissions.all())
-    employee.save()
+            old_permissions = employee.permissions.all()
+            length = len(old_permissions)
 
-    Log.objects.create(author=request.user.email, **employee.permission_change_log(old_permissions))
+            employee.permissions.add(*employee_request.permissions.all())
+            employee.save()
 
-    messages.add_message(request, messages.SUCCESS, "Employee %s %s's request was successfully approved." % (employee.first_name, employee.last_name))
-    return redirect('detail-employee-request', employee_request.pk)
+            Log.objects.create(author=request.user.email, **employee.permission_change_log(old_permissions))
+
+            messages.add_message(request, messages.SUCCESS, "Employee %s %s's request was successfully approved. Permissions have been transferred successfully." % (employee.first_name, employee.last_name))
+            employee_request.delete()
+            return redirect('list-requests')
+   
+        else:
+            messages.add_message(request, messages.ERROR, "Could not approve final request. Needs approval from: Human Resources, Access Control Engineer, and Training Coordinator.")
+            return redirect('detail-employee-request', employee_request.pk)
+    else:
+        employee = employee_request.employee
+        messages.add_message(request, messages.SUCCESS, "Employee %s %s's request has been approved by %s." % (employee.first_name, employee.last_name, request.user.title))
+        return redirect('detail-employee-request', employee_request.pk)
 
 def approve_contractor_request(request, pk):
     """
@@ -139,10 +137,6 @@ def approve_contractor_request(request, pk):
         contractor_request.tc_status = True
     elif request.user.title == 'Access Control Engineer':
         contractor_request.ace_status = True
-    elif request.user.title == 'CIP Manager':
-        contractor_request.cip_status = True
-    elif request.user.title == 'Alternate CIP Manager':
-        contractor_request.cip_status = True
 
     contractor_request.save()
 
@@ -153,17 +147,29 @@ def approve_contractor_request(request, pk):
         employer=contractor_request.employer,
         company=contractor_request.company
     )
+    
+    if request.user.title == 'CIP Manager' or request.user.title == 'Alternate CIP Manager':
+        if contractor_request.hr_status and contractor_request.tc_status and contractor_request.ace_status:
 
-    old_permissions = contractor.permissions.all()
-    length = len(old_permissions)
+            old_permissions = contractor.permissions.all()
+            length = len(old_permissions)
 
-    contractor.permissions.add(*contractor_request.permissions.all())
-    contractor.save()
+            contractor.permissions.add(*contractor_request.permissions.all())
+            contractor.save()
 
-    Log.objects.create(author=request.user.email, **contractor.permission_change_log(old_permissions))
+            Log.objects.create(author=request.user.email, **contractor.permission_change_log(old_permissions))
 
-    messages.add_message(request, messages.SUCCESS, "Contractor %s %s's request was successfully approved." % (contractor.first_name, contractor.last_name))
-    return redirect('detail-contractor-request', contractor_request.pk)
+            messages.add_message(request, messages.SUCCESS, "Contractor %s %s's request was successfully approved. Permissions have been transferred successfully." % (contractor.first_name, contractor.last_name))
+            contractor_request.delete()
+            return redirect('list-requests')
+   
+        else:
+            messages.add_message(request, messages.ERROR, "Could not approve final request. Needs approval from: Human Resources, Access Control Engineer, and Training Coordinator.")
+            return redirect('detail-contractor-request', contractor_request.pk)
+    else:
+        messages.add_message(request, messages.SUCCESS, "Contractor %s %s's request has been approved by %s." % (contractor.first_name, contractor.last_name, request.user.title))
+        return redirect('detail-contractor-request', contractor_request.pk)
+
 
 def reject_employee_request(request, pk):
     """
