@@ -123,6 +123,8 @@ def approve_employee_request(request, pk):
     else:
         employee = employee_request.employee
         messages.add_message(request, messages.SUCCESS, "Employee %s %s's request has been approved by %s." % (employee.first_name, employee.last_name, request.user.title))
+        description = "Employee %s %s's request for %s approved by %s." % (employee.first_name, employee.last_name, employee_request.permissions.all().values_list('name', flat=True), request.user.title)
+        Log.objects.create(company=request.user.company, category='Approval', author=request.user.email, accessor='Employee', description=description)
         return redirect('detail-employee-request', employee_request.pk)
 
 def approve_contractor_request(request, pk):
@@ -168,6 +170,8 @@ def approve_contractor_request(request, pk):
             return redirect('detail-contractor-request', contractor_request.pk)
     else:
         messages.add_message(request, messages.SUCCESS, "Contractor %s %s's request has been approved by %s." % (contractor.first_name, contractor.last_name, request.user.title))
+        description = "Contractor %s %s's request for %s approved by %s." % (contractor.first_name, contractor.last_name, contractor_request.permissions.all().values_list('name', flat=True), request.user.title)
+        Log.objects.create(company=request.user.company, category='Approval', author=request.user.email, accessor='Contractor', description=description)
         return redirect('detail-contractor-request', contractor_request.pk)
 
 
@@ -183,14 +187,24 @@ def reject_employee_request(request, pk):
         employee_request.tc_status = False
     elif request.user.title == 'Access Control Engineer':
         employee_request.ace_status = False
-    elif request.user.title == 'CIP Manager':
-        employee_request.cip_status = False
-    elif request.user.title == 'Alternate CIP Manager':
-        employee_request.cip_status = False
 
     employee_request.save()
+    employee = employee_request.employee
 
-    return redirect('detail-employee-request', employee_request.pk)
+    if request.user.title == 'CIP Manager' or request.user.title == 'Alternate CIP Manager':
+        employee_request.cip_status = False
+        messages.add_message(request, messages.SUCCESS, "Employee %s %s's request has been rejected and deleted from the system." % (employee.first_name, employee.last_name))
+        description = 'Employee %s %s request for %s rejected and deleted from the system.' % (employee.first_name, employee.last_name, employee_request.permissions.all().values_list('name', flat=True))
+        Log.objects.create(company=request.user.company, category='Rejection', author=request.user.email, accessor='Employee', description=description)
+        employee_request.delete()
+
+        return redirect('list-requests')
+    else:
+        messages.add_message(request, messages.SUCCESS, "Employee %s %s's request has been rejected by %s." % (employee.first_name, employee.last_name, request.user.title))
+        description = 'Employee %s %s request for %s rejected by %s.' % (employee.first_name, employee.last_name, employee_request.permissions.all().values_list('name', flat=True), request.user.title)
+        Log.objects.create(company=request.user.company, category='Rejection', author=request.user.email, accessor='Employee', description=description)
+
+        return redirect('detail-employee-request', employee_request.pk)
 
 def reject_contractor_request(request, pk):
     """
@@ -204,11 +218,28 @@ def reject_contractor_request(request, pk):
         contractor_request.tc_status = False
     elif request.user.title == 'Access Control Engineer':
         contractor_request.ace_status = False
-    elif request.user.title == 'CIP Manager':
-        contractor_request.cip_status = False
-    elif request.user.title == 'Alternate CIP Manager':
-        employee_request.cip_status = False
 
     contractor_request.save()
+    contractor, created = Contractor.objects.get_or_create(
+        first_name=contractor_request.first_name,
+        last_name=contractor_request.last_name,
+        email=contractor_request.email,
+        employer=contractor_request.employer,
+        company=contractor_request.company
+    )
 
-    return redirect('detail-contractor-request', contractor_request.pk)
+    if request.user.title == 'CIP Manager' or request.user.title == 'Alternate CIP Manager':
+        contractor_request.cip_status = False
+        messages.add_message(request, messages.SUCCESS, "Contractor %s %s's request has been rejected and deleted from the system." % (contractor.first_name, contractor.last_name))
+        description = "Contractor %s %s's request for %s rejected and deleted from the system." % (contractor.first_name, contractor.last_name, contractor_request.permissions.all().values_list('name', flat=True))
+        Log.objects.create(company=request.user.company, category='Rejection', author=request.user.email, accessor='Contractor', description=description)
+        contractor_request.delete()
+
+        return redirect('list-requests')
+    else:
+        messages.add_message(request, messages.SUCCESS, "Contractor %s %s's request has been rejected by %s." % (contractor.first_name, contractor.last_name, request.user.title))
+        description = "Contractor %s %s's request for %s rejected by %s." % (contractor.first_name, contractor.last_name, contractor_request.permissions.all().values_list('name', flat=True), request.user.title)
+        Log.objects.create(company=request.user.company, category='Rejection', author=request.user.email, accessor='Contractor', description=description)
+
+        return redirect('detail-contractor-request', contractor_request.pk)
+

@@ -261,6 +261,8 @@ class Log(models.Model):
     Represents a change log of permissions.
     """
     CATEGORIES = (
+        ('Approval', 'Approval'),
+        ('Rejection', 'Rejection'),
         ('New Employee', 'New Employee'),
         ('New Contractor', 'New Contractor'),
         ('Permission Change', 'Permission Change'),
