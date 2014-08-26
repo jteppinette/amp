@@ -60,8 +60,8 @@ def requests(request):
     """
     Load the Employee and Contractor requests into context.
     """
-    employee_requests = EmployeeRequest.objects.all().prefetch_related('employee', 'permissions')
-    contractor_requests = ContractorRequest.objects.all().prefetch_related('permissions')
+    employee_requests = EmployeeRequest.objects.all().prefetch_related('employee', 'permissions').order_by('employee__first_name')
+    contractor_requests = ContractorRequest.objects.all().prefetch_related('permissions').order_by('first_name')
 
     return render(request, 'requests/list.html', {
         'employee_requests': employee_requests,
