@@ -7,9 +7,6 @@ from django.contrib import admin
 # Company Model
 from api.models import Company
 
-# Notification Model
-from api.models import Notification
-
 # Accessor Models
 from api.models import Employee, Contractor
 
@@ -30,17 +27,6 @@ class CompanyAdmin(admin.ModelAdmin):
     """
     list_display = ('__unicode__',)
     search_fields = ['name']
-
-"""
-                             NOTIFICATION MODEL
-"""
-
-
-class NotificationAdmin(admin.ModelAdmin):
-    """
-    Define the custom charactersitics for the `Notification` model.
-    """
-    list_display = ('title', 'description', 'user')
 
 """
                              ACCESSOR MODELS
@@ -106,9 +92,6 @@ class ContractorRequestAdmin(admin.ModelAdmin):
 
 # Company Model
 admin.site.register(Company, CompanyAdmin)
-
-# Notification Model
-admin.site.register(Notification, NotificationAdmin)
 
 # Accessor Models
 admin.site.register(Employee, EmployeeAdmin)

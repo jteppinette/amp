@@ -11,9 +11,6 @@ from django.contrib.auth import get_user_model
 # Company Model
 from api.models import Company
 
-# Notification Model
-from api.models import Notification
-
 # Accessor Models
 from api.models import Employee, Contractor
 

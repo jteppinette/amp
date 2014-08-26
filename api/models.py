@@ -48,26 +48,6 @@ class Company(models.Model):
         return self.name
 
 """
-                             NOTIFICATION MODEL
-"""
-
-
-class Notification(models.Model):
-    """
-    Represents a notification that will be sent to a user.
-    """
-    title = models.CharField(max_length=80)
-    description = models.CharField(max_length=160)
-
-    user = models.ForeignKey(settings.AUTH_USER_MODEL)
-
-    def __unicode__(self):
-        """
-        Provide a unicode representation of this model.
-        """
-        return "%s | %s" % (self.title, self.description)
-
-"""
                              ACCESSOR MODELS
 """
 
@@ -83,6 +63,9 @@ class Employee(models.Model):
     eid = models.IntegerField(unique=True)
 
     permissions = models.ManyToManyField('Permission', blank=True, null=True)
+
+    background_check = models.FileField(upload_to='background', blank=True, null=True, help_text='This field is not required.')
+    last_training_date = models.DateField(blank=True, null=True, help_text='This is field is not required. Ex. 2012-05-13')
 
     def __unicode__(self):
         """
@@ -166,6 +149,9 @@ class Contractor(models.Model):
     company = models.ForeignKey(Company, help_text="This field represents the company that the contractor is requesting access to.")
 
     permissions = models.ManyToManyField('Permission', blank=True, null=True)
+
+    background_check = models.FileField(upload_to='background', blank=True, null=True, help_text='This field is not required.')
+    last_training_date = models.DateField(blank=True, null=True, help_text='This is field is not required. Ex. 2012-05-13')
 
     def __unicode__(self):
         """
