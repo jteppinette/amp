@@ -1,5 +1,7 @@
 {% extends "base/basenav.html" %}
 
+{% load custom_filters %}
+
 {% block title %}Employees | AMP{% endblock %}
 
 {% block content %}
@@ -70,8 +72,8 @@
             <tr>
                 <td>{{employee.eid}}</td>
                 <td>{{employee.first_name}} {{employee.last_name}}</td>
-                <td class="hidden-xs">{{employee.last_background_check_date}}</td>
-                <td class="hidden-xs">{{employee.last_training_date}}</td>
+                <td class="hidden-xs">{{employee.last_background_check_date|add_days:"2555"}}</td>
+                <td class="hidden-xs">{{employee.last_training_date|add_days:"365"}}</td>
                 <td><a href="{% url 'update-employee' employee.pk %}"><span class="glyphicon glyphicon-pencil"></span></a></td>
                 <td><a href="{% url 'delete-employee' employee.pk %}"><span class="glyphicon glyphicon-remove"></span></a></td>
             </tr>

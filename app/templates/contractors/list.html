@@ -1,5 +1,7 @@
 {% extends "base/basenav.html" %}
 
+{% load custom_filters %}
+
 {% block title %}Contractors | AMP{% endblock %}
 
 {% block content %}
@@ -70,8 +72,8 @@
             <tr>
                 <td>{{contractor.first_name}} {{contractor.last_name}}</td>
                 <td>{{contractor.employer}}</td>
-                <td class="hidden-xs hidden-sm">{{contractor.last_background_check_date}}</td>
-                <td class="hidden-xs hidden-sm">{{contractor.last_training_date}}</td>
+                <td class="hidden-xs hidden-sm">{{contractor.last_background_check_date|add_days:"2555"}}</td>
+                <td class="hidden-xs hidden-sm">{{contractor.last_training_date|add_days:"365"}}</td>
                 <td><a href="{% url 'update-contractor' contractor.pk %}"><span class="glyphicon glyphicon-pencil"></span></a></td>
                 <td><a href="{% url 'delete-contractor' contractor.pk %}"><span class="glyphicon glyphicon-remove"></span></a></td>
             </tr>
