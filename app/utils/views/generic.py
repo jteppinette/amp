@@ -15,6 +15,10 @@ class SearchListView(ListView):
         Refine the queryset.
         """
         search = dict(self.request.GET.iteritems())
+        try:
+            del search['orderby']
+        except:
+            pass
         for term in search.keys():
             if search[term] is None or search[term] == '':
                 del search[term]

@@ -32,6 +32,19 @@
             <form class="form-inline" method="get" role="form">
                 <div class="row">
                     <div class="col-sm-3 form-group">
+                        <label class="sr-only" for="eid">Order By</label>
+                        <select name="orderby" class="form-control" id="orderby">
+                            <option value="">Order By</option>
+                            {% for value in options %}
+                            {% if value.value == orderby %}
+                            <option selected="selected" value="{{value.value}}">{{value.name}}</option>
+                            {% else %}
+                            <option value="{{value.value}}">{{value.name}}</option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-sm-3 form-group">
                         <label class="sr-only" for="first_name">First Name</label>
                         <input name="first_name" value="{{first_name}}" type="text" class="form-control" id="first_name" placeholder="First Name">
                     </div>
@@ -39,11 +52,6 @@
                         <label class="sr-only" for="last_name">Last Name</label>
                         <input name="last_name" value="{{last_name}}" type="text" class="form-control" id="last_name" placeholder="Last Name">
                     </div>
-                    <div class="col-sm-3 form-group">
-                        <label class="sr-only" for="employer">Employer</label>
-                        <input name="employer" value="{{employer}}" type="text" class="form-control" id="eid" placeholder="Employer">
-                    </div>
-
                     <div class="col-sm-3 form-group">
                         <button type="submit" class="btn btn-primary">Search</button>
                     </div>

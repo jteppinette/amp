@@ -25,19 +25,29 @@ class ListEmployees(SearchListView):
     """
     template_name = 'employees/list.html'
     model = Employee
-    search_fields = {'eid': 'exact', 'first_name': 'icontains', 'last_name': 'icontains'}
+    search_fields = {'first_name': 'icontains', 'last_name': 'icontains'}
 
     def get_queryset(self, *args, **kwargs):
         """
         Filter by company.
         """
-        return super(ListEmployees, self).get_queryset(*args, **kwargs).filter(company=self.request.user.company)
+        orderby = self.request.GET.get('orderby', None)
+        qs = super(ListEmployees, self).get_queryset(*args, **kwargs).filter(company=self.request.user.company)
+        if orderby is None or orderby == '':
+            return qs
+        else:
+            return qs.order_by(orderby)
 
-    def get_form_kwargs(self):
-        kwargs = super(ListEmployees, self).get_form_kwargs()
-        kwargs['options'] = {'options': ['Training Due Date', 'Background Due Date']}
-        kwargs['orderby'] = 'Training Due Date'
-        return kwargs
+    def get_context_data(self, *args, **kwargs):
+        context = super(ListEmployees, self).get_context_data(*args, **kwargs)
+        context['options'] = [
+            {'value': 'first_name', 'name': 'First Name'},
+            {'value': 'last_name', 'name': 'Last Name'},
+            {'value': 'last_training_date', 'name': 'Training Due Date'},
+            {'value': 'last_background_check_date', 'name': 'Background Due Date'},
+        ]
+        context['orderby'] = self.request.GET.get('orderby', None)
+        return context
 
 
 class NewEmployee(SuccessMessageMixin, CreateView):

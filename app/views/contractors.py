@@ -25,13 +25,29 @@ class ListContractors(SearchListView):
     """
     template_name = 'contractors/list.html'
     model = Contractor
-    search_fields = {'first_name': 'icontains', 'last_name': 'icontains', 'employer': 'icontains'}
+    search_fields = {'first_name': 'icontains', 'last_name': 'icontains'}
 
     def get_queryset(self, *args, **kwargs):
         """
         Refine by company.
         """
-        return super(ListContractors, self).get_queryset(*args, **kwargs).filter(company=self.request.user.company)
+        orderby = self.request.GET.get('orderby', None)
+        qs = super(ListContractors, self).get_queryset(*args, **kwargs).filter(company=self.request.user.company)
+        if orderby is None or orderby == '':
+            return qs
+        else:
+            return qs.order_by(orderby)
+        
+    def get_context_data(self, *args, **kwargs):
+        context = super(ListContractors, self).get_context_data(*args, **kwargs)
+        context['options'] = [
+            {'value': 'first_name', 'name': 'First Name'},
+            {'value': 'last_name', 'name': 'Last Name'},
+            {'value': 'last_training_date', 'name': 'Training Due Date'},
+            {'value': 'last_background_check_date', 'name': 'Background Due Date'},
+        ]
+        context['orderby'] = self.request.GET.get('orderby', None)
+        return context
 
 
 class NewContractor(SuccessMessageMixin, CreateView):
