@@ -33,6 +33,12 @@ class ListEmployees(SearchListView):
         """
         return super(ListEmployees, self).get_queryset(*args, **kwargs).filter(company=self.request.user.company)
 
+    def get_form_kwargs(self):
+        kwargs = super(ListEmployees, self).get_form_kwargs()
+        kwargs['options'] = {'options': ['Training Due Date', 'Background Due Date']}
+        kwargs['orderby'] = 'Training Due Date'
+        return kwargs
+
 
 class NewEmployee(SuccessMessageMixin, CreateView):
     """

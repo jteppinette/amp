@@ -32,8 +32,18 @@
             <form class="form-inline" method="get" role="form">
                 <div class="row">
                     <div class="col-sm-3 form-group">
-                        <label class="sr-only" for="eid">EID</label>
+                        <label class="sr-only" for="eid">Order By</label>
                         <input name="eid" value="{{eid}}" type="number" class="form-control" id="eid" placeholder="EID">
+                        <select name="orderby" class="form-control" id="orderby">
+                            <option value="">Order By</option>
+                            {% for value in options %}
+                            {% if value == orderby %}
+                            <option selected="selected">{{value | first}}</option>
+                            {% else %}
+                            <option>{{value | first}}</option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
                     </div>
                     <div class="col-sm-3 form-group">
                         <label class="sr-only" for="first_name">First Name</label>
