@@ -61,6 +61,8 @@
             <tr>
                 <th>Name</th>
                 <th>Employer</th>
+                <th class="hidden-xs hidden-sm">Background Due Date</th>
+                <th class="hidden-xs hidden-sm">Training Due Date</th>
                 <th>Update</th>
                 <th>Delete</th>
             </tr>
@@ -68,6 +70,8 @@
             <tr>
                 <td>{{contractor.first_name}} {{contractor.last_name}}</td>
                 <td>{{contractor.employer}}</td>
+                <td class="hidden-xs hidden-sm">{{contractor.last_background_check_date}}</td>
+                <td class="hidden-xs hidden-sm">{{contractor.last_training_date}}</td>
                 <td><a href="{% url 'update-contractor' contractor.pk %}"><span class="glyphicon glyphicon-pencil"></span></a></td>
                 <td><a href="{% url 'delete-contractor' contractor.pk %}"><span class="glyphicon glyphicon-remove"></span></a></td>
             </tr>

@@ -65,7 +65,7 @@ class Employee(models.Model):
     permissions = models.ManyToManyField('Permission', blank=True, null=True)
 
     background_check = models.FileField(upload_to='background', blank=True, null=True, help_text='This field is not required.')
-    last_backround_check_date = models.DateField(blank=True, null=True, help_text='This field is not required. Ex. 2012-05-13')
+    last_background_check_date = models.DateField(blank=True, null=True, help_text='This field is not required. Ex. 2012-05-13')
 
     last_training_date = models.DateField(blank=True, null=True, help_text='This is field is not required. Ex. 2012-05-13')
 
@@ -153,7 +153,7 @@ class Contractor(models.Model):
     permissions = models.ManyToManyField('Permission', blank=True, null=True)
 
     background_check = models.FileField(upload_to='background', blank=True, null=True, help_text='This field is not required.')
-    last_backround_check_date = models.DateField(blank=True, null=True, help_text='This field is not required. Ex. 2012-05-13')
+    last_background_check_date = models.DateField(blank=True, null=True, help_text='This field is not required. Ex. 2012-05-13')
 
     last_training_date = models.DateField(blank=True, null=True, help_text='This field is not required. Ex. 2012-05-13')
 
