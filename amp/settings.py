@@ -70,11 +70,28 @@ WSGI_APPLICATION = 'amp.wsgi.application'
 import os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-STATIC_ROOT = 'staticfiles'
-STATIC_URL = '/static/'
+if DEBUG:
 
-MEDIA_ROOT = ''
-MEDIA_URL = '/media/'
+    STATIC_ROOT = 'staticfiles'
+    STATIC_URL = '/static/'
+
+    MEDIA_ROOT = BASE_DIR 
+    MEDIA_URL = '/media/'
+
+else:
+
+    DEFAULT_FILE_STORAGE = 'api.util.storages.PrefixedStorage'
+    STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+
+    STATIC_ROOT = 'staticfiles'
+    STATIC_URL = 'http://s3.amazonaws.com/gdsamp/'
+
+    AWS_ACCESS_KEY_ID = 'AKIAI53U4MXHDBTSOBWA'
+    AWS_SECRET_ACCESS_KEY = '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'
+    AWS_STORAGE_BUCKET_NAME = 'gdsamp'
+
+    MEDIA_ROOT = 'media'
+    MEDIA_URL = 'https://s3.amazonaws.com/gdsamp/media/'
 
 STATICFILES_DIRS = (
     os.path.abspath(os.path.join(BASE_DIR, '..', 'static')),
