@@ -31,7 +31,9 @@
                 <th>Name</th>
                 <th class="hidden-xs">Employer</th>
                 <th>Requested Permissions</th>
+                {% if contractorrequest.background_check %}
                 <th class="visible-lg">Background Check</th>
+                {% endif %}
                 <th class="hidden-xs">Remote</th>
                 <th>Approve</th>
                 <th>Reject</th>
@@ -48,7 +50,9 @@
                     </ul>
                     {% endif %}
                 </td>
+                {% if contractorrequest.background_check %}
                 <td class="visible-lg visible-md"><a href="{{contractorrequest.background_check.url}}">{{contractorrequest.background_check}}</a></td>
+                {% endif %}
                 <td class="hidden-xs">{{contractorrequest.remote}}</td>
                 <td><a href="{% url 'approve-contractor-request' contractorrequest.pk %}"><span class="glyphicon glyphicon-ok"></span></a></td>
                 <td><a href="{% url 'reject-contractor-request' contractorrequest.pk %}"><span class="glyphicon glyphicon-remove"></span></a></td>
