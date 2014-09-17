@@ -379,3 +379,6 @@ class ContractorRequest(models.Model):
 
         return log
 
+
+# Import Receivers
+from api import receivers

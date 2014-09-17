@@ -81,6 +81,21 @@ STATICFILES_DIRS = (
     os.path.abspath(os.path.join(BASE_DIR, '..', 'app', 'static')),
 )
 
+# Mail
+import os
+EMAIL_HOST = 'smtp.mandrillapp.com'
+EMAIL_PORT = 587
+
+if DEBUG:
+    EMAIL_HOST_USER = 'app26343405@heroku.com'
+    EMAIL_HOST_PASSWORD = 'IYZR90-QFNR60BxjxcifhA'
+else:
+    EMAIL_HOST_USER = os.environ['MANDRILL_USERNAME']
+    EMAIL_HOST_PASSWORD = os.environ['MANDRILL_APIKEY']
+
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'notfications@gdsamp.com'
+
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
