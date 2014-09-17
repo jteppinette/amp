@@ -80,7 +80,7 @@ if DEBUG:
 
 else:
 
-    DEFAULT_FILE_STORAGE = 'api.util.storages.PrefixedStorage'
+    DEFAULT_FILE_STORAGE = 'api.utils.storages.PrefixedStorage'
     STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
     STATIC_ROOT = 'staticfiles'
