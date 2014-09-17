@@ -36,7 +36,7 @@ class ListContractors(SearchListView):
         if orderby is None or orderby == '':
             return qs
         else:
-            return qs.order_by(orderby)
+            return qs.order_by(str(orderby))
         
     def get_context_data(self, *args, **kwargs):
         context = super(ListContractors, self).get_context_data(*args, **kwargs)
