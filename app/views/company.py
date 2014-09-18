@@ -20,7 +20,7 @@ class ListCompanyUsers(ListView):
     template_name = 'company/list.html'
 
     def get_queryset(self):
-        return get_user_model().objects.filter(company=self.request.user.company).exclude(title='CIP Manager')
+        return get_user_model().objects.filter(company=self.request.user.company)
 
 
 class NewCompanyUser(SuccessMessageMixin, CreateView):
