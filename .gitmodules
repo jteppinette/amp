@@ -1,3 +1,0 @@
-[submodule "bootstrapforms"]
-	path = bootstrapforms
-	url = git://github.com/jteppinette/DjangoBootstrapFormTemplate.git

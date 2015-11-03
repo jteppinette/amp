@@ -1,4 +1,5 @@
 *.pyc
 app-server/venv
 app-server/staticfiles
-app-server/background
+app-server/media
+.vagrant
