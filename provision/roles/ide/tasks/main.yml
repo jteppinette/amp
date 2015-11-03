@@ -1,0 +1,25 @@
+---
+
+- name: Update Package Cache
+  apt: update_cache=yes cache_valid_time=3600
+  sudo: yes
+
+- name: Install Packages
+  apt: name={{item}}
+  with_items: [git, tmux, vim]
+  sudo: yes
+  
+- name: Clone IDE Configuration
+  git: repo=https://github.com/jteppinette/dotfiles.git dest={{home}}/dotfiles depth=1 update=no
+  
+- name: Install IDE Configurations
+  shell: "{{home}}/dotfiles/install.sh"
+  
+- name: Configure Git Email
+  command: git config --global user.email "josheppinette@gmail.com"
+  
+- name: Configure Git Name
+  command: git config --global user.name "Joshua Taylor Eppinette"
+
+- name: Configure Git Editor
+  command: git config --global core.editor "vim"

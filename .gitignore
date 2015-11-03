@@ -1,4 +1,4 @@
 *.pyc
-venv
-staticfiles
-background
+app-server/venv
+app-server/staticfiles
+app-server/background

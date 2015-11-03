@@ -1,0 +1,37 @@
+{% extends "base/basenav.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %}New Conctractor | AMP{% endblock %}
+
+{% block content %}
+
+<!-- Jumbotron -->
+<div class="jumbotron">
+    <div class="container">
+        <h1>New Contractor!</h1>
+        <p>This page allows you to create a new Contractor.</p>
+    </div>
+</div>
+
+<div class="container">
+
+    <!-- Breadcrumbs -->
+    <ol class="breadcrumb">
+      <li><a href="{% url 'dashboard-home' %}">Dashboard</a></li>
+      <li><a href="{% url 'list-contractors' %}">Contractors</a></li>
+      <li class="active">New</li>
+    </ol>
+
+    <!-- Form -->
+    <form class="form" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons %}
+            <button type="submit" class="btn btn-primary"> Submit</button>
+        {% endbuttons %}
+    </form>
+
+</div>
+
+{% endblock %}

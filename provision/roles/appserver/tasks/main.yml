@@ -1,0 +1,43 @@
+---
+
+- name: Update Package Cache
+  apt: update_cache=yes cache_valid_time=3600
+  sudo: yes
+
+- name: Install Packages
+  apt: name={{item}}
+  with_items: [apache2, libapache2-mod-wsgi, python-pip, python-virtualenv, python-dev]
+  sudo: yes
+
+- name: Create Virtual Environment
+  command: virtualenv venv chdir={{dir}}
+  
+- name: Install Pip Packages
+  pip: requirements={{dir}}/requirements.txt virtualenv={{dir}}/venv
+  
+- name: Configure Apache WSGIDaemonProcess
+  lineinfile: state=present line="WSGIDaemonProcess django python-path={{dir}}:{{dir}}/venv/lib/python2.7/site-packages" dest=/etc/apache2/apache2.conf
+  sudo: yes
+
+- name: Configure Apache WSGIProcessGroup
+  lineinfile: state=present line="WSGIProcessGroup django" dest=/etc/apache2/apache2.conf
+  sudo: yes
+  
+- name: Configure Virtual Host
+  lineinfile: state=present insertafter="^<VirtualHost \\*:80>$" line="{{item}}" dest=/etc/apache2/sites-enabled/000-default.conf
+  with_items:
+      - \tWSGIScriptAlias / {{dir}}/project/wsgi.py
+      - \tAlias /static/ {{dir}}/staticfiles/
+      - \t<Directory {{dir}}/staticfiles>\n\t\tRequire all granted\n\t</Directory>
+      - \t<Directory {{dir}}/project>\n\t\t<Files wsgi.py>\n\t\t\tRequire all granted\n\t\t</Files>\n\t</Directory>
+  sudo: yes
+
+- name: Restart Apache
+  shell: service apache2 restart
+  sudo: yes
+
+- name: Collect Django Static Assets
+  django_manage: command=collectstatic app_path={{dir}} virtualenv={{dir}}/venv
+  
+- name: Migrate Django SQL Schema
+  django_manage: command=migrate app_path={{dir}} virtualenv={{dir}}/venv

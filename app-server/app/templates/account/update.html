@@ -1,0 +1,36 @@
+{% extends "base/basenav.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %}Account | AMP{% endblock %}
+
+{% block content %}
+
+<!-- Jumbotron -->
+<div class="jumbotron">
+    <div class="container">
+        <h1>Account</h1>
+        <p>This page allows you to update your Account.</p>
+    </div>
+</div>
+
+<div class="container">
+
+    <!-- Breadcrumbs -->
+    <ol class="breadcrumb">
+      <li><a href="{% url 'dashboard-home' %}">Dashboard</a></li>
+      <li class="active">Account</li>
+    </ol>
+
+    <!-- Form -->
+    <form class="form" method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons %}
+            <button type="submit" class="btn btn-primary"> Submit</button>
+        {% endbuttons %}
+    </form>
+
+</div>
+
+{% endblock %}

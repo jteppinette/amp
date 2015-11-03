@@ -1,0 +1,1 @@
+{"nfs":{"/vagrant":{"type":"nfs","mount_options":["nolock,vers=3,udp,noatime,actimeo=1"],"guestpath":"/vagrant","hostpath":"/Users/jeppinette/projects/amp","disabled":false,"map_uid":1375734449,"map_gid":20,"nfs_udp":true,"nfs_version":3,"uuid":"4049789659"}}}

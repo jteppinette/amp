@@ -1,0 +1,21 @@
+---
+
+- name: Update Package Cache
+  apt: update_cache=yes cache_valid_time=3600
+  sudo: yes
+
+- name: Install Packages
+  apt: name={{item}}
+  with_items: [libpq-dev, postgresql, postgresql-contrib]
+  sudo: yes
+  
+- name: Configure PostgreSQL User
+  shell: psql -c "ALTER USER postgres PASSWORD 'password';"
+  sudo: yes
+  sudo_user: postgres
+  
+- name: Create PostgreSQL Database
+  shell: createdb mydb
+  failed_when: False
+  sudo: yes
+  sudo_user: postgres
