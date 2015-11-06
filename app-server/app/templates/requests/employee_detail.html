@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<!-- Jumbotron -->
+<!-- JUMBOTRON -->
 <div class="jumbotron">
     <div class="container">
         <h1>{{employeerequest}}</h1>
@@ -12,20 +12,21 @@
     </div>
 </div>
 
+<!-- CONTENT -->
 <div class="container">
 
-    <!-- Breadcrumbs -->
+    <!-- BREADCRUMBS -->
     <ol class="breadcrumb">
       <li><a href="{% url 'dashboard-home' %}">Dashboard</a></li>
       <li><a href="{% url 'list-requests' %}">Requests</a></li>
       <li class="active">{{employeerequest}}</li>
     </ol>
 
-    <!-- Employee Requests-->
+    <!-- EMPLOYEE REQUESTS-->
     <div class="panel panel-default">
-        <div class="panel-heading">Request Information</div>
 
-        <!-- List -->
+        <!-- INFO TABLE -->
+        <div class="panel-heading">Request Information</div>
         <table class="table table-striped">
             <tr>
                 <th>Name</th>
@@ -49,9 +50,8 @@
             </tr>
         </table>
 
+        <!-- STATUS TABLE -->
         <div class="panel-heading">Request Status</div>
-
-        <!-- Status -->
         <table class="table table-striped">
             <tr>
                 <th>HR</th>
@@ -95,7 +95,6 @@
         </table>
 
     </div>
-
     
 </div>
 

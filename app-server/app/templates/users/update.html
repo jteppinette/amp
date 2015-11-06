@@ -6,7 +6,7 @@
 
 {% block content %}
 
-<!-- Jumbotron -->
+<!-- JUMBOTRON -->
 <div class="jumbotron">
     <div class="container">
       <h1>Update {{form.first_name.value}} {{form.last_name.value}}</h1>
@@ -14,16 +14,17 @@
     </div>
 </div>
 
+<!-- CONTENT -->
 <div class="container">
 
-    <!-- Breadcrumbs -->
+    <!-- BREADCRUMBS -->
     <ol class="breadcrumb">
       <li><a href="{% url 'dashboard-home' %}">Dashboard</a></li>
       <li><a href="{% url 'list-users' %}">Users</a></li>
       <li class="active">{{form.first_name.value}} {{form.last_name.value}}</li>
     </ol>
 
-    <!-- Form -->
+    <!-- FORM -->
     <form class="form" method="post">
         {% csrf_token %}
         {% bootstrap_form form %}

@@ -6,7 +6,7 @@
 
 {% block content %}
 
-<!-- Jumbotron -->
+<!-- JUMBOTRON -->
 <div class="jumbotron">
     <div class="container">
         <h1>Contractors</h1>
@@ -15,20 +15,21 @@
     </div>
 </div>
 
+<!-- CONTENT -->
 <div class="container">
 
-    <!-- Breadcrumbs -->
+    <!-- BREADCRUMBS -->
     <ol class="breadcrumb">
       <li><a href="{% url 'dashboard-home' %}">Dashboard</a></li>
       <li class="active">Conctractors</li>
     </ol>
 
-    <!-- Panel -->
+    <!-- PANEL -->
     <div class="panel panel-default">
+
+        <!-- SEARCH -->
         <div class="panel-heading">Search Contractors</div>
         <div class="panel-body">
-
-            <!-- Search -->
             <form class="form-inline" method="get" role="form">
                 <div class="row">
                     <div class="col-sm-3 form-group">
@@ -57,15 +58,15 @@
                     </div>
                 </div>
             </form>
-
         </div>
 
+        <!-- RESULTS -->
         <div class="panel-heading">
             <span>{{object_list | length}} Results</span>
             <span class="pull-right"><a href="{% url 'list-contractors' %}">Reset</a></span>
         </div>
 
-        <!-- List -->
+        <!-- TABLE -->
         {% if object_list %}
         <table class="table table-striped">
             <tr>

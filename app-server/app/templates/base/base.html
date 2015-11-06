@@ -2,61 +2,56 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
+    <!-- HEAD -->
     <head>
 
-        <!-- Meta (set charset, ie-compatability, mobile viewport) -->
+        <!-- META -->
         <meta charset="utf-8">
         <meta http-equic="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no;">
 
         <title>{% block title %}{% endblock %}</title>
 
-        <!-- Bootstrap -->
+        <!-- CSS -->
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet"> 
-
-        <!-- Custom CSS -->
         <link href="{{STATIC_URL}}app/css/styles.css" rel="stylesheet">
 
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- HTML5 SHIM -->
         <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+
     </head>
 
     <!-- BODY -->
     <body ng-app="app">
 
-    <!-- Navigation -->
-    {% block nav %}{% endblock %}
+        <!-- NAVIGATION -->
+        {% block nav %}{% endblock %}
 
-    <!-- Messages -->
-    {% bootstrap_messages %}
+        <!-- MESSAGES -->
+        {% bootstrap_messages %}
 
-    <!-- Main Content -->
-    {% block content %}{% endblock %}
+        <!-- CONTENT -->
+        {% block content %}{% endblock %}
 
-    <!-- JavaScript Imports -->
+        <!-- JS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <script src="{{STATIC_URL}}app/js/fastclick.js"></script>
 
-    <!-- JQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-
-    <!-- Bootstrap -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
-    <!-- Fastclick -->
-    <script src="{{STATIC_URL}}app/js/fastclick.js"></script>
-
-    <!-- Instantiate FastClick --> 
-
-    <script>
-        $(document).ready(function () {
-            FastClick.attach(document.body)
-        })
-    </script>
+        <!-- INITIALIZE --> 
+        <script>
+            $(document).ready(function () {
+                FastClick.attach(document.body)
+            })
+        </script>
 
     </body>
 
+    <!-- FOOTER -->
     <div class="container">
         <hr>
         <footer>

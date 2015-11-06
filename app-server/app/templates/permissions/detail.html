@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<!-- Jumbotron -->
+<!-- JUMBOTRON -->
 <div class="jumbotron">
     <div class="container">
         <h1>{{permission.name}}</h1>
@@ -13,24 +13,25 @@
     </div>
 </div>
 
+<!-- CONTENT -->
 <div class="container">
 
-    <!-- Breadcrumbs -->
+    <!-- BREADCRUMBS -->
     <ol class="breadcrumb">
       <li><a href="{% url 'dashboard-home' %}">Dashboard</a></li>
       <li><a href="{% url 'list-permissions' %}">Permissions</a></li>
       <li class="active">{{permission.name}}</li>
     </ol>
 
-    <!-- Panel -->
+    <!-- PANEL -->
     <div class="panel panel-default">
 
-        <!-- Employees Heading -->
+        <!-- EMPLOYEES HEADING -->
         <div class="panel-heading">
             <span>{{permission.employee_set.all | length}} Employees with this permission</span>
         </div>
 
-        <!-- Employees List -->
+        <!-- EMPLOYEES TABLE -->
         <table class="table table-striped">
             <tr>
                 <th>#</th>
@@ -44,15 +45,16 @@
             {% endfor %}
         </table>
 
+        <!-- DIVIDER -->
         <div class="panel-body">
         </div>
 
-        <!-- Contractors Heading -->
+        <!-- CONTRACTORS HEADING -->
         <div class="panel-heading">
             <span>{{permission.contractor_set.all | length}} Contractors with this permission</span>
         </div>
 
-        <!-- Contractors List -->
+        <!-- CONTRACTORS TABLE -->
         <table class="table table-striped">
             <tr>
                 <th>Name</th>

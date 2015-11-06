@@ -14,20 +14,21 @@
     </div>
 </div>
 
+<!-- CONTENT -->
 <div class="container">
 
-    <!-- Breadcrumbs -->
+    <!-- BREADCRUMBS -->
     <ol class="breadcrumb">
       <li><a href="{% url 'dashboard-home' %}">Dashboard</a></li>
       <li class="active">Permissions</li>
     </ol>
 
-    <!-- Panel -->
+    <!-- PANEL -->
     <div class="panel panel-default">
+
+        <!-- SEARCH -->
         <div class="panel-heading">Search Permissions</div>
         <div class="panel-body">
-
-            <!-- Search -->
             <form class="form-inline" method="get" role="form">
                 <div class="row">
                     <div class="col-sm-9 form-group">
@@ -40,15 +41,15 @@
                     </div>
                 </div>
             </form>
-
         </div>
 
+        <!-- RESULTS -->
         <div class="panel-heading">
             <span>Results {{object_list | length}}</span>
             <span class="pull-right"><a href="{% url 'list-permissions' %}">Reset</a></span>
         </div>
 
-        <!-- List -->
+        <!-- TABLE -->
         <table class="table table-striped">
             <tr>
                 <th>Name</th>

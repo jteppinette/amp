@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<!-- Jumbotron -->
+<!-- JUMBOTRON -->
 <div class="jumbotron">
     <div class="container">
         <h1>Requests</h1>
@@ -12,21 +12,24 @@
     </div>
 </div>
 
+<!-- CONTENT -->
 <div class="container">
 
-    <!-- Breadcrumbs -->
+    <!-- BREADCRUMBS -->
     <ol class="breadcrumb">
       <li><a href="{% url 'dashboard-home' %}">Dashboard</a></li>
       <li class="active">Requests</li>
     </ol>
 
-    <!-- Employee Requests-->
+    <!-- EMPLOYEE REQUESTS-->
     <div class="panel panel-default">
+
+        <!-- HEADING -->
         <div class="panel-heading">
             <span>{{employee_requests | length}} Employee Requests</span>
         </div>
 
-        <!-- List -->
+        <!-- TABLE -->
         <table class="table table-striped">
             <tr>
                 <th>Name</th>
@@ -50,18 +53,19 @@
                 <td><a href="{% url 'reject-employee-request' request.pk %}"><span class="glyphicon glyphicon-remove"></span></a></td>
             </tr>
             {% endfor %}
-
         </table>
 
     </div>
 
-    <!-- Contractor Requests-->
+    <!-- CONTRACTOR REQUESTS-->
     <div class="panel panel-default">
+
+        <!-- HEADING -->
         <div class="panel-heading">
             <span>{{contractor_requests | length}} Contractor Requests</span>
         </div>
 
-        <!-- List -->
+        <!-- TABLE -->
         <table class="table table-striped">
             <tr>
                 <th>Name</th>

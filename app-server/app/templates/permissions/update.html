@@ -6,7 +6,7 @@
 
 {% block content %}
 
-<!-- Jumbotron -->
+<!-- JUMBOTRON -->
 <div class="jumbotron">
     <div class="container">
         <h1>Read/Update Permission</h1>
@@ -14,16 +14,17 @@
     </div>
 </div>
 
+<!-- CONTENT -->
 <div class="container">
 
-    <!-- Breadcrumbs -->
+    <!-- BREADCRUMBS -->
     <ol class="breadcrumb">
       <li><a href="{% url 'dashboard-home' %}">Dashboard</a></li>
       <li><a href="{% url 'list-permissions' %}">Permissions</a></li>
       <li class="active">{{form.name.value}}</li>
     </ol>
 
-    <!-- Form -->
+    <!-- FORM -->
     <form class="form" method="post">
         {% csrf_token %}
         {% bootstrap_form form %}

@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<!-- Jumbotron | Allows login-->
+<!-- JUMBOTRON -->
 <div class="jumbotron">
     <div class="container">
       <h1>{{user.company}} Dashboard!</h1>
@@ -12,17 +12,18 @@
     </div>
 </div>
 
+<!-- CONTENT -->
 <div class="container">
 
-    <!-- Breadcrumbs -->
+    <!-- BREADCRUMBS -->
     <ol class="breadcrumb">
         <li class="active">Dashboard</li>
     </ol>
 
-    <!-- Dashboard Options -->
+    <!-- FEATURES -->
     <div class="row">
         
-        <!-- Employees -->
+        <!-- EMPOYEES -->
         <div class="col-md-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">Employees</div>
@@ -33,7 +34,7 @@
             </div>
         </div>
 
-        <!-- Contractors -->
+        <!-- CONTRACTORS -->
         <div class="col-md-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">Contractors</div>
@@ -44,7 +45,7 @@
             </div>
         </div>
 
-        <!-- Requests -->
+        <!-- REQUESTS -->
         <div class="col-md-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">Requests</div>
@@ -55,7 +56,7 @@
             </div>
         </div>
 
-        <!-- Permissions -->
+        <!-- PERMISSIONS -->
         <div class="col-md-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">Permissions</div>
@@ -66,7 +67,7 @@
             </div>
         </div>
 
-        <!-- Logs -->
+        <!-- LOGS -->
         <div class="col-md-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">Logs</div>
@@ -77,7 +78,7 @@
             </div>
         </div>
 
-        <!-- Account -->
+        <!-- ACCOUNT -->
         <div class="col-md-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">Account</div>
@@ -90,7 +91,7 @@
 
         {% if user.title == "CIP Manager" or user.title == "Alternate CIP Manager" %}
 
-        <!-- Users -->
+        <!-- USERS -->
         <div class="col-md-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">Users</div>
@@ -101,7 +102,7 @@
             </div>
         </div>
 
-        <!-- Settings -->
+        <!-- SETTINGS -->
         <div class="col-md-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">Settings</div>
