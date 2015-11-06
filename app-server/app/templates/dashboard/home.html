@@ -89,16 +89,29 @@
         </div>
 
         {% if user.title == "CIP Manager" or user.title == "Alternate CIP Manager" %}
+
         <!-- Company -->
-        <div class="col-md-12">
+        <div class="col-md-6">
             <div class="panel panel-primary">
-                <div class="panel-heading">Company</div>
+                <div class="panel-heading">Company Users</div>
                 <div class="panel-body">
                     <p>Manipulate your company. This feature allows you to manipulate the different positions and users that are allowed access to this system.</p>
-                    <p><a href="{% url 'list-company-users' %}" class="btn btn-default" role="button">Company &raquo;</a></p>
+                    <p><a href="{% url 'list-company-users' %}" class="btn btn-default" role="button">Company Users &raquo;</a></p>
                 </div>
             </div>
         </div>
+
+        <!-- Settings -->
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Settings</div>
+                <div class="panel-body">
+                    <p>Update your system settings. This feature allows you to manipulate the different system settings that affect your interaction with AMP.</p>
+                    <p><a href="{% url 'update-settings' %}" class="btn btn-default" role="button">Settings &raquo;</a></p>
+                </div>
+            </div>
+        </div>
+
         {% endif %}
 
     </div>

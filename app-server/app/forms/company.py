@@ -47,12 +47,12 @@ class NewCompanyUserForm(forms.ModelForm):
         Check that if the title is not Access Control Engineer there is only 1.
         """
         title = self.cleaned_data.get('title')
-        if title == 'Access Control Engineer':
+        if title == 'Access Control Engineer' or title == 'Human Resources':
             return title
         else:
             users = User.objects.filter(company=self.request.user.company, title=title)
             if users:
-                raise forms.ValidationError('A user with this title already exists. "Access Control Engineer" is the only position that can be held by multiple Users.')
+                raise forms.ValidationError('A user with this title already exists. "Access Control Engineer" and "Human Resoures" are the only positions that can be held by multiple Users.')
             else:
                 return title
 

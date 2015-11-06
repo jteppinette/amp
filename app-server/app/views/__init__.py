@@ -1,4 +1,5 @@
 from .account import *
+from .settings import *
 from .contractors import *
 from .employees import *
 from .dashboard import *
