@@ -2,7 +2,7 @@
 
 {% load bootstrap3 %}
 
-{% block title %}Update Company User | AMP{% endblock %}
+{% block title %}Update User | AMP{% endblock %}
 
 {% block content %}
 
@@ -10,7 +10,7 @@
 <div class="jumbotron">
     <div class="container">
       <h1>Update {{form.first_name.value}} {{form.last_name.value}}</h1>
-        <p>This page allows you to update a company user.</p>
+        <p>This page allows you to update a user.</p>
     </div>
 </div>
 
@@ -19,7 +19,7 @@
     <!-- Breadcrumbs -->
     <ol class="breadcrumb">
       <li><a href="{% url 'dashboard-home' %}">Dashboard</a></li>
-      <li><a href="{% url 'list-company-users' %}">Company Users</a></li>
+      <li><a href="{% url 'list-users' %}">Users</a></li>
       <li class="active">{{form.first_name.value}} {{form.last_name.value}}</li>
     </ol>
 

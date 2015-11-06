@@ -25,11 +25,11 @@ urlpatterns = patterns('',
     # Account
     url(r'^dashboard/settings/$', login_required(views.UpdateSettings.as_view()), name='update-settings'),
 
-    # Company
-    url(r'^dashboard/company/users/$', login_required(views.ListCompanyUsers.as_view()), name='list-company-users'),
-    url(r'^dashboard/company/users/new/$', login_required(views.NewCompanyUser.as_view()), name='new-company-user'),
-    url(r'^dashboard/company/users/(?P<pk>\d+)/update/$', login_required(views.UpdateCompanyUser.as_view()), name='update-company-user'),
-    url(r'^dashboard/company/users/(?P<pk>\d+)/delete/$', login_required(views.DeleteCompanyUser.as_view()), name='delete-company-user'),
+    # Users
+    url(r'^dashboard/users/$', login_required(views.ListUsers.as_view()), name='list-users'),
+    url(r'^dashboard/users/new/$', login_required(views.NewUser.as_view()), name='new-user'),
+    url(r'^dashboard/users/(?P<pk>\d+)/update/$', login_required(views.UpdateUser.as_view()), name='update-user'),
+    url(r'^dashboard/users/(?P<pk>\d+)/delete/$', login_required(views.DeleteUser.as_view()), name='delete-user'),
 
     # Logs
     url(r'^dashboard/logs/$', login_required(views.ListLogs.as_view()), name='list-logs'),

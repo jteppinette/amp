@@ -5,6 +5,6 @@ from .employees import *
 from .dashboard import *
 from .discover import *
 from .permissions import *
-from .company import *
+from .users import *
 from .requests import *
 from .logs import *
