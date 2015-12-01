@@ -8,9 +8,9 @@ from django.contrib import messages
 
 from django.core.urlresolvers import reverse_lazy
 
-from app.models import Employee, EmployeeDocument
+from app.models import Employee, EmployeeDocument, Contractor, ContractorDocument
 
-from app.forms.documents import NewEmployeeDocumentForm
+from app.forms.documents import NewEmployeeDocumentForm, NewContractorDocumentForm
 
 
 class NewEmployeeDocument(SuccessMessageMixin, CreateView):
@@ -37,3 +37,29 @@ class DeleteEmployeeDocument(DeleteView):
 
     def get_success_url(self):
         return reverse_lazy('update-employee', args=[self.kwargs.get('employee', None)])
+
+
+class NewContractorDocument(SuccessMessageMixin, CreateView):
+    template_name = 'documents/new_contractor_document.html'
+    form_class = NewContractorDocumentForm
+    success_message = "Contractor Document was successfully created."
+
+    def get_success_url(self):
+        return reverse_lazy('update-contractor', args=[self.kwargs.get('contractor', None)])
+
+    def get_context_data(self, **kwargs):
+        kwargs.setdefault('contractor', Contractor.objects.get(id=self.kwargs.get('contractor', None)))
+        return super(NewContractorDocument, self).get_context_data(**kwargs)
+
+    def get_form_kwargs(self):
+        kwargs = super(NewContractorDocument, self).get_form_kwargs()
+        kwargs.update({'contractor': self.kwargs.get('contractor', None)})
+        return kwargs
+
+
+class DeleteContractorDocument(DeleteView):
+    model = ContractorDocument
+    template_name = 'base/delete.html'
+
+    def get_success_url(self):
+        return reverse_lazy('update-contractor', args=[self.kwargs.get('contractor', None)])

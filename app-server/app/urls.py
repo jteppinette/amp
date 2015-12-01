@@ -53,6 +53,10 @@ urlpatterns = patterns('',
     url(r'^dashboard/contractors/(?P<pk>\d+)/update/$', login_required(views.UpdateContractor.as_view()), name='update-contractor'),
     url(r'^dashboard/contractors/(?P<pk>\d+)/delete/$', login_required(views.DeleteContractor.as_view()), name='delete-contractor'),
 
+    # Contractor Documents
+    url(r'^dashboard/contractors/(?P<contractor>\d+)/documents/new/$', login_required(views.NewContractorDocument.as_view()), name='new-contractor-document'),
+    url(r'^dashboard/contractors/(?P<contractor>\d+)/documents/(?P<pk>\d+)/delete/$', login_required(views.DeleteContractorDocument.as_view()), name='delete-contractor-document'),
+
     # Permissions
     url(r'^dashboard/permissions/$', login_required(views.ListPermissions.as_view()), name='list-permissions'),
     url(r'^dashboard/permissions/csv$', login_required(views.CSVPermissions.as_view()), name='csv-permissions'),

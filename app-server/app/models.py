@@ -14,7 +14,9 @@ The AMP models are seperated into the following groups:
     ACCESSOR MODELS:
 
         * Employee
+        * EmployeeDocument
         * Contractor
+        * ContractorDocument
 
     PERMISSION MODELS:
         
@@ -129,7 +131,7 @@ class Employee(models.Model):
 
 
 class EmployeeDocument(models.Model):
-    file = models.FileField(upload_to='employee-documents', blank=True, null=True, help_text='This field is not required.')
+    file = models.FileField(upload_to='employee-documents')
     employee = models.ForeignKey(Employee, help_text='This field represent the employee that this document belongs to.', related_name='documents')
 
     def __unicode__(self):
@@ -210,6 +212,15 @@ class Contractor(models.Model):
 
     class Meta:
         unique_together = ('first_name', 'last_name', 'company')
+
+
+class ContractorDocument(models.Model):
+    file = models.FileField(upload_to='contractor-documents')
+    contractor = models.ForeignKey(Contractor, help_text='This field represent the contractor that this document belongs to.', related_name='documents')
+
+    def __unicode__(self):
+        return 'Document %s of %s' % (self.contractor, self.file)
+
 
 """
                              PERMISSION MODELS

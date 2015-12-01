@@ -4,7 +4,7 @@ from django.contrib import admin
 from app.models import Company
 
 # Accessor Models
-from app.models import Employee, EmployeeDocument, Contractor
+from app.models import Employee, EmployeeDocument, Contractor, ContractorDocument
 
 # Permission Models
 from app.models import Permission, Log
@@ -39,6 +39,12 @@ class EmployeeDocumentAdmin(admin.ModelAdmin):
 class ContractorAdmin(admin.ModelAdmin):
     list_display = ('__unicode__', 'first_name', 'last_name', 'employer', 'company')
     search_fields = ['first_name', 'last_name']
+
+
+class ContractorDocumentAdmin(admin.ModelAdmin):
+    list_display = ('__unicode__',)
+    search_fields = ['contractor__first_name', 'contractor__last_name']
+
 
 """
                              PERMISSION MODELS
@@ -77,6 +83,7 @@ admin.site.register(Company, CompanyAdmin)
 admin.site.register(Employee, EmployeeAdmin)
 admin.site.register(EmployeeDocument, EmployeeDocumentAdmin)
 admin.site.register(Contractor, ContractorAdmin)
+admin.site.register(ContractorDocument, ContractorDocumentAdmin)
 
 # Permission Models
 admin.site.register(Permission, PermissionAdmin)
