@@ -6,6 +6,10 @@ ROOT = os.path.dirname(os.path.dirname(__file__))
 # DEBUG
 DEBUG = True
 
+# COMPANY SETTINGS
+APP_URL = 'http://localhost:8080'
+COMPANY_NAME = 'LUS'
+
 # TEMPLATES
 TEMPLATE_DEBUG = True
 TEMPLATE_DIRS = [

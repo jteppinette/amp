@@ -40,7 +40,7 @@ from django.conf import settings
 class Company(models.Model):
     name = models.CharField(max_length=160, unique=True)
 
-    log_reccurence = models.IntegerField(help_text='Represent the time between automatic log emails. This field is measured in days.', default=7)
+    log_reccurence = models.IntegerField(help_text='Represent the time between automatic log emails. This field is measured in days.', default=1)
 
     def __unicode__(self):
         """
