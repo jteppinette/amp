@@ -1,13 +1,9 @@
-"""
-Define the views used to render the AMP Contractors pages.
-"""
-
 from django.shortcuts import redirect
 
 from django.views.generic.edit import UpdateView, CreateView
 from django.views.generic import DeleteView
 
-from app.utils.views.generic import SearchListView
+from app.utils.views.generic import SearchListView, SearchCSVView
 
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
@@ -20,20 +16,14 @@ from app.forms.contractors import NewContractorForm, UpdateContractorForm
 
 
 class ListContractors(SearchListView):
-    """
-    List the contractors that are owned by the requestors company.
-    """
     template_name = 'contractors/list.html'
     model = Contractor
     search_fields = {'first_name': 'icontains', 'last_name': 'icontains'}
 
     def get_queryset(self, *args, **kwargs):
-        """
-        Refine by company.
-        """
         orderby = self.request.GET.get('orderby', None)
         qs = super(ListContractors, self).get_queryset(*args, **kwargs).filter(company=self.request.user.company)
-        if orderby is None or orderby == '':
+        if orderby is None or orderby == '' or orderby == 'None':
             return qs
         else:
             return qs.order_by(str(orderby))
@@ -50,10 +40,20 @@ class ListContractors(SearchListView):
         return context
 
 
+class CSVContractors(SearchCSVView):
+    model = Contractor
+    search_fields = {'first_name': 'icontains', 'last_name': 'icontains'}
+
+    def get_queryset(self, *args, **kwargs):
+        orderby = self.request.GET.get('orderby', None)
+        qs = super(CSVContractors, self).get_queryset(*args, **kwargs).filter(company=self.request.user.company)
+        if orderby is None or orderby == '' or orderby == 'None':
+            return qs
+        else:
+            return qs.order_by(str(orderby))
+
+
 class NewContractor(SuccessMessageMixin, CreateView):
-    """
-    Create a new contractor.
-    """
     template_name = 'contractors/new.html'
     form_class = NewContractorForm
     success_url = reverse_lazy('list-contractors')
@@ -65,18 +65,12 @@ class NewContractor(SuccessMessageMixin, CreateView):
         return kwargs
 
     def form_valid(self, form):
-        """
-        Save the form and generate a proper log.
-        """
         obj = form.save(commit=True)
         Log.objects.create(author=self.request.user.email, **obj.creation_log())
         return super(NewContractor, self).form_valid(form)
 
 
 class UpdateContractor(SuccessMessageMixin, UpdateView):
-    """
-    Update an employee.
-    """
     template_name = 'contractors/update.html'
     form_class = UpdateContractorForm
     model = Contractor
@@ -84,9 +78,6 @@ class UpdateContractor(SuccessMessageMixin, UpdateView):
     success_message = 'Contractor %(first_name)s %(last_name)s was successfully updated.'
 
     def form_valid(self, form):
-        """
-        Save the form and generate a proper log.
-        """
         old_permissions = self.object.permissions.all()
         length = len(old_permissions)
 

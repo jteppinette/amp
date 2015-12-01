@@ -21,14 +21,24 @@
     <!-- BREADCRUMBS -->
     <ol class="breadcrumb">
       <li><a href="{% url 'dashboard-home' %}">Dashboard</a></li>
-      <li class="active">Conctractors</li>
+      <li class="active">Contractors</li>
     </ol>
 
     <!-- PANEL -->
     <div class="panel panel-default">
 
         <!-- SEARCH -->
-        <div class="panel-heading">Search Contractors</div>
+        <div class="panel-heading">Search Contractors
+        
+            <!-- DOWNLOAD CSV -->
+            <form class="pull-right" method="get" action="{% url 'csv-contractors' %}" role="form">
+                <input name="orderby" type="hidden" value="{{orderby}}">
+                <input name="first_name" type="hidden" value="{{first_name}}">
+                <input name="last_name" type="hidden" value="{{last_name}}">
+                <button type="submit" class="btn-link">Download Contractors CSV</a>
+            </form>
+
+        </div>
         <div class="panel-body">
             <form class="form-inline" method="get" role="form">
                 <div class="row">

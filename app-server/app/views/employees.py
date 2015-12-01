@@ -23,7 +23,7 @@ class ListEmployees(SearchListView):
     def get_queryset(self, *args, **kwargs):
         orderby = self.request.GET.get('orderby', None)
         qs = super(ListEmployees, self).get_queryset(*args, **kwargs).filter(company=self.request.user.company)
-        if orderby is None or orderby == '':
+        if orderby is None or orderby == '' or orderby == 'None':
             return qs
         else:
             return qs.order_by(str(orderby))
@@ -47,7 +47,7 @@ class CSVEmployees(SearchCSVView):
     def get_queryset(self, *args, **kwargs):
         orderby = self.request.GET.get('orderby', None)
         qs = super(CSVEmployees, self).get_queryset(*args, **kwargs).filter(company=self.request.user.company)
-        if orderby is None or orderby == '':
+        if orderby is None or orderby == '' or orderby == 'None':
             return qs
         else:
             return qs.order_by(str(orderby))

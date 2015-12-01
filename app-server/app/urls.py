@@ -44,6 +44,7 @@ urlpatterns = patterns('',
 
     # Contractors
     url(r'^dashboard/contractors/$', login_required(views.ListContractors.as_view()), name='list-contractors'),
+    url(r'^dashboard/contractors/csv$', login_required(views.CSVContractors.as_view()), name='csv-contractors'),
     url(r'^dashboard/contractors/new/$', login_required(views.NewContractor.as_view()), name='new-contractor'),
     url(r'^dashboard/contractors/(?P<pk>\d+)/update/$', login_required(views.UpdateContractor.as_view()), name='update-contractor'),
     url(r'^dashboard/contractors/(?P<pk>\d+)/delete/$', login_required(views.DeleteContractor.as_view()), name='delete-contractor'),
