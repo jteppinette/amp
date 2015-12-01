@@ -41,3 +41,6 @@
   
 - name: Migrate Django SQL Schema
   django_manage: command=migrate app_path={{dir}} virtualenv={{dir}}/venv
+
+- name: Generate Send Logs Cron 
+  cron: name="Send Logs" day="*" job="{{dir}}/venv/bin/python {{dir}}/manage.py sendlogs"
