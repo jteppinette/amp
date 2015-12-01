@@ -16,6 +16,7 @@ from app.forms.permissions import NewPermissionForm, UpdatePermissionForm
 
 
 class ListPermissions(SearchListView):
+    paginate_by = 20
     template_name = 'permissions/list.html'
     model = Permission
     search_fields = {'name': 'icontains'}

@@ -73,7 +73,7 @@
 
         <!-- RESULTS -->
         <div class="panel-heading">
-            <span>{{object_list | length}} Results</span>
+            <span>Results {{page_obj.start_index}} - {{page_obj.end_index}} of {{paginator.count}} </span>
             <span class="pull-right"><a href="{% url 'list-employees' %}">Reset</a></span>
         </div>
 
@@ -99,6 +99,33 @@
             </tr>
             {% endfor %}
         </table>
+        {% endif %}
+
+        <!-- PAGINATION -->
+        {% if page_obj.has_previous or page_obj.has_next %}
+        <div class="panel-footer clearfix">
+
+              {% if page_obj.has_previous %}
+              <form method="get" action="{% url 'list-employees' %}" role="form">
+                  <input name="orderby" type="hidden" value="{{orderby}}">
+                  <input name="first_name" type="hidden" value="{{first_name}}">
+                  <input name="last_name" type="hidden" value="{{last_name}}">
+                  <input name="page" type="hidden" value="{{page_obj.previous_page_number}}">
+                  <button type="submit" class="pull-left btn btn-default">Previous</button>
+              </form>
+              {% endif %}
+
+              {% if page_obj.has_next %}
+              <form method="get" action="{% url 'list-employees' %}" role="form">
+                  <input name="orderby" type="hidden" value="{{orderby}}">
+                  <input name="first_name" type="hidden" value="{{first_name}}">
+                  <input name="last_name" type="hidden" value="{{last_name}}">
+                  <input name="page" type="hidden" value="{{page_obj.next_page_number}}">
+                  <button type="submit" class="pull-right btn btn-default">Next</button>
+              </form>
+              {% endif %}
+
+        </div>
         {% endif %}
 
     </div>

@@ -16,6 +16,7 @@ from app.forms.employees import NewEmployeeForm, UpdateEmployeeForm
 
 
 class ListEmployees(SearchListView):
+    paginate_by = 20
     template_name = 'employees/list.html'
     model = Employee
     search_fields = {'first_name': 'icontains', 'last_name': 'icontains'}

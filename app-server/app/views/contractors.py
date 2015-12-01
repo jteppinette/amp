@@ -16,6 +16,7 @@ from app.forms.contractors import NewContractorForm, UpdateContractorForm
 
 
 class ListContractors(SearchListView):
+    paginate_by = 20
     template_name = 'contractors/list.html'
     model = Contractor
     search_fields = {'first_name': 'icontains', 'last_name': 'icontains'}
