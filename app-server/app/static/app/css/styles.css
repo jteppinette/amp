@@ -24,3 +24,7 @@ body {
 .form-inline .row .form-group button {
     width: 100%;
 }
+
+.tab-pane {
+    padding-top: 20px;
+}

@@ -24,14 +24,60 @@
       <li class="active">{{form.first_name.value}} {{form.last_name.value}}</li>
     </ol>
 
-    <!-- FORM -->
-    <form class="form" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {% bootstrap_form form %}
-        {% buttons %}
-            <button type="submit" class="btn btn-primary"> Submit</button>
-        {% endbuttons %}
-    </form>
+    <!-- TABS -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#detail-update" aria-controls="detail-update" role="tab" data-toggle="tab">Detail Update</a></li>
+        <li role="presentation"><a href="#documents" aria-controls="profile" role="tab" data-toggle="tab">Documents</a></li>
+    </ul>
+
+    <!-- PANES -->
+    <div class="tab-content">
+
+
+        <!-- DETAIL UPDATE FORM -->
+        <div role="tabpanel" class="tab-pane active" id="detail-update">
+            <form class="form" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                {% buttons %}
+                    <button type="submit" class="btn btn-primary"> Submit</button>
+                {% endbuttons %}
+            </form>
+        </div>
+
+        <!-- DOCUMENTS -->
+        <div role="tabpanel" class="tab-pane" id="documents">
+
+            <!-- PANEL -->
+            <div class="panel panel-default">
+
+                <!-- RESULTS -->
+                <div class="panel-heading clearfix">
+                    <span>{{object.documents.all.count}} Documents</span>
+                    <span class="pull-right"><a class="btn btn-primary" href="{% url 'list-contractors' %}">Add Document</a></span>
+                </div>
+
+                <!-- TABLE -->
+                <table class="table table-striped">
+                    <tr>
+                        <th>Name</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+                    </tr>
+                    {% for document in object.documents.all %}
+                    <tr>
+                        <td><a href="{{document.file.url}}">{{document.file}}</a></td>
+                        <td><a href="{% url 'list-employees' %}"><span class="glyphicon glyphicon-pencil"></span></a></td>
+                        <td><a href="{% url 'list-employees' %}"><span class="glyphicon glyphicon-remove"></span></a></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </div>
 

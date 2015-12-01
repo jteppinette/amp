@@ -36,9 +36,6 @@ from django.conf import settings
 
 
 class Company(models.Model):
-    """
-    Represents a company that can use the amp software.
-    """
     name = models.CharField(max_length=160, unique=True)
 
     log_reccurence = models.IntegerField(help_text='Represent the time between automatic log emails. This field is measured in days.', default=7)
@@ -55,9 +52,6 @@ class Company(models.Model):
 
 
 class Employee(models.Model):
-    """ Represents an employee at a specific amp company. This model is used to
-    request and track permissions between individuals.
-    """
     first_name = models.CharField(max_length=80)
     last_name = models.CharField(max_length=80)
 
@@ -72,9 +66,6 @@ class Employee(models.Model):
     last_training_date = models.DateField(blank=True, null=True, help_text='This is field is not required. Ex. 2012-05-13')
 
     def __unicode__(self):
-        """
-        Provide a unicode representation of this model.
-        """
         return 'Employee %s, %s' % (self.last_name, self.first_name)
 
     def permission_change_log(self, old_permissions):
@@ -115,9 +106,6 @@ class Employee(models.Model):
         return log
 
     def creation_log(self):
-        """
-        Generate the log description for a newly created Employee object.
-        """
         log = {'category': 'New Employee',
                'accessor': '%s, %s' % (self.last_name, self.first_name),
                'company': self.company}
@@ -140,11 +128,15 @@ class Employee(models.Model):
         unique_together = (('first_name', 'last_name', 'company'), ('company', 'eid'))
 
 
+class EmployeeDocument(models.Model):
+    file = models.FileField(upload_to='employee-documents', blank=True, null=True, help_text='This field is not required.')
+    employee = models.ForeignKey(Employee, help_text='This field represent the employee that this document belongs to.', related_name='documents')
+
+    def __unicode__(self):
+        return 'Document %s of %s' % (self.employee, self.file)
+
+
 class Contractor(models.Model):
-    """
-    Represents a contractor for a specific amp company. This model is used to
-    request and track permissions between contractors.
-    """
     first_name = models.CharField(max_length=80)
     last_name = models.CharField(max_length=80)
     email = models.EmailField()
@@ -160,15 +152,9 @@ class Contractor(models.Model):
     last_training_date = models.DateField(blank=True, null=True, help_text='This field is not required. Ex. 2012-05-13')
 
     def __unicode__(self):
-        """
-        Provide a unicode representation of this model.
-        """
         return 'Contractor %s, %s' % (self.last_name, self.first_name)
 
     def permission_change_log(self, old_permissions):
-        """
-        Generate the log for a change in this Contractor's permissions.
-        """
         log = {'category': 'Permission Change',
                'accessor': '%s, %s' % (self.last_name, self.first_name),
                'company': self.company}
@@ -204,9 +190,6 @@ class Contractor(models.Model):
 
 
     def creation_log(self):
-        """
-        Generate the log description for a newly created Contractor object.
-        """
         log = {'category': 'New Contractor',
                'accessor': '%s, %s' % (self.last_name, self.first_name),
                'company': self.company}
@@ -234,24 +217,15 @@ class Contractor(models.Model):
 
 
 class Permission(models.Model):
-    """
-    Represents a permission that has given to an `Accessor`.
-    """
     name = models.CharField(max_length=160)
 
     company = models.ForeignKey(Company)
 
     def __unicode__(self):
-        """
-        Provide a unicode representation of this model.
-        """
         return '%s created by %s' % (self.name, str(self.company))
 
 
 class Log(models.Model):
-    """
-    Represents a change log of permissions.
-    """
     CATEGORIES = (
         ('Approval', 'Approval'),
         ('Rejection', 'Rejection'),
@@ -279,9 +253,6 @@ class Log(models.Model):
     creation_time = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
-        """
-        Provide a unicode representation of this model.
-        """
         description = self.description
         if len(description) >= 35:
             description = description[:32]
@@ -298,9 +269,6 @@ class Log(models.Model):
 
 
 class EmployeeRequest(models.Model):
-    """
-    Represents a request made to gain permissions by an employee.
-    """
     company = models.ForeignKey(Company)
     employee = models.ForeignKey(Employee)
     permissions = models.ManyToManyField(Permission)
@@ -311,15 +279,9 @@ class EmployeeRequest(models.Model):
     cip_status = models.NullBooleanField(blank=True, null=True)
 
     def __unicode__(self):
-        """
-        Provide a unicode representation of this model.
-        """
         return 'Employee request by %s' % (str(self.employee))
 
     def creation_log(self):
-        """
-        Generate the log description for a newly created EmployeeRequest object.
-        """
         log = {'category': 'New Employee Permission Request',
                'accessor': '%s, %s' % (self.employee.last_name, self.employee.first_name),
                'company': self.company}
@@ -336,9 +298,6 @@ class EmployeeRequest(models.Model):
 
 
 class ContractorRequest(models.Model):
-    """
-    Represents a request made to gain permissions by a contractor.
-    """
     first_name = models.CharField(max_length=80)
     last_name = models.CharField(max_length=80)
     email = models.EmailField()
@@ -358,15 +317,9 @@ class ContractorRequest(models.Model):
     cip_status = models.NullBooleanField(blank=True, null=True)
 
     def __unicode__(self):
-        """
-        Provide a unicode representation of this model.
-        """
         return 'Contractor request by Contractor %s, %s' % (self.last_name, self.first_name)
 
     def creation_log(self):
-        """
-        Generate the log description for a newly created ContractorRequest object.
-        """
         log = {'category': 'New Contractor Permission Request',
                'accessor': '%s, %s' % (self.last_name, self.first_name),
                'company': self.company}
