@@ -27,7 +27,15 @@
     <div class="panel panel-default">
 
         <!-- SEARCH -->
-        <div class="panel-heading">Search Permissions</div>
+        <div class="panel-heading">Search Permissions
+
+            <!-- DOWNLOAD CSV -->
+            <form class="pull-right" method="get" action="{% url 'csv-permissions' %}" role="form">
+                <input name="name" type="hidden" value="{{name}}">
+                <button type="submit" class="btn-link">Download Permissions CSV</a>
+            </form>
+
+        </div>
         <div class="panel-body">
             <form class="form-inline" method="get" role="form">
                 <div class="row">
