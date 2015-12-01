@@ -28,7 +28,17 @@
     <div class="panel panel-default">
 
         <!-- SEARCH -->
-        <div class="panel-heading">Search Employees</div>
+        <div class="panel-heading">Search Employees
+        
+            <!-- DOWNLOAD CSV -->
+            <form class="pull-right" method="get" action="{% url 'csv-employees' %}" role="form">
+                <input name="orderby" type="hidden" value="{{orderby}}">
+                <input name="first_name" type="hidden" value="{{first_name}}">
+                <input name="last_name" type="hidden" value="{{last_name}}">
+                <button type="submit" class="btn-link">Download Employees CSV</a>
+            </form>
+
+        </div>
         <div class="panel-body">
             <form class="form-inline" method="get" role="form">
                 <div class="row">

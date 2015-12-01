@@ -1,13 +1,9 @@
-"""
-Define the views used to render the AMP Employees pages.
-"""
-
 from django.shortcuts import redirect
 
 from django.views.generic.edit import UpdateView, CreateView
 from django.views.generic import DeleteView
 
-from app.utils.views.generic import SearchListView
+from app.utils.views.generic import SearchListView, SearchCSVView
 
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
@@ -20,17 +16,11 @@ from app.forms.employees import NewEmployeeForm, UpdateEmployeeForm
 
 
 class ListEmployees(SearchListView):
-    """
-    List the employees that are owned by the requestors company.
-    """
     template_name = 'employees/list.html'
     model = Employee
     search_fields = {'first_name': 'icontains', 'last_name': 'icontains'}
 
     def get_queryset(self, *args, **kwargs):
-        """
-        Filter by company.
-        """
         orderby = self.request.GET.get('orderby', None)
         qs = super(ListEmployees, self).get_queryset(*args, **kwargs).filter(company=self.request.user.company)
         if orderby is None or orderby == '':
@@ -50,10 +40,20 @@ class ListEmployees(SearchListView):
         return context
 
 
+class CSVEmployees(SearchCSVView):
+    model = Employee
+    search_fields = {'first_name': 'icontains', 'last_name': 'icontains'}
+
+    def get_queryset(self, *args, **kwargs):
+        orderby = self.request.GET.get('orderby', None)
+        qs = super(CSVEmployees, self).get_queryset(*args, **kwargs).filter(company=self.request.user.company)
+        if orderby is None or orderby == '':
+            return qs
+        else:
+            return qs.order_by(str(orderby))
+
+
 class NewEmployee(SuccessMessageMixin, CreateView):
-    """
-    Create a new employee.
-    """
     template_name = 'employees/new.html'
     form_class = NewEmployeeForm
     success_url = reverse_lazy('list-employees')
@@ -74,9 +74,6 @@ class NewEmployee(SuccessMessageMixin, CreateView):
 
 
 class UpdateEmployee(SuccessMessageMixin, UpdateView):
-    """
-    Update an employee.
-    """
     template_name = 'employees/update.html'
     form_class = UpdateEmployeeForm
     model = Employee
@@ -84,9 +81,6 @@ class UpdateEmployee(SuccessMessageMixin, UpdateView):
     success_message = 'Employee %(first_name)s %(last_name)s was successfully updated.'
 
     def form_valid(self, form):
-        """
-        Save the form and generate a proper log.
-        """
         old_permissions = self.object.permissions.all()
         length = len(old_permissions)
 

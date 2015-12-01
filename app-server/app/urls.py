@@ -37,6 +37,7 @@ urlpatterns = patterns('',
 
     # Employees
     url(r'^dashboard/employees/$', login_required(views.ListEmployees.as_view()), name='list-employees'),
+    url(r'^dashboard/employees/csv$', login_required(views.CSVEmployees.as_view()), name='csv-employees'),
     url(r'^dashboard/employees/new/$', login_required(views.NewEmployee.as_view()), name='new-employee'),
     url(r'^dashboard/employees/(?P<pk>\d+)/update/$', login_required(views.UpdateEmployee.as_view()), name='update-employee'),
     url(r'^dashboard/employees/(?P<pk>\d+)/delete/$', login_required(views.DeleteEmployee.as_view()), name='delete-employee'),
