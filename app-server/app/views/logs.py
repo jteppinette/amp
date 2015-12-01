@@ -2,11 +2,9 @@
 Define the views used to render the AMP Logs pages.
 """
 
-from app.utils.views.generic import SearchListView
+from app.utils.views.generic import SearchListView, SearchCSVView
 
 from app.models import Log
-
-from djqscsv import render_to_csv_response
 
 class ListLogs(SearchListView):
     """
@@ -24,6 +22,6 @@ class ListLogs(SearchListView):
         context['categories'] = Log.CATEGORIES
         return context
 
-def CSVLogs(request):
-    logs = Log.objects.all().order_by('-creation_time').values()
-    return render_to_csv_response(logs)
+class CSVLogs(SearchCSVView):
+    queryset = Log.objects.all().order_by('-creation_time')
+    search_fields = {'category': 'exact', 'author': 'icontains', 'accessor': 'icontains'}

@@ -27,7 +27,15 @@
         <!-- SEARCH -->
         <div class="panel-heading">
             Search Logs
-            <a class="pull-right" href="{% url 'csv-logs' %}">Download Logs</a>
+
+            <!-- DOWNLOAD CSV -->
+            <form class="pull-right" method="get" action="{% url 'csv-logs' %}" role="form">
+                <input name="category" type="hidden" value="{{category}}">
+                <input name="author" type="hidden" value="{{author}}">
+                <input name="accessor" type="hidden" value="{{accessor}}">
+                <button type="submit" class="btn-link">Download Logs</a>
+            </form>
+
         </div>
         <div class="panel-body">
             <form class="form-inline" method="get" role="form">

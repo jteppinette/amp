@@ -33,7 +33,7 @@ urlpatterns = patterns('',
 
     # Logs
     url(r'^dashboard/logs/$', login_required(views.ListLogs.as_view()), name='list-logs'),
-    url(r'^dashboard/logs/csv$', login_required(views.CSVLogs), name='csv-logs'),
+    url(r'^dashboard/logs/csv$', login_required(views.CSVLogs.as_view()), name='csv-logs'),
 
     # Employees
     url(r'^dashboard/employees/$', login_required(views.ListEmployees.as_view()), name='list-employees'),
