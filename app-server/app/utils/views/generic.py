@@ -2,18 +2,11 @@
 Define generic utility views.
 """
 
-from django.views.generic import ListView
+from django.views.generic.list import MultipleObjectMixin, MultipleObjectTemplateResponseMixin, BaseListView, ListView
 
-
-class SearchListView(ListView):
-    """
-    Searches on the provided values.
-    """
+class MultipleObjectSearchMixin(MultipleObjectMixin):
 
     def get_queryset(self):
-        """
-        Refine the queryset.
-        """
         search = dict(self.request.GET.iteritems())
         try:
             del search['orderby']
@@ -33,11 +26,15 @@ class SearchListView(ListView):
         else:
             return self.model.objects.filter(**search)
 
+
+class BaseSearchListView(BaseListView, MultipleObjectSearchMixin):
+    pass
+
+
+class SearchListView(MultipleObjectTemplateResponseMixin, BaseSearchListView):
+
     def get_context_data(self, **kwargs):
-        """
-        Add search terms.
-        """
-        context = super(ListView, self).get_context_data(**kwargs)
+        context = super(SearchListView, self).get_context_data(**kwargs)
         for field in self.search_fields:
             context[field] = self.request.GET.get(field, '')
         return context
