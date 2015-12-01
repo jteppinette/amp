@@ -4,7 +4,7 @@ import os
 ROOT = os.path.dirname(os.path.dirname(__file__))
 
 # DEBUG
-DEBUG = True
+DEBUG = False
 
 # COMPANY SETTINGS
 APP_URL = 'http://localhost:8080'
