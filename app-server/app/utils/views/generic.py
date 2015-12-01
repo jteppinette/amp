@@ -11,10 +11,10 @@ class MultipleObjectSearchMixin(MultipleObjectMixin):
 
     def get_queryset(self):
         search = dict(self.request.GET.iteritems())
-        try:
-            del search['orderby']
-        except:
-            pass
+
+        search.pop('orderby', None)
+        search.pop('page', None)
+
         for term in search.keys():
             if search[term] is None or search[term] == '':
                 del search[term]
