@@ -9,16 +9,16 @@ import random
 from django.contrib.auth import get_user_model
 
 # Company Model
-from api.models import Company
+from app.models import Company
 
 # Accessor Models
-from api.models import Employee, Contractor
+from app.models import Employee, Contractor
 
 # Permission Models
-from api.models import Permission, Log
+from app.models import Permission, Log
 
 # Request Models
-from api.models import EmployeeRequest, ContractorRequest
+from app.models import EmployeeRequest, ContractorRequest
 
 
 class Command(BaseCommand):

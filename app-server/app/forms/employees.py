@@ -2,7 +2,7 @@
 Define the forms that will be used by the Employees views.
 """
 
-from api.models import Employee
+from app.models import Employee
 
 from django import forms
 

@@ -2,5 +2,5 @@
 app-server/venv
 app-server/staticfiles
 app-server/media
-app-server/api/migrations
+app-server/app/migrations
 .vagrant

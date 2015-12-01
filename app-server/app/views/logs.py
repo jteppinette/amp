@@ -4,7 +4,7 @@ Define the views used to render the AMP Logs pages.
 
 from app.utils.views.generic import SearchListView
 
-from api.models import Log
+from app.models import Log
 
 from djqscsv import render_to_csv_response
 

@@ -2,7 +2,7 @@
 Define the forms that will be used by the Settings views.
 """
 
-from api.models import Company
+from app.models import Company
 
 from django import forms
 

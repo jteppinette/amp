@@ -6,7 +6,7 @@ user model has been created for the use-case of authenticating by email.
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 
-from api.models import Company
+from app.models import Company
 
 
 class UserManager(BaseUserManager):

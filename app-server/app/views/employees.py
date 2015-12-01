@@ -14,7 +14,7 @@ from django.contrib import messages
 
 from django.core.urlresolvers import reverse_lazy
 
-from api.models import Employee, Log
+from app.models import Employee, Log
 
 from app.forms.employees import NewEmployeeForm, UpdateEmployeeForm
 

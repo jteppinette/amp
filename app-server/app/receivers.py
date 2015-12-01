@@ -8,7 +8,7 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.contrib.auth import get_user_model
 
-from api.models import EmployeeRequest, ContractorRequest
+from app.models import EmployeeRequest, ContractorRequest
 
 
 @receiver(post_save, sender=EmployeeRequest)
@@ -38,7 +38,7 @@ def employee_request_notification(sender, **kwargs):
 @receiver(post_save, sender=ContractorRequest)
 def contractor_request_notification(sender, **kwargs):
     """
-    Send an email notifiatin to all officers about new Contractor Request.
+    Send an email notification to all officers about new Contractor Request.
     """
     if kwargs['created'] is False:
         return

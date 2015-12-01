@@ -2,7 +2,7 @@
 Define the forms that will be used by the Requests views.
 """
 
-from api.models import EmployeeRequest, ContractorRequest
+from app.models import EmployeeRequest, ContractorRequest
 
 from django import forms
 

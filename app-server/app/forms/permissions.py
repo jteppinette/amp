@@ -2,7 +2,7 @@
 Define the forms that will be used by the Permissions views.
 """
 
-from api.models import Permission
+from app.models import Permission
 
 from django import forms
 

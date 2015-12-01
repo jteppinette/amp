@@ -14,7 +14,7 @@ from django.contrib import messages
 
 from django.core.urlresolvers import reverse_lazy
 
-from api.models import Permission
+from app.models import Permission
 
 from app.forms.permissions import NewPermissionForm, UpdatePermissionForm
 

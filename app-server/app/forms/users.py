@@ -1,4 +1,4 @@
-from api.models import Company
+from app.models import Company
 from authentication.models import User
 
 from django import forms

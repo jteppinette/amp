@@ -14,7 +14,7 @@ from django.contrib import messages
 
 from django.core.urlresolvers import reverse_lazy
 
-from api.models import Contractor, Log
+from app.models import Contractor, Log
 
 from app.forms.contractors import NewContractorForm, UpdateContractorForm
 

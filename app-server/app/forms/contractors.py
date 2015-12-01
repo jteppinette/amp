@@ -2,7 +2,7 @@
 Define the forms that will be used by the Contractors views.
 """
 
-from api.models import Contractor
+from app.models import Contractor
 
 from django import forms
 

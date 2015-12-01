@@ -12,7 +12,7 @@ from django.contrib import messages
 
 from django.core.urlresolvers import reverse_lazy
 
-from api.models import EmployeeRequest, ContractorRequest, Log, Contractor
+from app.models import EmployeeRequest, ContractorRequest, Log, Contractor
 
 from app.forms.requests import NewEmployeeRequestForm, NewContractorRequestForm
 
