@@ -54,21 +54,19 @@
                 <!-- RESULTS -->
                 <div class="panel-heading clearfix">
                     <span>{{object.documents.all.count}} Documents</span>
-                    <span class="pull-right"><a class="btn btn-primary" href="{% url 'list-contractors' %}">Add Document</a></span>
+                    <span class="pull-right"><a class="btn btn-primary" href="{% url 'new-employee-document' object.pk %}">Add Document</a></span>
                 </div>
 
                 <!-- TABLE -->
                 <table class="table table-striped">
                     <tr>
                         <th>Name</th>
-                        <th>Update</th>
                         <th>Delete</th>
                     </tr>
                     {% for document in object.documents.all %}
                     <tr>
                         <td><a href="{{document.file.url}}">{{document.file}}</a></td>
-                        <td><a href="{% url 'list-employees' %}"><span class="glyphicon glyphicon-pencil"></span></a></td>
-                        <td><a href="{% url 'list-employees' %}"><span class="glyphicon glyphicon-remove"></span></a></td>
+                        <td><a href="{% url 'delete-employee-document' object.pk document.pk %}"><span class="glyphicon glyphicon-remove"></span></a></td>
                     </tr>
                     {% endfor %}
                 </table>

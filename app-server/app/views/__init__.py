@@ -2,6 +2,7 @@ from .account import *
 from .settings import *
 from .contractors import *
 from .employees import *
+from .documents import *
 from .dashboard import *
 from .discover import *
 from .permissions import *

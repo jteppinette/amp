@@ -42,6 +42,10 @@ urlpatterns = patterns('',
     url(r'^dashboard/employees/(?P<pk>\d+)/update/$', login_required(views.UpdateEmployee.as_view()), name='update-employee'),
     url(r'^dashboard/employees/(?P<pk>\d+)/delete/$', login_required(views.DeleteEmployee.as_view()), name='delete-employee'),
 
+    # Employee Documents
+    url(r'^dashboard/employees/(?P<employee>\d+)/documents/new/$', login_required(views.NewEmployeeDocument.as_view()), name='new-employee-document'),
+    url(r'^dashboard/employees/(?P<employee>\d+)/documents/(?P<pk>\d+)/delete/$', login_required(views.DeleteEmployeeDocument.as_view()), name='delete-employee-document'),
+
     # Contractors
     url(r'^dashboard/contractors/$', login_required(views.ListContractors.as_view()), name='list-contractors'),
     url(r'^dashboard/contractors/csv$', login_required(views.CSVContractors.as_view()), name='csv-contractors'),

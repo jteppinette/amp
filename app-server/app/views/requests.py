@@ -1,7 +1,3 @@
-"""
-Define the views used to render the AMP Requests pages.
-"""
-
 from django.shortcuts import render, redirect
 
 from django.views.generic.edit import CreateView
@@ -18,18 +14,12 @@ from app.forms.requests import NewEmployeeRequestForm, NewContractorRequestForm
 
 
 class NewEmployeeRequest(SuccessMessageMixin, CreateView):
-    """
-    Create a new employee request.
-    """
     template_name = 'requests/new_employee_request.html'
     form_class = NewEmployeeRequestForm
     success_url = reverse_lazy('discover-home')
     success_message = "Employee Request submision was successful. You will be contacted soon."
 
     def form_valid(self, form):
-        """
-        Save the form and generate a proper log.
-        """
         obj = form.save()
 
         Log.objects.create(author='Anonymous', **obj.creation_log())
@@ -38,18 +28,12 @@ class NewEmployeeRequest(SuccessMessageMixin, CreateView):
 
 
 class NewContractorRequest(SuccessMessageMixin, CreateView):
-    """
-    Create a new contractor request.
-    """
     template_name = 'requests/new_contractor_request.html'
     form_class = NewContractorRequestForm
     success_url = reverse_lazy('discover-home')
     success_message = "Contractor Request submision was successful. You will be contacted soon."
 
     def form_valid(self, form):
-        """
-        Save the form and generate a proper log.
-        """
         obj = form.save(commit=True)
 
         Log.objects.create(author='Anonymous', **obj.creation_log())
@@ -57,9 +41,6 @@ class NewContractorRequest(SuccessMessageMixin, CreateView):
         return super(NewContractorRequest, self).form_valid(form)
 
 def requests(request):
-    """
-    Load the Employee and Contractor requests into context.
-    """
     employee_requests = EmployeeRequest.objects.all().prefetch_related('employee', 'permissions').order_by('employee__first_name')
     contractor_requests = ContractorRequest.objects.all().prefetch_related('permissions').order_by('first_name')
 
@@ -70,25 +51,16 @@ def requests(request):
 
 
 class DetailEmployeeRequest(DetailView):
-    """
-    Detail a Request.
-    """
     template_name = 'requests/employee_detail.html'
     model = EmployeeRequest
 
 
 class DetailContractorRequest(DetailView):
-    """
-    Detail a Request.
-    """
     template_name = 'requests/contractor_detail.html'
     model = ContractorRequest
 
 
 def approve_employee_request(request, pk):
-    """
-    Approve an employee request based on the provided pk.
-    """
     employee_request = EmployeeRequest.objects.get(pk=pk)
 
     if request.user.title == 'Human Resources':
@@ -128,9 +100,6 @@ def approve_employee_request(request, pk):
         return redirect('detail-employee-request', employee_request.pk)
 
 def approve_contractor_request(request, pk):
-    """
-    Approve a contractor request based on the provided pk.
-    """
     contractor_request = ContractorRequest.objects.get(pk=pk)
 
     if request.user.title == 'Human Resources':
@@ -176,9 +145,6 @@ def approve_contractor_request(request, pk):
 
 
 def reject_employee_request(request, pk):
-    """
-    Reject a employee request based on the provided pk.
-    """
     employee_request = EmployeeRequest.objects.get(pk=pk)
     
     if request.user.title == 'Human Resources':
@@ -207,9 +173,6 @@ def reject_employee_request(request, pk):
         return redirect('detail-employee-request', employee_request.pk)
 
 def reject_contractor_request(request, pk):
-    """
-    Reject a contractor request based on the provided pk.
-    """
     contractor_request = ContractorRequest.objects.get(pk=pk)
     
     if request.user.title == 'Human Resources':
