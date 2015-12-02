@@ -50,6 +50,7 @@ def requests(request):
     })
 
 
+
 class DetailEmployeeRequest(DetailView):
     template_name = 'requests/employee_detail.html'
     model = EmployeeRequest
@@ -143,7 +144,6 @@ def approve_contractor_request(request, pk):
         Log.objects.create(company=request.user.company, category='Approval', author=request.user.email, accessor='Contractor', description=description)
         return redirect('detail-contractor-request', contractor_request.pk)
 
-
 def reject_employee_request(request, pk):
     employee_request = EmployeeRequest.objects.get(pk=pk)
     
@@ -205,4 +205,3 @@ def reject_contractor_request(request, pk):
         Log.objects.create(company=request.user.company, category='Rejection', author=request.user.email, accessor='Contractor', description=description)
 
         return redirect('detail-contractor-request', contractor_request.pk)
-

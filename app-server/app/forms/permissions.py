@@ -1,16 +1,9 @@
-"""
-Define the forms that will be used by the Permissions views.
-"""
-
 from app.models import Permission
 
 from django import forms
 
 
 class NewPermissionForm(forms.ModelForm):
-    """
-    This form will be used when a new Permission is being created.
-    """
     class Meta:
         model = Permission
         fields = '__all__'
@@ -25,9 +18,6 @@ class NewPermissionForm(forms.ModelForm):
 
 
 class UpdatePermissionForm(forms.ModelForm):
-    """
-    This form will be used when a Permission is updated.
-    """
     class Meta:
         model = Permission
         exclude = ('company',)

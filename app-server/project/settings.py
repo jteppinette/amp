@@ -4,11 +4,11 @@ import os
 ROOT = os.path.dirname(os.path.dirname(__file__))
 
 # DEBUG
-DEBUG = False
+DEBUG = True
 
 # COMPANY SETTINGS
 APP_URL = 'http://localhost:8080'
-COMPANY_NAME = 'LUS'
+COMPANY_NAME = 'TEST COMPANY'
 
 # TEMPLATES
 TEMPLATE_DEBUG = True

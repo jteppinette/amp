@@ -1,11 +1,8 @@
-"""
-Define generic utility views.
-"""
-
 from django.views.generic.base import View
 from django.views.generic.list import MultipleObjectMixin, MultipleObjectTemplateResponseMixin, BaseListView, ListView
 
 from djqscsv import render_to_csv_response
+
 
 class MultipleObjectSearchMixin(MultipleObjectMixin):
 
@@ -32,6 +29,7 @@ class MultipleObjectSearchMixin(MultipleObjectMixin):
 
 class BaseSearchListView(BaseListView, MultipleObjectSearchMixin):
     pass
+
 
 class SearchCSVView(MultipleObjectSearchMixin, View):
 

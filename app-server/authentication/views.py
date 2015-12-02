@@ -1,7 +1,3 @@
-"""
-Define the views used to render the Authentication pages.
-"""
-
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
@@ -10,9 +6,6 @@ from django.conf import settings
 from django.shortcuts import render, redirect
 
 def auth_login(request):
-    """
-    Login in a user based on the provided email and password.
-    """
     if request.method == 'POST':
         email = request.POST['email']
         password = request.POST['password']
@@ -30,8 +23,5 @@ def auth_login(request):
         return render(request, 'login.html')
 
 def auth_logout(request):
-    """
-    Logout the currently logged in user.
-    """
     logout(request)
     return redirect(settings.LOGOUT_REDIRECT_URL)

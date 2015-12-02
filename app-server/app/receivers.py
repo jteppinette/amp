@@ -1,7 +1,3 @@
-"""
-Define receivers for AMP application.
-"""
-
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.conf import settings
@@ -13,9 +9,6 @@ from app.models import EmployeeRequest, ContractorRequest
 
 @receiver(post_save, sender=EmployeeRequest)
 def employee_request_notification(sender, **kwargs):
-    """
-    Send an email notifiatin to all officers about new Employee Request.
-    """
     if kwargs['created'] is False:
         return
 
@@ -37,9 +30,6 @@ def employee_request_notification(sender, **kwargs):
 
 @receiver(post_save, sender=ContractorRequest)
 def contractor_request_notification(sender, **kwargs):
-    """
-    Send an email notification to all officers about new Contractor Request.
-    """
     if kwargs['created'] is False:
         return
 

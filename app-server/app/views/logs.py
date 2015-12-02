@@ -2,6 +2,7 @@ from app.utils.views.generic import SearchListView, SearchCSVView
 
 from app.models import Log
 
+
 class ListLogs(SearchListView):
     queryset = Log.objects.all().order_by('-creation_time')
     paginate_by = 20
@@ -15,6 +16,7 @@ class ListLogs(SearchListView):
         context = super(ListLogs, self).get_context_data(*args, **kwargs)
         context['categories'] = Log.CATEGORIES
         return context
+
 
 class CSVLogs(SearchCSVView):
     queryset = Log.objects.all().order_by('-creation_time')

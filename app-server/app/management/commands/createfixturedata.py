@@ -22,15 +22,8 @@ from app.models import EmployeeRequest, ContractorRequest
 
 
 class Command(BaseCommand):
-    """
-    Create a large set of fixture data for  visual testing.
-    """
 
     def handle(self, *args, **kwargs):
-        """
-        Prompt the user, asking if he/she would truly like to delete all
-        objects.
-        """
         print 'Are you sure you would like to recreate your entire database?'
         print 'Enter `DELETE` to delete database and load with fixture data: '
         choice = raw_input()

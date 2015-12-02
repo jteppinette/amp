@@ -1,7 +1,3 @@
-"""
-Define the routing used to find the Authentication app.
-"""
-
 from django.conf.urls import patterns, url, include
 
 from authentication import views

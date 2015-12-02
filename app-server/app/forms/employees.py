@@ -1,16 +1,9 @@
-"""
-Define the forms that will be used by the Employees views.
-"""
-
 from app.models import Employee
 
 from django import forms
 
 
 class NewEmployeeForm(forms.ModelForm):
-    """
-    This form will be used when a new Employee is being created.
-    """
     class Meta:
         model = Employee
         fields = '__all__'
@@ -25,9 +18,6 @@ class NewEmployeeForm(forms.ModelForm):
 
 
 class UpdateEmployeeForm(forms.ModelForm):
-    """
-    This form will be used when an Employee is updated.
-    """
     class Meta:
         model = Employee
         exclude = ('company',)

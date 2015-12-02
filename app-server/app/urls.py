@@ -1,7 +1,3 @@
-"""
-Define the routing used to find the AMP pages.
-"""
-
 from django.conf.urls import patterns, url, include
 
 from django.contrib.auth.decorators import login_required

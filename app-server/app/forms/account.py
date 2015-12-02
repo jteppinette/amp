@@ -1,16 +1,9 @@
-"""
-Define the forms that will be used by the Account views.
-"""
-
 from authentication.models import User
 
 from django import forms
 
 
 class UpdateAccountForm(forms.ModelForm):
-    """
-    This form will be used when updating the currently logged in user' account.
-    """
     new_password = forms.CharField(widget=forms.PasswordInput, required=False)
 
     class Meta:
@@ -24,12 +17,6 @@ class UpdateAccountForm(forms.ModelForm):
         self.fields['title'].required = True
 
     def save(self, commit=True):
-        """
-        Save the form and if the user has provided a new password, set it.
-
-        Additionally, provide support for a user to have commit set to
-        `False` and not save the created object.
-        """
         user = super(UpdateAccountForm, self).save(commit=False)
         if self.cleaned_data['new_password']:
             user.set_password(self.cleaned_data['new_password'])

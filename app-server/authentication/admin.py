@@ -1,7 +1,3 @@
-"""
-This module defines the Admin pages for the new `User` model.
-"""
-
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import Group
@@ -11,9 +7,6 @@ from authentication.forms import UserCreationForm, UserChangeForm
 
 
 class CustomUserAdmin(UserAdmin):
-    """
-    The forms to add and change user instances.
-    """
     form = UserChangeForm
     add_form = UserCreationForm
 
