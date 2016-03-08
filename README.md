@@ -2,7 +2,7 @@
 
 ## Initialize Environment
 
-1. Install [Vagrant](https://www.vagrantup.com/downloads.html) and [VirtualBox](https://www.virtualbox.org/wiki/Downloads).
+1. Install [Vagrant](https://www.vagrantup.com/downloads.html), and [VirtualBox](https://www.virtualbox.org/wiki/Downloads), and [Ansible](https://www.ansible.com).
 
 2. `git clone https://github.com/jteppinette/amp.git`
 
@@ -27,7 +27,7 @@
 ## Development
 
 After the steps listed above in the _Initialize Environment_ section have been completed, then you can begin to develop the application.
-Developing or maintaining this application is as simple as editing the many views, template, models and etc.. files listed under the app-server directory.
+Developing or maintaining this application is as simple as editing the many views, templates, models, and utility files listed under the app-server directory.
 After you have made a change, it is necessary to run `sudo service apache2 restart` to restart the Django server.
 This restart will force a reloading of the necessary Python assets and will make your new changes available on the next page refresh.
 
