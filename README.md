@@ -63,25 +63,25 @@ The AMP system offers many different features and capablities that are defined a
 Each key feature of AMP is broken down into either a list page with individual detail or a single detail page.
 
 * List Pages:
-** List pages offer the ability to _Create_, _Edit_, _Delete_, _Search_, and _Export_ the data they represent. If you click on the edit, _pencil_ icon, you will be redirected the the individual detail page.
+    * List pages offer the ability to _Create_, _Edit_, _Delete_, _Search_, and _Export_ the data they represent. If you click on the edit, _pencil_ icon, you will be redirected the the individual detail page.
 * Detail Pages:
-** Detail pages offer the ability to modify a single object.
+    * Detail pages offer the ability to modify a single object.
 
 ## Notifications
 
 The AMP system sends many alerts and notifications that react to user input and regular time schedules.
 
 * Employee Request Notification: 
-  ** Employee request notifications are sent upon an employee registering into the system. This registration occurs on the unauthenticated landing page found under the _Make Employee Request_ heading.
-  ** This notification is sent to all users of the requested Company.
+    * Employee request notifications are sent upon an employee registering into the system. This registration occurs on the unauthenticated landing page found under the _Make Employee Request_ heading.
+    * This notification is sent to all users of the requested Company.
 
 * Contractor Request Notification: 
-  ** Contractor request notifications are sent upon a contractor registering into the system. This registration occurs on the unauthenticated landing page found under the _Make Contractor Request_ heading.
-  ** This notification is sent to all users of the requested Company.
+    * Contractor request notifications are sent upon a contractor registering into the system. This registration occurs on the unauthenticated landing page found under the _Make Contractor Request_ heading.
+    * This notification is sent to all users of the requested Company.
 
 * Recurring Log Notification:
-  ** The entire log count will be sent via email to all company users at an interval set through the _Log Reccurence_ input on the _Settings_ page.
-  ** By default, these logs will be mailed out once per day.
+    * The entire log count will be sent via email to all company users at an interval set through the _Log Reccurence_ input on the _Settings_ page.
+    * By default, these logs will be mailed out once per day.
 
 ## Backup
 
