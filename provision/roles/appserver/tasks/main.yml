@@ -6,7 +6,7 @@
 
 - name: Install Packages
   apt: name={{item}}
-  with_items: [apache2, libapache2-mod-wsgi, python-pip, python-virtualenv, python-dev]
+  with_items: [git, apache2, libapache2-mod-wsgi, python-pip, python-virtualenv, python-dev]
   sudo: yes
 
 - name: Create Virtual Environment

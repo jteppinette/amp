@@ -6,7 +6,7 @@
 
 - name: Install Packages
   apt: name={{item}}
-  with_items: [libpq-dev, postgresql, postgresql-contrib]
+  with_items: [git, libpq-dev, postgresql, postgresql-contrib]
   sudo: yes
   
 - name: Configure PostgreSQL User
