@@ -1,7 +1,5 @@
 # AMP - *a permissions and employee/contractor management system*
 
-======
-
 ## Initialize Environment
 
 1. Install [Vagrant](https://www.vagrantup.com/downloads.html) and [VirtualBox](https://www.virtualbox.org/wiki/Downloads).
