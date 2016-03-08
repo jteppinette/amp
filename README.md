@@ -72,16 +72,16 @@ Each key feature of AMP is broken down into either a list page with individual d
 The AMP system sends many alerts and notifications that react to user input and regular time schedules.
 
 * Employee Request Notification: 
-** Employee request notifications are sent upon an employee registering into the system. This registration occurs on the unauthenticated landing page found under the _Make Employee Request_ heading.
-** This notification is sent to all users of the requested Company.
+  ** Employee request notifications are sent upon an employee registering into the system. This registration occurs on the unauthenticated landing page found under the _Make Employee Request_ heading.
+  ** This notification is sent to all users of the requested Company.
 
 * Contractor Request Notification: 
-** Contractor request notifications are sent upon a contractor registering into the system. This registration occurs on the unauthenticated landing page found under the _Make Contractor Request_ heading.
-** This notification is sent to all users of the requested Company.
+  ** Contractor request notifications are sent upon a contractor registering into the system. This registration occurs on the unauthenticated landing page found under the _Make Contractor Request_ heading.
+  ** This notification is sent to all users of the requested Company.
 
 * Recurring Log Notification:
-** The entire log count will be sent via email to all company users at an interval set through the _Log Reccurence_ input on the _Settings_ page.
-** By default, these logs will be mailed out once per day.
+  ** The entire log count will be sent via email to all company users at an interval set through the _Log Reccurence_ input on the _Settings_ page.
+  ** By default, these logs will be mailed out once per day.
 
 ## Backup
 
