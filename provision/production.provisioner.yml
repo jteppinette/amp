@@ -5,5 +5,5 @@
       - dbserver
       - appserver
   vars:
-      dir: /vagrant/app-server
-      development: true
+      dir: /var/www
+      production: true

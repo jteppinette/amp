@@ -9,11 +9,22 @@
   with_items: [git, apache2, libapache2-mod-wsgi, python-pip, python-virtualenv, python-dev]
   sudo: yes
 
+- name: Create Directory
+  file: path={{dir}} state=directory
+  sudo: yes
+
+- name: Copy Directory
+  copy: src={{inventory_dir}}/app-server/ dest={{dir}}
+  sudo: yes
+  when: production is defined
+
 - name: Create Virtual Environment
   command: virtualenv venv chdir={{dir}}
+  sudo: yes
   
 - name: Install Pip Packages
   pip: requirements={{dir}}/requirements.txt virtualenv={{dir}}/venv
+  sudo: yes 
   
 - name: Configure Apache WSGIDaemonProcess
   lineinfile: state=present line="WSGIDaemonProcess django python-path={{dir}}:{{dir}}/venv/lib/python2.7/site-packages" dest=/etc/apache2/apache2.conf
@@ -38,9 +49,12 @@
 
 - name: Collect Django Static Assets
   django_manage: command=collectstatic app_path={{dir}} virtualenv={{dir}}/venv
+  sudo: yes
   
 - name: Migrate Django SQL Schema
   django_manage: command=migrate app_path={{dir}} virtualenv={{dir}}/venv
+  sudo: yes
 
 - name: Generate Send Logs Cron 
   cron: name="Send Logs" day="*" job="{{dir}}/venv/bin/python {{dir}}/manage.py sendlogs"
+  sudo: yes
