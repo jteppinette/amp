@@ -39,7 +39,7 @@
                 {% csrf_token %}
                 {% bootstrap_form form %}
                 {% buttons %}
-                    <button type="submit" class="btn btn-primary"> Submit</button>
+                    <button type="submit" class="btn btn-success"> Submit</button>
                 {% endbuttons %}
             </form>
         </div>
@@ -53,7 +53,7 @@
                 <!-- RESULTS -->
                 <div class="panel-heading clearfix">
                     <span>{{object.documents.all.count}} Documents</span>
-                    <span class="pull-right"><a class="btn btn-primary" href="{% url 'new-employee-document' object.pk %}">Add Document</a></span>
+                    <span class="pull-right"><a class="btn btn-success" href="{% url 'new-employee-document' object.pk %}">Add Document</a></span>
                 </div>
 
                 <!-- TABLE -->

@@ -23,8 +23,4 @@ Vagrant.configure(2) do |config|
   config.vm.provision "shell", inline: "mkdir -p /home/vagrant/.ssh"
   config.vm.provision "shell", inline: "printf 'Host *\n\tStrictHostKeyChecking no' > /home/vagrant/.ssh/config"
 
-  config.vm.provision "ansible" do |ansible|
-    ansible.playbook = "provision/playbook.yml"
-  end
-
 end

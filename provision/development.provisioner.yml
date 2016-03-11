@@ -4,3 +4,5 @@
   roles:
       - dbserver
       - appserver
+  vars:
+      dir: /vagrant/app-server

@@ -8,23 +8,25 @@ Upon receiving the AMP system for development or production uses, the following 
 
 2. `git clone https://github.com/jteppinette/amp.git`
 
-3. `vagrant up` - _Initialize and provison the Ubuntu Trust 64 virtual machine._
+3. `vagrant up` - _Initialize the Ubuntu Trust 64 virtual machine._
 
-4. `vagrant ssh` - _Create an ssh tunnel using port 2222 on the localhost ip._
+5. `ansible-playbook provision/development.provisioner.yml -i localhost.inventory.ini -u vagrant -k`
 
-5. `cd /vagrant/app-server`
+6. `vagrant ssh` - _Create an ssh tunnel using port 2222 on the localhost ip._
 
-6. `source venv/bin/activate`- _Activate the Python2.7 virtual environment. This virtual environment contains all necessary Python packages. These packages are described in the requirements file located at /vagrant/app-server/requirements.txt._
+7. `cd /vagrant/app-server`
 
-7. `python manage.py createsuperuser` - _Create a user by following the Django *createsuperuser* command prompts. This superuser will be used to create companies and administor the AMP system._
+8. `source venv/bin/activate`- _Activate the Python2.7 virtual environment. This virtual environment contains all necessary Python packages. These packages are described in the requirements file located at /vagrant/app-server/requirements.txt._
 
-8. Visit `http://localhost:8080/admin` and login with your superuser credentials.
+9. `python manage.py createsuperuser` - _Create a user by following the Django *createsuperuser* command prompts. This superuser will be used to create companies and administor the AMP system._
 
-9. Create a new Company by visiting the  *Company* page listed in the *App* panel of the administrator site.
+10. Visit `http://localhost:8080/admin` and login with your superuser credentials.
 
-10. Create a new CIP Manager for this Company by visiting the  *Users* page listed in the *Authentication* panel of the administrator site.
+11. Create a new Company by visiting the  *Company* page listed in the *App* panel of the administrator site.
 
-11. Visit `http://localhost:8080/` and login as the CIP Manager that you have just created. - _This is the account that can be used to fully manage this individual company._
+12. Create a new CIP Manager for this Company by visiting the  *Users* page listed in the *Authentication* panel of the administrator site.
+
+13. Visit `http://localhost:8080/` and login as the CIP Manager that you have just created. - _This is the account that can be used to fully manage this individual company._
 
 ## Development
 
