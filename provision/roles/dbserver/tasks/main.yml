@@ -10,12 +10,12 @@
   sudo: yes
   
 - name: Configure PostgreSQL User
-  shell: psql -c "ALTER USER postgres PASSWORD 'password';"
-  sudo: yes
-  sudo_user: postgres
+  shell: psql -d postgres -c "ALTER USER postgres PASSWORD 'password';"
+  become: yes
+  become_user: postgres
   
 - name: Create PostgreSQL Database
   shell: createdb mydb
   failed_when: False
-  sudo: yes
-  sudo_user: postgres
+  become: yes
+  become_user: postgres
