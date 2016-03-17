@@ -2,8 +2,14 @@
 
 - hosts: all
   roles:
-      - dbserver
-      - appserver
+      - postgres
+      - nginx
+      - django
   vars:
+      djangoport: "8080"
+      nginxport: "80"
+      debug: "False"
+      company: "Test Company"
+      url: "http://amp.jteppinette.com"
       dir: /var/www
       production: true

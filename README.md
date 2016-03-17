@@ -35,6 +35,22 @@ Developing or maintaining this application is as simple as editing the many view
 After you have made a change, it is necessary to run `sudo service apache2 restart` to restart the Django server.
 This restart will force a reloading of the necessary Python assets and will make your new changes available on the next page refresh.
 
+### Fixture Data
+
+Fixture data can be loaded into the AMP system by executing the following commands after provisioning the environment with Ansible:
+
+1. `vagrant ssh` - _Create an ssh tunnel using port 2222 on the localhost ip._
+
+2. `cd /vagrant/app-server`
+
+3. `sudo su`
+
+4. `source venv/bin/activate`- _Activate the Python2.7 virtual environment. This virtual environment contains all necessary Python packages. These packages are described in the requirements file located at /vagrant/app-server/requirements.txt._
+
+5. `python manage.py createfixturedata`
+
+6. You can now login to the system at `http://localhost:8080/auth/login/` with the credentials of email: `sean.johson@testcompany.com` and password: `sean`.
+
 ## Settings
 
 There are many settings and features that are configurable in the _/vagrant/app-server/project/settings.py_ file.
@@ -58,9 +74,9 @@ In a producton environment, be sure to set the *DEBUG* configuration item to _Fa
 
 ## Features
 
-The AMP system offers many different features and capablities that are defined and reachable through the dashboard.
+The AMP system offers many different features and capabilities that are defined and reachable through the dashboard.
 
-### Struture
+### Structure
 
 Each key feature of AMP is broken down into either a list page with individual detail or a single detail page.
 

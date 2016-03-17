@@ -1,0 +1,51 @@
+---
+
+- name: Update Package Cache
+  apt: update_cache=yes cache_valid_time=3600
+  sudo: yes
+
+- name: Install Packages
+  apt: name={{item}}
+  with_items: [git, python-pip, python-virtualenv, python-dev]
+  sudo: yes
+
+- name: Create Directory
+  file: path={{dir}} state=directory
+  sudo: yes
+
+- name: Copy Directory
+  copy: src={{inventory_dir}}/app-server/ dest={{dir}}
+  sudo: yes
+  when: production is defined
+
+- name: Template Django settings.py
+  template: src=settings.py dest={{dir}}/project/settings.py
+  sudo: yes
+
+- name: Create Virtual Environment
+  command: virtualenv venv chdir={{dir}}
+  sudo: yes
+  
+- name: Install Pip Packages
+  pip: requirements={{dir}}/requirements.txt virtualenv={{dir}}/venv
+  sudo: yes 
+
+- name: Collect Django Static Assets
+  django_manage: command=collectstatic app_path={{dir}} virtualenv={{dir}}/venv
+  sudo: yes
+
+- name: Migrate Django SQL Schema
+  django_manage: command=migrate app_path={{dir}} virtualenv={{dir}}/venv
+  sudo: yes
+
+- name: Generate Send Logs Cron 
+  cron: name="Send Logs" day="*" job="{{dir}}/venv/bin/python {{dir}}/manage.py sendlogs"
+  sudo: yes
+
+- name: Template uWSGI Django Upstart Init Configuration
+  template: src=django.conf dest=/etc/init/django.conf
+  sudo: yes
+
+- name: Restart uWSGI Django
+  service: name=django state=restarted
+  sudo: yes

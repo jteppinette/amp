@@ -1,0 +1,22 @@
+---
+
+- name: Update Package Cache
+  apt: update_cache=yes cache_valid_time=3600
+  sudo: yes
+
+- name: Install Packages
+  apt: name={{item}}
+  with_items: [nginx]
+  sudo: yes
+
+- name: Template nginx.conf
+  template: src=nginx.conf dest=/etc/nginx/nginx.conf
+  sudo: yes
+
+- name: Template django.conf
+  template: src=django.conf dest=/etc/nginx/conf.d/django.conf
+  sudo: yes
+
+- name: Restart Nginx
+  service: name=nginx state=restarted
+  sudo: yes

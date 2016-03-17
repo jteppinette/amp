@@ -4,14 +4,14 @@ import os
 ROOT = os.path.dirname(os.path.dirname(__file__))
 
 # DEBUG
-DEBUG = True
+DEBUG = {{debug}}
 
 # COMPANY SETTINGS
-APP_URL = 'http://localhost:8080/'
-COMPANY_NAME = 'Test Company'
+APP_URL = '{{url}}'
+COMPANY_NAME = '{{company}}'
 
 # TEMPLATES
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = {{debug}}
 TEMPLATE_DIRS = [
     os.path.join(ROOT, 'templates'),
 ]

@@ -37,8 +37,9 @@ class Command(BaseCommand):
         # Delete pre-existing objects
         Company.objects.all().delete()
 
-        lus = Company.objects.create(name='LUS')
-        print lus
+        company = Company.objects.create(name=settings.COMPANY_NAME)
+	company_email = company.name.replace(' ', '').lower()
+        print company
 
         """
         Generate Users.
@@ -47,16 +48,16 @@ class Command(BaseCommand):
         get_user_model().objects.all().exclude(is_admin=True).delete()
 
         users = [
-            {'first_name': 'Sean', 'last_name': 'Johnson', 'email': 'sean.johnson@lus.com'},
-            {'first_name': 'Tyler', 'last_name': 'Coody', 'email': 'tyler.coody@lus.com'},
-            {'first_name': 'John', 'last_name': 'Easton', 'email': 'john.easton@lus.com'},
-            {'first_name': 'Dustin', 'last_name': 'Howard', 'email': 'dustin.howard@lus.com'},
-            {'first_name': 'Will', 'last_name': 'Todd', 'email': 'will.todd@lus.com'},
+            {'first_name': 'Sean', 'last_name': 'Johnson', 'email': 'sean.johnson@' + company_email + '.com'},
+            {'first_name': 'Tyler', 'last_name': 'Coody', 'email': 'tyler.coody@' + company_email + '.com'},
+            {'first_name': 'John', 'last_name': 'Easton', 'email': 'john.easton@' + company_email + '.com'},
+            {'first_name': 'Dustin', 'last_name': 'Howard', 'email': 'dustin.howard@' + company_email + '.com'},
+            {'first_name': 'Will', 'last_name': 'Todd', 'email': 'will.todd@' + company_email + '.com'},
         ]
 
         # Create new users
         for idx, title in enumerate(get_user_model().TITLES):
-            print get_user_model().objects.create_user(email=users[idx]['email'], password='lus', first_name=users[idx]['first_name'], last_name=users[idx]['last_name'], title=title[0], company=lus)
+            print get_user_model().objects.create_user(email=users[idx]['email'], password=users[idx]['first_name'].lower(), first_name=users[idx]['first_name'], last_name=users[idx]['last_name'], title=title[0], company=company)
 
         """
         Generate Permissions.
@@ -72,7 +73,7 @@ class Command(BaseCommand):
         ]
 
         for name in permission_names:
-            print Permission.objects.create(name=name, company=lus)
+            print Permission.objects.create(name=name, company=company)
 
         """
         Generate Employees.
@@ -85,7 +86,7 @@ class Command(BaseCommand):
         employee_info_list = json.loads(response.read())
 
         for info in employee_info_list:
-            employee = Employee.objects.create(company=lus, **info)
+            employee = Employee.objects.create(company=company, **info)
             print employee
             
             Log.objects.create(author='Fixture Data Script', **employee.creation_log())
@@ -123,7 +124,7 @@ class Command(BaseCommand):
             employer = random.choice(companies)
             email = '%s.%s@%s.com' % (info['first_name'], info['last_name'], employer)
 
-            contractor = Contractor.objects.create(company=lus, employer=employer, email=email.replace(' ', '').lower(), **info)
+            contractor = Contractor.objects.create(company=company, employer=employer, email=email.replace(' ', '').lower(), **info)
             print contractor
 
             Log.objects.create(author='Fixture Data Script', **contractor.creation_log())
@@ -162,7 +163,7 @@ class Command(BaseCommand):
                     print 'Failure to maintain unique integrity.'
                     continue
                 else:
-                    request = EmployeeRequest.objects.create(employee=employee, company=lus)
+                    request = EmployeeRequest.objects.create(employee=employee, company=company)
                     request.permissions.add(permission.id)
                     request.save()
                     print request
@@ -194,7 +195,7 @@ class Command(BaseCommand):
                                                                employer=contractor.employer,
                                                                email=contractor.email,
                                                                remote=random.choice([True, False]),
-                                                               company=lus)
+                                                               company=company)
                     request.permissions.add(permission.id)
                     request.save()
                     print request
