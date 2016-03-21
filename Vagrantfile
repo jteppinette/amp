@@ -3,7 +3,7 @@
 
 Vagrant.configure(2) do |config|
 
-  config.vm.box = "ubuntu/trusty64"
+  config.vm.box = "centos/7"
 
   config.vm.network "forwarded_port", guest: 8080, host: 8080
 
@@ -19,8 +19,5 @@ Vagrant.configure(2) do |config|
     vb.memory = 2048
     vb.cpus = 4
   end
-
-  config.vm.provision "shell", inline: "mkdir -p /home/vagrant/.ssh"
-  config.vm.provision "shell", inline: "printf 'Host *\n\tStrictHostKeyChecking no' > /home/vagrant/.ssh/config"
 
 end

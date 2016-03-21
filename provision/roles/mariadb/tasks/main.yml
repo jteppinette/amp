@@ -1,0 +1,21 @@
+---
+
+- name: Configure Yum Repo
+  template: src=MariaDB.repo dest=/etc/yum.repos.d/MariaDB.repo
+  sudo: yes
+
+- name: Install Packages
+  yum: name={{item}}
+  with_items: [MariaDB-server, MariaDB-client, mysql-devel, MySQL-python]
+  sudo: yes
+
+- name: Initialize Service
+  service: name=mysql enabled=yes state=started
+  sudo: yes
+
+- name: Create DB User
+  mysql_user: name={{db_user}} password={{db_password}} priv=*.*:ALL state=present          
+  sudo: yes
+
+- name: Create DB
+  mysql_db: name=amp login_user={{db_user}} login_password={{db_password}} state=present

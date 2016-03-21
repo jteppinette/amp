@@ -1,12 +1,12 @@
 ---
 
-- name: Update Package Cache
-  apt: update_cache=yes cache_valid_time=3600
+- name: Install EPEL
+  yum: name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
   sudo: yes
 
 - name: Install Packages
-  apt: name={{item}}
-  with_items: [git, python-pip, python-virtualenv, python-dev]
+  yum: name={{item}} enablerepo=epel
+  with_items: [python-pip, python-virtualenv, python-devel, gcc, openssl, openssl-devel]
   sudo: yes
 
 - name: Create Directory
@@ -43,9 +43,9 @@
   sudo: yes
 
 - name: Template uWSGI Django Upstart Init Configuration
-  template: src=django.conf dest=/etc/init/django.conf
+  template: src=django.conf dest=/etc/systemd/system/django.service
   sudo: yes
 
-- name: Restart uWSGI Django
-  service: name=django state=restarted
+- name: Start uWSGI Django
+  service: name=django state=restarted enabled=yes
   sudo: yes

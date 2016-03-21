@@ -2,15 +2,17 @@
 
 - hosts: all
   roles:
-      - postgres
+      - mariadb
       - nginx
       - django
-      - vagrant
   vars:
       djangoport: "8081"
       nginxport: "8080"
       debug: "True"
       company: "Test Company"
       url: "http://localhost:8080/"
-      dir: /vagrant/app-server
+      dir: "/vagrant/app-server"
       development: true
+      db_user: "amp"
+      db_password: "password"
+      secret: "cmttfpnk9+6^vs0ow=umgt3$bue+pm=a&-n&$&6@%ww9gpl2x@"

@@ -68,9 +68,9 @@ EMAIL_FILE_PATH = '/tmp/amp-mail'
 # DATABASES
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'mydb',
-        'USER': 'postgres',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'amp',
+        'USER': 'amp',
         'PASSWORD': 'password',
         'HOST': 'localhost',
         'PORT': 5432,

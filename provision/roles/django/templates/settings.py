@@ -68,10 +68,10 @@ EMAIL_FILE_PATH = '/tmp/amp-mail'
 # DATABASES
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'mydb',
-        'USER': 'postgres',
-        'PASSWORD': 'password',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'amp',
+        'USER': '{{db_user}}',
+        'PASSWORD': '{{db_password}}',
         'HOST': 'localhost',
         'PORT': 5432,
     }
@@ -85,7 +85,7 @@ USE_L10N = True
 USE_TZ = True
 
 # SECURITY
-SECRET_KEY = 'cmttfpnk9+6^vs0ow=umgt3$bue+pm=a&-n&$&6@%ww9gpl2x@'
+SECRET_KEY = '{{secret}}'
 
 # HEADER MANAGEMENT
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
