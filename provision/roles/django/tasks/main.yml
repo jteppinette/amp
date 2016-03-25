@@ -42,7 +42,7 @@
   cron: name="Send Logs" day="*" job="{{dir}}/venv/bin/python {{dir}}/manage.py sendlogs"
   sudo: yes
 
-- name: Template uWSGI Django Upstart Init Configuration
+- name: Template uWSGI Django SystemD Service
   template: src=django.conf dest=/etc/systemd/system/django.service
   sudo: yes
 

@@ -1,5 +1,0 @@
----
-
-- name: Template Vagrant Mounted Upstart Init Configuration
-  template: src=vagrant-mounted.conf dest=/etc/init/vagrant-mounted.conf
-  sudo: yes

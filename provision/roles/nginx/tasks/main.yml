@@ -1,12 +1,12 @@
 ---
 
-- name: Update Package Cache
-  apt: update_cache=yes cache_valid_time=3600
+- name: Install EPEL
+  yum: name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
   sudo: yes
 
 - name: Install Packages
-  apt: name={{item}}
-  with_items: [nginx]
+  yum: name={{item}} enablerepo=epel
+  with_items: [nginx, libsemanage-python]
   sudo: yes
 
 - name: Template nginx.conf
@@ -15,6 +15,11 @@
 
 - name: Template django.conf
   template: src=django.conf dest=/etc/nginx/conf.d/django.conf
+  sudo: yes
+
+- name: SE Linux HTTPD Booleans
+  seboolean: name={{item}} state=yes persistent=yes
+  with_items: [httpd_can_network_connect, httpd_use_nfs]
   sudo: yes
 
 - name: Restart Nginx
