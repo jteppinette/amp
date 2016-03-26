@@ -12,7 +12,7 @@
       company: "Test Company"
       url: "http://localhost:8080/"
       dir: "/vagrant/app-server"
-      development: true
+      development: yes
       db_user: "amp"
       db_password: "password"
       secret: "cmttfpnk9+6^vs0ow=umgt3$bue+pm=a&-n&$&6@%ww9gpl2x@"

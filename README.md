@@ -8,7 +8,7 @@ Upon receiving the AMP system for development or production uses, the following 
 
 2. `git clone https://github.com/jteppinette/amp.git`
 
-3. `vagrant up` - _Initialize the Ubuntu Trust 64 virtual machine._
+3. `vagrant up` - _Initialize the CentOS Trust 64 virtual machine._
 
 5. `ansible-playbook provision/development.provisioner.yml -i localhost.inventory.ini -u vagrant -k`
 
@@ -32,7 +32,7 @@ Upon receiving the AMP system for development or production uses, the following 
 
 After the steps listed above in the _Initialize Environment_ section have been completed, then you can begin to develop the application.
 Developing or maintaining this application is as simple as editing the many views, templates, models, and utility files listed under the app-server directory.
-After you have made a change, it is necessary to run `sudo service apache2 restart` to restart the Django server.
+After you have made a change, it is necessary to run `sudo service django restart` to restart the Django server.
 This restart will force a reloading of the necessary Python assets and will make your new changes available on the next page refresh.
 
 ### Fixture Data

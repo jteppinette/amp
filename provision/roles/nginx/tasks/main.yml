@@ -22,6 +22,10 @@
   with_items: [httpd_can_network_connect, httpd_use_nfs]
   sudo: yes
 
+- name: SE Linux HTTPD Content
+  command: chcon -Rt httpd_sys_content_t {{dir}}/staticfiles
+  sudo: yes
+
 - name: Restart Nginx
   service: name=nginx state=restarted
   sudo: yes

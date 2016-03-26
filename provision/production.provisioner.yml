@@ -2,7 +2,7 @@
 
 - hosts: all
   roles:
-      - postgres
+      - mariadb
       - nginx
       - django
   vars:
@@ -13,3 +13,6 @@
       url: "http://amp.jteppinette.com"
       dir: /var/www
       production: true
+      db_user: "amp"
+      db_password: "password"
+      secret: "cmttfpnk9+6^vs0ow=umgt3$bue+pm=a&-n&$&6@%ww9gpl2x@"

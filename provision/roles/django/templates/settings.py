@@ -4,7 +4,7 @@ import os
 ROOT = os.path.dirname(os.path.dirname(__file__))
 
 # DEBUG
-DEBUG = {{debug}}
+DEBUG = {% if debug %}True{% else %}False{% endif %}
 
 # COMPANY SETTINGS
 APP_URL = '{{url}}'
