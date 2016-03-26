@@ -3,21 +3,35 @@
 
 Vagrant.configure(2) do |config|
 
-  config.vm.box = "centos/7"
+  config.vm.define "app" do |app|
 
-  config.vm.network "forwarded_port", guest: 8080, host: 8080
+    app.vm.box = "centos/7"
 
-  config.vm.network "private_network", ip: "192.168.50.6"
+    app.vm.network "forwarded_port", guest: 8080, host: 8080
 
-  config.vm.synced_folder ".", "/vagrant",
-    :type => "nfs",
-    :mount_options => ['nolock,vers=3,udp,noatime,actimeo=1']
+    app.vm.network "private_network", ip: "192.168.100.111"
+    app.vm.hostname = "app"
+
+    app.vm.synced_folder ".", "/vagrant",
+      :type => "nfs",
+      :mount_options => ['nolock,vers=3,udp,noatime,actimeo=1']
+
+  end
+
+  config.vm.define "db" do |db|
+
+    db.vm.box = "centos/7"
+
+    db.vm.network "forwarded_port", guest: 3306, host: 3306
+
+    db.vm.network "private_network", ip: "192.168.100.222"
+    db.vm.hostname = "db"
+
+  end
 
   config.vm.provider "virtualbox" do |vb|
-    vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
-    vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
     vb.memory = 2048
-    vb.cpus = 4
+    vb.cpus = 1
   end
 
 end

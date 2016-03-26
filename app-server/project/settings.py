@@ -72,8 +72,8 @@ DATABASES = {
         'NAME': 'amp',
         'USER': 'amp',
         'PASSWORD': 'password',
-        'HOST': 'localhost',
-        'PORT': 5432,
+        'HOST': '192.168.100.222',
+        'PORT': 3306,
     }
 }
 

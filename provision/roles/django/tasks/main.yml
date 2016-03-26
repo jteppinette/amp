@@ -6,7 +6,7 @@
 
 - name: Install Packages
   yum: name={{item}} enablerepo=epel
-  with_items: [python-pip, python-virtualenv, python-devel, gcc, openssl, openssl-devel]
+  with_items: [python-pip, python-virtualenv, python-devel, gcc, openssl, openssl-devel, MySQL-python, mysql-devel]
   sudo: yes
 
 - name: Create Directory

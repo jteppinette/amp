@@ -14,7 +14,10 @@
   sudo: yes
 
 - name: Create DB User
-  mysql_user: name={{db_user}} password={{db_password}} priv=*.*:ALL state=present          
+  mysql_user: name={{db_user}} password={{db_password}} priv=*.*:ALL state=present host={{hostvars[item].inventory_hostname}}
+  with_items:
+    - "{{groups['app-servers']}}"
+    - "localhost"
   sudo: yes
 
 - name: Create DB

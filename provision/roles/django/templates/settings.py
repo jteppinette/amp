@@ -6,6 +6,7 @@ ROOT = os.path.dirname(os.path.dirname(__file__))
 # DEBUG
 DEBUG = {% if debug %}True{% else %}False{% endif %}
 
+
 # COMPANY SETTINGS
 APP_URL = '{{url}}'
 COMPANY_NAME = '{{company}}'
@@ -72,8 +73,8 @@ DATABASES = {
         'NAME': 'amp',
         'USER': '{{db_user}}',
         'PASSWORD': '{{db_password}}',
-        'HOST': 'localhost',
-        'PORT': 5432,
+        'HOST': '{{hostvars[groups["db-servers"][0]].inventory_hostname}}',
+        'PORT': 3306,
     }
 }
 

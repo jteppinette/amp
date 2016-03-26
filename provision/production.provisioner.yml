@@ -1,18 +1,25 @@
 ---
 
-- hosts: all
+- hosts: db-servers
   roles:
       - mariadb
-      - nginx
+  vars:
+      db_user: "amp"
+      db_password: "password"
+      production: true
+
+- hosts: app-servers
+  roles:
       - django
+      - nginx
   vars:
       djangoport: "8080"
       nginxport: "80"
-      debug: "False"
+      debug: no
       company: "Test Company"
       url: "http://amp.jteppinette.com"
       dir: /var/www
-      production: true
+      secret: "cmttfpnk9+6^vs0ow=umgt3$bue+pm=a&-n&$&6@%ww9gpl2x@"
       db_user: "amp"
       db_password: "password"
-      secret: "cmttfpnk9+6^vs0ow=umgt3$bue+pm=a&-n&$&6@%ww9gpl2x@"
+      production: yes

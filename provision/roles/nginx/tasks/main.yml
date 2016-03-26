@@ -22,9 +22,10 @@
   with_items: [httpd_can_network_connect, httpd_use_nfs]
   sudo: yes
 
-- name: SE Linux HTTPD Content
+- name: SE Linux HTTPD Context
   command: chcon -Rt httpd_sys_content_t {{dir}}/staticfiles
   sudo: yes
+  when: production is defined
 
 - name: Restart Nginx
   service: name=nginx state=restarted
