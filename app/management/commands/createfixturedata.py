@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand, CommandError
 from django.conf import settings
 
+from optparse import make_option
 import urllib2
 import json
 import random
@@ -22,14 +23,16 @@ from app.models import EmployeeRequest, ContractorRequest
 
 
 class Command(BaseCommand):
+    option_list = BaseCommand.option_list + (make_option('-f', '--force', action='store_true', help='Force DB Wipe'),)
 
     def handle(self, *args, **kwargs):
-        print 'Are you sure you would like to recreate your entire database?'
-        print 'Enter `DELETE` to delete database and load with fixture data: '
-        choice = raw_input()
-        if choice != 'DELETE':
-            print 'Your actions have resulted in zero change to the database.'
-            return
+        if not kwargs.get('force'):
+            print 'Are you sure you would like to recreate your entire database?'
+            print 'Enter `DELETE` to delete database and load with fixture data: '
+            choice = raw_input()
+            if choice != 'DELETE':
+                print 'Your actions have resulted in zero change to the database.'
+                return
 
         """
         Generate Companies.

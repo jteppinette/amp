@@ -1,17 +1,16 @@
 import os
-
 # ROOT
 ROOT = os.path.dirname(os.path.dirname(__file__))
 
 # DEBUG
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', False)
 
 # COMPANY SETTINGS
-APP_URL = 'http://localhost:8080/'
-COMPANY_NAME = 'Test Company'
+APP_URL = os.environ.get('APP_URL', 'http://localhost:8000/')
+COMPANY_NAME = os.environ.get('COMPANY_NAME', 'Test Company')
 
 # TEMPLATES
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = DEBUG
 TEMPLATE_DIRS = [
     os.path.join(ROOT, 'templates'),
 ]
@@ -49,9 +48,6 @@ MIDDLEWARE_CLASSES = (
 # URLS
 ROOT_URLCONF = 'project.urls'
 
-# WSGI
-WSGI_APPLICATION = 'project.wsgi.application'
-
 # STATIC ASSETS
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
@@ -63,17 +59,13 @@ STATICFILES_DIRS = (
 
 # MAIL
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-EMAIL_FILE_PATH = '/tmp/amp-mail'
+EMAIL_FILE_PATH = os.path.join(ROOT, 'email')
 
 # DATABASES
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'amp',
-        'USER': 'amp',
-        'PASSWORD': 'password',
-        'HOST': '192.168.100.222',
-        'PORT': 3306,
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'data.sqlite3'
     }
 }
 
@@ -85,7 +77,7 @@ USE_L10N = True
 USE_TZ = True
 
 # SECURITY
-SECRET_KEY = 'cmttfpnk9+6^vs0ow=umgt3$bue+pm=a&-n&$&6@%ww9gpl2x@'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # HEADER MANAGEMENT
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

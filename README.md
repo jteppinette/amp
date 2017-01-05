@@ -4,58 +4,46 @@
 
 Upon receiving the AMP system for development or production uses, the following information will allow you to get your environment setup and ready for use.
 
-1. Install [Vagrant](https://www.vagrantup.com/downloads.html), and [VirtualBox](https://www.virtualbox.org/wiki/Downloads), and [Ansible](https://www.ansible.com).
+1. Install `pip` and `virtualenv`
 
 2. `git clone https://github.com/jteppinette/amp.git`
 
-3. `vagrant up` - _Initialize the CentOS Trust 64 virtual machine._
+3. `virtualenv amp`
 
-5. `ansible-playbook provision/development.provisioner.yml -i localhost.inventory.ini -u vagrant -k`
-
-6. `vagrant ssh` - _Create an ssh tunnel using port 2222 on the localhost ip._
-
-7. `cd /vagrant/app-server`
-
-8. `source venv/bin/activate`- _Activate the Python2.7 virtual environment. This virtual environment contains all necessary Python packages. These packages are described in the requirements file located at /vagrant/app-server/requirements.txt._
+5. `source amp/bin/activate`
 
 9. `python manage.py createsuperuser` - _Create a user by following the Django *createsuperuser* command prompts. This superuser will be used to create companies and administor the AMP system._
 
-10. Visit `http://localhost:8080/admin` and login with your superuser credentials.
+10. Visit `http://localhost:8000/admin` and login with your superuser credentials.
 
 11. Create a new Company by visiting the  *Company* page listed in the *App* panel of the administrator site.
 
 12. Create a new CIP Manager for this Company by visiting the  *Users* page listed in the *Authentication* panel of the administrator site.
 
-13. Visit `http://localhost:8080/` and login as the CIP Manager that you have just created. - _This is the account that can be used to fully manage this individual company._
-
-## Development
-
-After the steps listed above in the _Initialize Environment_ section have been completed, then you can begin to develop the application.
-Developing or maintaining this application is as simple as editing the many views, templates, models, and utility files listed under the app-server directory.
-After you have made a change, it is necessary to run `sudo service django restart` to restart the Django server.
-This restart will force a reloading of the necessary Python assets and will make your new changes available on the next page refresh.
+13. Visit `http://localhost:8000/` and login as the CIP Manager that you have just created. - _This is the account that can be used to fully manage this individual company._
 
 ### Fixture Data
 
 Fixture data can be loaded into the AMP system by executing the following commands after provisioning the environment with Ansible:
 
-1. `vagrant ssh` - _Create an ssh tunnel using port 2222 on the localhost ip._
+1. `source venv/bin/activate`- _Activate the Python2.7 virtual environment. This virtual environment contains all necessary Python packages. These packages are described in the requirements file located at /vagrant/app-server/requirements.txt._
 
-2. `cd /vagrant/app-server`
+2. `python manage.py createfixturedata`
 
-3. `sudo su`
-
-4. `source venv/bin/activate`- _Activate the Python2.7 virtual environment. This virtual environment contains all necessary Python packages. These packages are described in the requirements file located at /vagrant/app-server/requirements.txt._
-
-5. `python manage.py createfixturedata`
-
-6. You can now login to the system at `http://localhost:8080/auth/login/` with the credentials of email: `sean.johson@testcompany.com` and password: `sean`.
+3. You can now login to the system at `http://localhost:8080/auth/login/` with the credentials of email: `sean.johson@testcompany.com` and password: `sean`.
 
 ## Settings
 
-There are many settings and features that are configurable in the _/vagrant/app-server/project/settings.py_ file.
+There are many settings and features that are configurable in the _/<root>/project/settings.py_ file.
+Some of which are also made available through environment variables.
 Read through this file for detailed documentation regarding each available setting, or
 view the online [Django v1.8 Documentation](https://docs.djangoproject.com/en/1.8/ref/settings/).
+
+## Docker
+
+1. `docker build . -t amp`
+
+2. `docker run -it -e SECRET_KEY=<secret> -e APP_URL=<url> -e COMPANY_NAME=<company_name> -P --rm --name amp amp`
 
 ### Email
 
@@ -100,11 +88,3 @@ The AMP system sends many alerts and notifications that react to user input and 
 * Recurring Log Notification:
     * The entire log count will be sent via email to all company users at an interval set through the _Log Reccurence_ input on the _Settings_ page.
     * By default, these logs will be mailed out once per day.
-
-## Backup
-
-The AMP system does not come configured with backup systems for the database or media assets (logs, backgound checks, files, etc..). These systems are left to the individual system administrator to be implemented.
-
-* [PostgreSQL Backup](http://www.postgresql.org/docs/9.1/static/backup.html): This set of documentation will provide information on exporting and importing PostgreSQL raw data.
-* Media Backup: Media files are stored in a diretory determined by the *MEDIA_ROOT* setting in *settings.py*. Typically, an [rsync](http://linux.die.net/man/1/rsync) command would be setup throug a [chronjob](http://man7.org/linux/man-pages/man5/crontab.5.html), so that the directory can be backed up on a remote system at a regular interval.
-
