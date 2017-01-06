@@ -3,7 +3,7 @@ import os
 ROOT = os.path.dirname(os.path.dirname(__file__))
 
 # DEBUG
-DEBUG = os.environ.get('DEBUG', False)
+DEBUG = os.environ.get('DEBUG', True)
 
 # COMPANY SETTINGS
 APP_URL = os.environ.get('APP_URL', 'http://localhost:8000/')
@@ -77,7 +77,7 @@ USE_L10N = True
 USE_TZ = True
 
 # SECURITY
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY', 'TEST_KEY')
 
 # HEADER MANAGEMENT
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
