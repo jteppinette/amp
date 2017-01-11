@@ -10,17 +10,20 @@ Upon receiving the AMP system for development or production uses, the following 
 
 3. `virtualenv amp`
 
-5. `source amp/bin/activate`
+4. `source amp/bin/activate`
 
-9. `python manage.py createsuperuser` - _Create a user by following the Django *createsuperuser* command prompts. This superuser will be used to create companies and administor the AMP system._
+5. Run a mysql server. The default required settings can be found in `project/settings.py`. A compatible docker container would look like:
+    * `docker run -p 3306:3306 -d -e MYSQL_ROOT_PASSWORD=secret -e MYSQL_DATABASE=amp -e MYSQL_USER=amp -e MY_SQL_PASSWORD=secret --name mysql mysql`
 
-10. Visit `http://localhost:8000/admin` and login with your superuser credentials.
+6. `python manage.py createsuperuser` - _Create a user by following the Django *createsuperuser* command prompts. This superuser will be used to create companies and administor the AMP system._
 
-11. Create a new Company by visiting the  *Company* page listed in the *App* panel of the administrator site.
+7. Visit `http://localhost:8000/admin` and login with your superuser credentials.
 
-12. Create a new CIP Manager for this Company by visiting the  *Users* page listed in the *Authentication* panel of the administrator site.
+8. Create a new Company by visiting the  *Company* page listed in the *App* panel of the administrator site.
 
-13. Visit `http://localhost:8000/` and login as the CIP Manager that you have just created. - _This is the account that can be used to fully manage this individual company._
+9. Create a new CIP Manager for this Company by visiting the  *Users* page listed in the *Authentication* panel of the administrator site.
+
+10. Visit `http://localhost:8000/` and login as the CIP Manager that you have just created. - _This is the account that can be used to fully manage this individual company._
 
 ### Fixture Data
 
@@ -43,7 +46,28 @@ view the online [Django v1.8 Documentation](https://docs.djangoproject.com/en/1.
 
 1. `docker build . -t amp`
 
-2. `docker run -it -e SECRET_KEY=<secret> -e APP_URL=<url> -e COMPANY_NAME=<company_name> -P --rm --name amp amp`
+2. `docker run -p 3306:3306 -d \
+      -e MYSQL_DATABASE=<db name> \
+      -e MYSQL_USER=<db user> \
+      -e MYSQL_PASSWORD=<db password> \
+      -e MYSQL_ROOT_PASSWORD=<db password> \
+      --name mysql mysql`
+
+3. `docker run -it -p 8080:80 \
+      -e SECRET_KEY=<secret> \
+      -e APP_URL=<url> \
+      -e COMPANY_NAME=<company_name> \
+      -e DB_NAME=<db name> \
+      -e DB_USER=<db user> \
+      -e DB_PASSWORD=<db password> \
+      -e DB_HOST=<db host> \
+      -e DB_PORT=<db port> \
+      --rm --name amp amp`
+
+4. `docker exec -it amp python manage.py migrate`
+
+5. `docker exec -it amp python manage.py createsuperuser`
+
 
 ### Email
 

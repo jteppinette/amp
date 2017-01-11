@@ -1,7 +1,6 @@
 *.pyc
 amp
 staticfiles
-static
 media
 email
 app/migrations

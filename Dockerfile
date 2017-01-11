@@ -9,6 +9,6 @@ RUN pip install --no-cache-dir -r /app/requirements.txt
 
 COPY . /app
 
-RUN touch data.sqlite3
+RUN python manage.py collectstatic --noinput
 
-CMD python manage.py collectstatic --noinput && python manage.py migrate && python manage.py createfixturedata -f && /usr/bin/supervisord
+CMD /usr/bin/supervisord

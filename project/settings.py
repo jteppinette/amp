@@ -64,8 +64,12 @@ EMAIL_FILE_PATH = os.path.join(ROOT, 'email')
 # DATABASES
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'data.sqlite3'
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.environ.get('DB_NAME', 'amp'),
+        'USER': os.environ.get('DB_USER', 'amp'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'secret'),
+        'HOST': os.environ.get('DB_HOST', '0.0.0.0'),
+        'PORT': os.environ.get('DB_PORT', '3306')
     }
 }
 

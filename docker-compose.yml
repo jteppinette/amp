@@ -1,0 +1,24 @@
+ version: '2'
+ services:
+   app:
+     build: .
+     ports: 
+       - "8080:80"
+     environment:
+       - SECRET_KEY=23423423820jfjkajslk234085
+       - APP_URL=localhost:8080
+       - COMPANY_NAME=TEST COMPANY
+       - DB_NAME=amp
+       - DB_USER=amp
+       - DB_PASSWORD=lldafjnd33388ddjsnaldkfje
+       - DB_HOST=db
+       - DB_PORT=3306
+     links:
+       - db
+   db:
+     image: mysql
+     environment:
+       - MYSQL_DATABASE=amp
+       - MYSQL_USER=amp
+       - MYSQL_PASSWORD=lldafjnd33388ddjsnaldkfje
+       - MYSQL_ROOT_PASSWORD=lldafjnd33388ddjsnaldkfje
