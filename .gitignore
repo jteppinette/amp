@@ -1,7 +1,5 @@
 *.pyc
-amp
+venv
 staticfiles
 media
 email
-app/migrations
-data.sqlite3

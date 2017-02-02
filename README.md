@@ -1,73 +1,76 @@
 # AMP - *a permissions and employee/contractor management system*
 
-## Initialize Environment
+## Development
 
-Upon receiving the AMP system for development or production uses, the following information will allow you to get your environment setup and ready for use.
+### Required Software
 
-1. Install `pip` and `virtualenv`
+* [docker](https://docs.docker.com/)
+* [git](https://git-scm.com/)
+* [virtualenv](https://virtualenv.pypa.io/en/stable/)
 
-2. `git clone https://github.com/jteppinette/amp.git`
+### Getting Started
 
-3. `virtualenv amp`
+1. `git clone https://github.com/jteppinette/risk-managed.git`
 
-4. `source amp/bin/activate`
+2. `virtualenv venv`
 
-5. Run a mysql server. The default required settings can be found in `project/settings.py`. A compatible docker container would look like:
-    * `docker run -p 3306:3306 -d -e MYSQL_ROOT_PASSWORD=secret -e MYSQL_DATABASE=amp -e MYSQL_USER=amp -e MY_SQL_PASSWORD=secret --name mysql mysql`
+3. `source venv/bin/activate`
 
-6. `python manage.py createsuperuser` - _Create a user by following the Django *createsuperuser* command prompts. This superuser will be used to create companies and administor the AMP system._
+4. `pip install -r requirements.txt`
 
-7. Visit `http://localhost:8000/admin` and login with your superuser credentials.
+5. `docker-compose up -d db`
 
-8. Create a new Company by visiting the  *Company* page listed in the *App* panel of the administrator site.
+6. `python manage.py migrate`
 
-9. Create a new CIP Manager for this Company by visiting the  *Users* page listed in the *Authentication* panel of the administrator site.
+7. `python manage.py createfixturedata`
 
-10. Visit `http://localhost:8000/` and login as the CIP Manager that you have just created. - _This is the account that can be used to fully manage this individual company._
+8. `python manage.py runserver`
 
-### Fixture Data
+## Usage
 
-Fixture data can be loaded into the AMP system by executing the following commands after provisioning the environment with Ansible:
+### Environment Variables
 
-1. `source venv/bin/activate`- _Activate the Python2.7 virtual environment. This virtual environment contains all necessary Python packages. These packages are described in the requirements file located at /vagrant/app-server/requirements.txt._
+Any variables marked as `insecure: true` should be overriden before being added to a production system.
 
-2. `python manage.py createfixturedata`
+* APP_URL         `default: http://localhost:8080/`
+* COMPANY_NAME    `default: Test Company`
+* DEBUG           `default: True`
+* DB_NAME         `default: db`
+* DB_USER         `default: db`
+* DB_PASSWORD     `defualt: secret, insecure: true`
+* DB_HOST         `default: 0.0.0.0`
+* DB_PORT         `default: 3306`
+* SESSION_SECRET  `defualt: secret, insecure: true`
 
-3. You can now login to the system at `http://localhost:8080/auth/login/` with the credentials of email: `sean.johson@testcompany.com` and password: `sean`.
+### Docker
 
-## Settings
+1. `docker build . -t app`
 
-There are many settings and features that are configurable in the _/<root>/project/settings.py_ file.
-Some of which are also made available through environment variables.
-Read through this file for detailed documentation regarding each available setting, or
-view the online [Django v1.8 Documentation](https://docs.djangoproject.com/en/1.8/ref/settings/).
+2. `docker run \
+      -d
+      -e MYSQL_DATABASE=db
+      -e MYSQL_USER=db
+      -e MYSQL_PASSWORD=db-secret
+      -e MYSQL_RANDOM_ROOT_PASSWORD=yes
+      --name db
+      mysql`
 
-## Docker
+3. `docker run
+      -d
+      -p 8080:80
+      -e SESSION_SECRET=session-secret
+      -e DB_NAME=db
+      -e DB_USER=db
+      -e DB_PORT=3306
+      -e DB_PASSWORD=db-secret
+      -e DB_HOST=db
+      --link db
+      --name app
+      app`
 
-1. `docker build . -t amp`
+4. `docker exec -it app python manage.py migrate`
 
-2. `docker run -p 3306:3306 -d \
-      -e MYSQL_DATABASE=<db name> \
-      -e MYSQL_USER=<db user> \
-      -e MYSQL_PASSWORD=<db password> \
-      -e MYSQL_ROOT_PASSWORD=<db password> \
-      --name mysql mysql`
-
-3. `docker run -it -p 8080:80 \
-      -e SECRET_KEY=<secret> \
-      -e APP_URL=<url> \
-      -e COMPANY_NAME=<company_name> \
-      -e DB_NAME=<db name> \
-      -e DB_USER=<db user> \
-      -e DB_PASSWORD=<db password> \
-      -e DB_HOST=<db host> \
-      -e DB_PORT=<db port> \
-      --rm --name amp amp`
-
-4. `docker exec -it amp python manage.py migrate`
-
-5. `docker exec -it amp python manage.py createsuperuser`
-
+5. `docker exec -it app python manage.py createsuperuser`
 
 ### Email
 
@@ -79,10 +82,6 @@ Read the linked documentation for information on setting this up.
 ### Company Settings
 
 For personalization and routing, the *APP_URL* and *COMPANY_NAME* configuration items should be set after initializing your envionrment, setting up DNS routing, and creating an initial company.
-
-### Debug
-
-In a producton environment, be sure to set the *DEBUG* configuration item to _False_. This will disable the automatic wen interface error reporting and expensive debugging routines.
 
 ## Features
 
@@ -97,7 +96,7 @@ Each key feature of AMP is broken down into either a list page with individual d
 * Detail Pages:
     * Detail pages offer the ability to modify a single object.
 
-## Notifications
+### Notifications
 
 The AMP system sends many alerts and notifications that react to user input and regular time schedules.
 
