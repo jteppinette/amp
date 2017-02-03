@@ -32,7 +32,7 @@
 
 Any variables marked as `insecure: true` should be overriden before being added to a production system.
 
-* APP_URL         `default: http://localhost:8080/`
+* APP_URL         `default: http://localhost:8000/`
 * COMPANY_NAME    `default: Test Company`
 * DEBUG           `default: True`
 * DB_NAME         `default: db`
@@ -57,7 +57,7 @@ Any variables marked as `insecure: true` should be overriden before being added 
 
 3. `docker run
       -d
-      -p 8080:80
+      -p 8000:80
       -e SESSION_SECRET=session-secret
       -e DB_NAME=db
       -e DB_USER=db
