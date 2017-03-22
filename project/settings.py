@@ -7,18 +7,29 @@ DEBUG = os.environ.get('DEBUG', True)
 APP_URL = os.environ.get('APP_URL', 'http://localhost:8000/')
 COMPANY_NAME = os.environ.get('COMPANY_NAME', 'Test Company')
 
-TEMPLATE_DEBUG = DEBUG
-TEMPLATE_DIRS = [
-    os.path.join(ROOT, 'templates'),
-]
-
 AUTH_USER_MODEL = 'authentication.User'
 LOGIN_REDIRECT_URL = '/dashboard/'
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = '/auth/login/'
 LOGOUT_URL = '/auth/logout/'
 
-INSTALLED_APPS = (
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': ['templates'],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
+INSTALLED_APPS = [
     'app',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -28,16 +39,17 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'bootstrap3',
     'authentication'
-)
+]
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-)
+]
 
 ROOT_URLCONF = 'project.urls'
 
@@ -45,9 +57,6 @@ STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(ROOT, 'media')
 MEDIA_URL = '/media/'
-STATICFILES_DIRS = (
-    os.path.abspath(os.path.join(ROOT, 'static')),
-)
 
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = os.path.join(ROOT, 'email')
@@ -62,6 +71,21 @@ DATABASES = {
         'PORT': os.environ.get('DB_PORT', '3306')
     }
 }
+
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+]
 
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'

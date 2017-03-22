@@ -1,7 +1,6 @@
 from django.core.management.base import BaseCommand, CommandError
 from django.conf import settings
 
-from optparse import make_option
 import urllib2
 import json
 import random
@@ -23,7 +22,16 @@ from app.models import EmployeeRequest, ContractorRequest
 
 
 class Command(BaseCommand):
-    option_list = BaseCommand.option_list + (make_option('-f', '--force', action='store_true', help='Force DB Wipe'),)
+
+    def add_arguments(self, parser):
+        parser.add_argument(
+            '-f',
+            '--force',
+            action='store_true',
+            dest='force',
+            default=False,
+            help='Force DB Wipe',
+        )
 
     def handle(self, *args, **kwargs):
         if not kwargs.get('force'):
