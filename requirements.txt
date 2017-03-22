@@ -4,3 +4,4 @@ django-bootstrap3==6.2.2
 uWSGI==2.0.12
 django-queryset-csv==1.0.0
 psycopg2==2.7.1
+minio==2.2.1

@@ -18,7 +18,7 @@
 
 4. `pip install -r requirements.txt`
 
-5. `docker-compose up -d db`
+5. `docker-compose up -d db minio`
 
 6. `python manage.py migrate`
 
@@ -40,13 +40,18 @@ Any variables marked as `insecure: true` should be overriden before being added 
 * DB_PASSWORD     `defualt: secret, insecure: true`
 * DB_HOST         `default: 0.0.0.0`
 * DB_PORT         `default: 5432`
+* MINIO_ACCESSKEY `default: access-key`
+* MINIO_BUCKET    `default: test`
+* MINIO_HOST      `default: 0.0.0.0`
+* MINIO_PORT      `default: 9000`
+* MINIO_SECRET    `default: 'secret-key, insecure: true`
 * SESSION_SECRET  `defualt: secret, insecure: true`
 
 ### Docker
 
 1. `docker build . -t app`
 
-2. `docker run \
+2. `docker run
       -d
       -e POSTGRES_DB=db
       -e POSTGRES_USER=db
@@ -56,6 +61,15 @@ Any variables marked as `insecure: true` should be overriden before being added 
 
 3. `docker run
       -d
+      -p 9000:9000
+      -e MINIO_ACCESS_KEY=access-key
+      -e MINIO_SECRET_KEY=secret-key
+      -v ${PWD}/minio:/data
+      --name minio
+      minio server /data`
+
+4. `docker run
+      -d
       -p 8000:80
       -e SESSION_SECRET=session-secret
       -e DB_NAME=db
@@ -63,7 +77,11 @@ Any variables marked as `insecure: true` should be overriden before being added 
       -e DB_PORT=5432
       -e DB_PASSWORD=db-secret
       -e DB_HOST=db
+      -e MINIO_HOST=minio
+      -e MINIO_PORT=9000
+      -e MINIO_BUCKET=amp
       --link db
+      --link minio
       --name app
       app`
 

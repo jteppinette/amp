@@ -32,6 +32,8 @@ The AMP models are seperated into the following groups:
 from django.db import models
 from django.conf import settings
 
+from django_minio.storage import MinioStorage
+
 """
                              COMPANY MODEL
 """
@@ -62,7 +64,7 @@ class Employee(models.Model):
 
     permissions = models.ManyToManyField('Permission', blank=True, null=True)
 
-    background_check = models.FileField(upload_to='background', blank=True, null=True, help_text='This field is not required.')
+    background_check = models.FileField(upload_to='background', blank=True, null=True, help_text='This field is not required.', storage=MinioStorage())
     last_background_check_date = models.DateField(blank=True, null=True, help_text='This field is not required. Ex. 2012-05-13')
 
     last_training_date = models.DateField(blank=True, null=True, help_text='This is field is not required. Ex. 2012-05-13')
@@ -131,7 +133,7 @@ class Employee(models.Model):
 
 
 class EmployeeDocument(models.Model):
-    file = models.FileField(upload_to='employee-documents')
+    file = models.FileField(upload_to='employee-documents', storage=MinioStorage())
     employee = models.ForeignKey(Employee, help_text='This field represent the employee that this document belongs to.', related_name='documents')
 
     def __unicode__(self):
@@ -148,7 +150,7 @@ class Contractor(models.Model):
 
     permissions = models.ManyToManyField('Permission', blank=True, null=True)
 
-    background_check = models.FileField(upload_to='background', blank=True, null=True, help_text='This field is not required.')
+    background_check = models.FileField(upload_to='background', blank=True, null=True, help_text='This field is not required.', storage=MinioStorage())
     last_background_check_date = models.DateField(blank=True, null=True, help_text='This field is not required. Ex. 2012-05-13')
 
     last_training_date = models.DateField(blank=True, null=True, help_text='This field is not required. Ex. 2012-05-13')
@@ -215,7 +217,7 @@ class Contractor(models.Model):
 
 
 class ContractorDocument(models.Model):
-    file = models.FileField(upload_to='contractor-documents')
+    file = models.FileField(upload_to='contractor-documents', storage=MinioStorage())
     contractor = models.ForeignKey(Contractor, help_text='This field represent the contractor that this document belongs to.', related_name='documents')
 
     def __unicode__(self):
@@ -320,7 +322,7 @@ class ContractorRequest(models.Model):
 
     remote = models.BooleanField(help_text="Will you be accessing remotely?")
 
-    background_check = models.FileField(upload_to='background', blank=True, null=True)
+    background_check = models.FileField(upload_to='background', blank=True, null=True, storage=MinioStorage())
 
     hr_status = models.NullBooleanField(blank=True, null=True)
     tc_status = models.NullBooleanField(blank=True, null=True)
