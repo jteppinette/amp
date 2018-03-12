@@ -42,8 +42,6 @@ from django_minio.storage import MinioStorage
 class Company(models.Model):
     name = models.CharField(max_length=160, unique=True)
 
-    log_reccurence = models.IntegerField(help_text='Represent the time between automatic log emails. This field is measured in days.', default=1)
-
     def __unicode__(self):
         """
         Provide a unicode representation of this model.

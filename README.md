@@ -18,7 +18,7 @@
 
 4. `pip install -r requirements.txt`
 
-5. `docker-compose up -d db minio`
+5. `docker-compose up -d db minio mail`
 
 6. `python manage.py makemigrations`
 
@@ -48,60 +48,27 @@ Any variables marked as `insecure: true` should be overriden before being added 
 * MINIO_SECURE    `default: false`
 * MINIO_SECRET    `default: 'secret-key, insecure: true`
 * SESSION_SECRET  `defualt: secret, insecure: true`
+* MAIL_FROM       `default: notifications@test-company.com')
+* MAIL_HOST       `default: 0.0.0.0`
+* MAIL_PORT       `default: 1025`
+* MAIL_PASSWORD   `default: `
+* MAIL_USER       `default: `
+* MAIL_USE_TLS    `default: False`
+* MAIL_USE_SSL    `default: False`
 
 ### Docker
 
-1. `docker build . -t app`
+1. `docker-compose up -d --build`
 
-2. `docker run
-      -d
-      -e POSTGRES_DB=db
-      -e POSTGRES_USER=db
-      -e POSTGRES_PASSWORD=db-secret
-      --name db
-      postgres:9.6`
+2. `docker-compose exec app python manage.py makemigrations`
 
-3. `docker run
-      -d
-      -p 9000:9000
-      -e MINIO_ACCESS_KEY=access-key
-      -e MINIO_SECRET_KEY=secret-key
-      -v ${PWD}/minio:/data
-      --name minio
-      minio server /data`
+3. `docker-compose exec app python manage.py migrate`
 
-4. `docker run
-      -d
-      -p 8000:80
-      -e SESSION_SECRET=session-secret
-      -e DB_NAME=db
-      -e DB_USER=db
-      -e DB_PORT=5432
-      -e DB_PASSWORD=db-secret
-      -e DB_HOST=db
-      -e MINIO_SERVER=minio:9000
-      -e MINIO_BUCKET=amp
-      --link db
-      --link minio
-      --name app
-      app`
-
-5. `docker exec -it app python manage.py makemigrations`
-
-6. `docker exec -it app python manage.py migrate`
-
-7. `docker exec -it app python manage.py createsuperuser`
-
-### Email
-
-An important group of setting to be aware of are the ones based around email.
-By default, the [_'django.core.mail.backends.filebased.EmailBackend'_](https://docs.djangoproject.com/en/1.8/topics/email/#file-backend) is used.
-In a production environment, this backend should be replaced by the [_'django.core.mail.backends.smpt.EmailBackend'_](https://docs.djangoproject.com/en/1.8/topics/email/#smtp-backend).
-Read the linked documentation for information on setting this up.
+4. `docker-compose exec app python manage.py createsuperuser`
 
 ### Company Settings
 
-For personalization and routing, the *APP_URL* and *COMPANY_NAME* configuration items should be set after initializing your envionrment, setting up DNS routing, and creating an initial company.
+For personalization and routing, the *APP_URL*, *MAIL_FROM*, and *COMPANY_NAME* configuration items should be set.
 
 ## Features
 
@@ -127,7 +94,3 @@ The AMP system sends many alerts and notifications that react to user input and 
 * Contractor Request Notification: 
     * Contractor request notifications are sent upon a contractor registering into the system. This registration occurs on the unauthenticated landing page found under the _Make Contractor Request_ heading.
     * This notification is sent to all users of the requested Company.
-
-* Recurring Log Notification:
-    * The entire log count will be sent via email to all company users at an interval set through the _Log Reccurence_ input on the _Settings_ page.
-    * By default, these logs will be mailed out once per day.

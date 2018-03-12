@@ -22,7 +22,7 @@ def employee_request_notification(sender, **kwargs):
     msg = {
         'subject': 'Notification: New Employee Request',
         'content': 'A new employee request has been created by %s %s.' % (inst.employee.first_name, inst.employee.last_name),
-        'from': 'notifications@gdsamp.com',
+        'from': settings.EMAIL_FROM,
         'to': to_list
     }
 
@@ -43,9 +43,8 @@ def contractor_request_notification(sender, **kwargs):
     msg = {
         'subject': 'Notification: New Contractor Request',
         'content': 'A new contractor request has been created by %s %s.' % (inst.first_name, inst.last_name),
-        'from': 'notifications@gdsamp.com',
+        'from': settings.EMAIL_FROM,
         'to': to_list
     }
 
     send_mail(msg['subject'], msg['content'], msg['from'], msg['to'], fail_silently=False)
-
