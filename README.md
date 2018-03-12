@@ -86,9 +86,11 @@ Any variables marked as `insecure: true` should be overriden before being added 
       --name app
       app`
 
-4. `docker exec -it app python manage.py migrate`
+5. `docker exec -it app python manage.py makemigrations`
 
-5. `docker exec -it app python manage.py createsuperuser`
+6. `docker exec -it app python manage.py migrate`
+
+7. `docker exec -it app python manage.py createsuperuser`
 
 ### Email
 
