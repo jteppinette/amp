@@ -10,23 +10,17 @@
 
 ### Getting Started
 
-1. `git clone https://github.com/jteppinette/amp.git`
-
-2. `virtualenv venv`
-
-3. `source venv/bin/activate`
-
-4. `pip install -r requirements.txt`
-
-5. `docker-compose up -d db minio mail`
-
-6. `python manage.py makemigrations`
-
-7. `python manage.py migrate`
-
-8. `python manage.py createfixturedata`
-
-9. `python manage.py runserver`
+```
+$ git clone https://github.com/jteppinette/amp.git && cd amp`
+$ virtualenv venv`
+$ source venv/bin/activate`
+$ pip install -r requirements.txt`
+$ docker-compose up -d db minio mail`
+$ python manage.py makemigrations`
+$ python manage.py migrate`
+$ python manage.py createfixturedata`
+$ python manage.py runserver`
+```
 
 ## Usage
 
@@ -55,16 +49,6 @@ Any variables marked as `insecure: true` should be overriden before being added 
 * MAIL_USER       `default: `
 * MAIL_USE_TLS    `default: False`
 * MAIL_USE_SSL    `default: False`
-
-### Docker
-
-1. `docker-compose up -d --build`
-
-2. `docker-compose exec app python manage.py makemigrations`
-
-3. `docker-compose exec app python manage.py migrate`
-
-4. `docker-compose exec app python manage.py createsuperuser`
 
 ### Company Settings
 
