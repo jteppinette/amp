@@ -56,7 +56,7 @@ ROOT_URLCONF = 'project.urls'
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
 
-EMAIL_FROM = os.environ.get('MAIL_FROM', 'notifications@test-company.com')
+EMAIL_FROM = os.environ.get('MAIL_FROM', 'notifications@test-company.localhost')
 EMAIL_HOST = os.environ.get('MAIL_HOST', '0.0.0.0')
 EMAIL_PORT = os.environ.get('MAIL_PORT', 1025)
 EMAIL_HOST_PASSWORD = os.environ.get('MAIL_PASSWORD', '')
