@@ -20,11 +20,13 @@
 
 5. `docker-compose up -d db minio`
 
-6. `python manage.py migrate`
+6. `python manage.py makemigrations`
 
-7. `python manage.py createfixturedata`
+7. `python manage.py migrate`
 
-8. `python manage.py runserver`
+8. `python manage.py createfixturedata`
+
+9. `python manage.py runserver`
 
 ## Usage
 
