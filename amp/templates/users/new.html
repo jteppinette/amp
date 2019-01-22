@@ -1,0 +1,30 @@
+{% extends "navigation.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="jumbotron">
+  <div class="container container-form">
+    <h1>New User</h1>
+  </div>
+</div>
+
+<div class="container container-form">
+
+  <ol class="breadcrumb">
+    <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+    <li><a href="{% url 'list-users' %}">Users</a></li>
+    <li class="active">New</li>
+  </ol>
+
+  <form class="form" method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <hr />
+    <button type="submit" class="btn btn-success"> Submit</button>
+    <a href="{% url 'list-users' %}" class="btn btn-link">Cancel</a>
+  </form>
+
+</div>
+
+{% endblock %}

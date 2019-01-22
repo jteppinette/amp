@@ -1,0 +1,30 @@
+{% extends "navigation.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>New Document</h1>
+    <p>This page allows you to create a new Document.</p>
+  </div>
+</div>
+
+<div class="container">
+
+  <ol class="breadcrumb">
+    <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+    <li><a href="{% url 'list-employees' %}">Employees</a></li>
+    <li><a href="{% url 'update-employee' form.employee.initial.pk %}">{{ form.employee.initial.get_full_name }}</a></li>
+    <li class="active">New Document</li>
+  </ol>
+
+  <form class="form" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-success"> Submit</button>
+  </form>
+
+</div>
+
+{% endblock %}

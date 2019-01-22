@@ -1,0 +1,21 @@
+{% extends "navigation.html" %}
+{% block content %}
+
+<!-- JUMBOTRON -->
+<div class="jumbotron">
+  <div class="container">
+    <h1>Welcome {% if user.get_full_name %}{{ user.get_full_name }}{% else %}{{ user.username }}{% endif %}!</h1>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="container">
+
+  <!-- BREADCRUMBS -->
+  <ol class="breadcrumb">
+    <li class="active">Dashboard</li>
+  </ol>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "navigation.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="jumbotron">
+  <div class="container container-form">
+    <h1>Employee Request</h1>
+    <p>
+      Press submit after selecting your employee account and desired permissions.
+      You will be notified when your request status is updated.
+    </p>
+  </div>
+</div>
+
+<div class="container container-form">
+  <form class="form" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <hr />
+    <button type="submit" class="btn btn-success">Submit Request</button>
+    <a href="{% url 'landing' %}" class="btn btn-link">Cancel</a>
+  </form>
+</div>
+{% endblock %}

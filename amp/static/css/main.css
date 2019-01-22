@@ -1,0 +1,46 @@
+body {
+  padding-top: 50px;
+}
+
+.messages>.alert {
+  margin-top: 12px;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 0px;
+  border-radius: 0px;
+}
+
+.form-inline .row .form-group input,
+.form-inline .row .form-group select,
+.form-inline .row .form-group button {
+  width: 100%;
+}
+
+.tab-pane {
+  padding-top: 20px;
+}
+
+.navbar.navbar-inverse {
+  border-bottom-width: 12px;
+  border-bottom-color: #449d44;
+}
+
+.jumbotron>.container.container-form {
+  text-align: center;
+}
+
+.container.container-form>.form {
+  max-width: 450px;
+  margin: 0 auto;
+}
+
+.container.container-form>.nav-tabs {
+  max-width: 450px;
+  margin: 20px auto;
+}
+
+.container.container-form>.breadcrumb {
+  max-width: 450px;
+  margin-left: auto;
+  margin-right: auto;
+}

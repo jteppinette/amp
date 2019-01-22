@@ -1,0 +1,42 @@
+{% extends "navigation.html" %}
+
+{% block content %}
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>Users</h1>
+    <p>This page allows you to update the users who have access to your company.</p>
+    <p><a href="{% url 'new-user' %}" class="btn btn-success btn-lg" role="button">Add a User &raquo;</a></p>
+  </div>
+</div>
+
+<div class="container">
+
+  <ol class="breadcrumb">
+    <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+    <li class="active">Users</li>
+  </ol>
+
+  <div class="panel panel-default">
+    <table class="table table-striped">
+      <tr>
+        <th>Username</th>
+        <th class="visible-lg">Email</th>
+        <th>Title</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
+      {% for user in object_list %}
+      <tr>
+        <td>{{ user.username }}</td>
+        <td class="visible-lg">{{ user.email }}</td>
+        <td>{{ user.amp_profile.title }}</td>
+        <td><a href="{% url 'update-user' user.pk %}"><span class="glyphicon glyphicon-pencil"></span></a></td>
+        <td><a href="{% url 'delete-user' user.pk %}"><span class="glyphicon glyphicon-remove"></span></a></td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+
+</div>
+{% endblock %}

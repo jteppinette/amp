@@ -1,0 +1,27 @@
+{% extends "navigation.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="jumbotron">
+  <div class="container container-form">
+    <h1>New Employee</h1>
+    <p>This page allows you to create a new Employee.</p>
+  </div>
+</div>
+
+<div class="container container-form">
+
+  <ol class="breadcrumb">
+    <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+    <li><a href="{% url 'list-employees' %}">Employees</a></li>
+    <li class="active">New</li>
+  </ol>
+
+  <form class="form" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-success"> Submit</button>
+  </form>
+
+</div>
+{% endblock %}

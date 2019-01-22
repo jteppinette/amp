@@ -1,0 +1,33 @@
+{% extends "navigation.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="jumbotron">
+  <div class="container container-form">
+    <h1>Account</h1>
+  </div>
+</div>
+
+<div class="container container-form">
+
+  <ol class="breadcrumb">
+    <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+    <li class="active">Account</li>
+  </ol>
+
+  <ul class="nav nav-tabs">
+    <li role="presentation" {% if 'general/update' in request.path %} class="active" {% endif %}><a href="{% url 'account-general-update' %}">General</a></li>
+    <li role="presentation" {% if 'password/change' in request.path %} class="active" {% endif %}><a href="{% url 'account-password-change' %}">Password</a></li>
+  </ul>
+
+  <form class="form" method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <hr />
+    <button type="submit" class="btn btn-success"> {% block inner_button %}Submit{% endblock %}</button>
+    <a href="{% url 'dashboard' %}" class="btn btn-link">Cancel</a>
+  </form>
+
+</div>
+
+{% endblock %}

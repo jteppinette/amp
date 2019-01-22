@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load amp %}
+
+{% block navigation %}
+
+<!-- NAVIGATION -->
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="{% url 'landing' %}" class="navbar-brand">AMP</a>
+    </div>
+    <div class="navbar-collapse collapse">
+      {% if user.is_authenticated %}
+      <ul class="nav navbar-nav">
+        <li {% if request.path|startswith:"/dashboard/employees" %}class="active" {% endif %}><a href="{% url 'list-employees' %}">Employees</a></li>
+        <li {% if request.path|startswith:"/dashboard/contractors" %}class="active" {% endif %}><a href="{% url 'list-contractors' %}">Contractors</a></li>
+        <li {% if request.path|startswith:"/dashboard/requests" %}class="active" {% endif %}><a href="{% url 'list-requests' %}">Requests</a></li>
+        <li {% if request.path|startswith:"/dashboard/permissions" %}class="active" {% endif %}><a href="{% url 'list-permissions' %}">Permissions</a></li>
+        <li {% if request.path|startswith:"/dashboard/logs" %}class="active" {% endif %}><a href="{% url 'list-logs' %}">Logs</a></li>
+
+        {% if user.amp_profile.is_cip %}
+        <li {% if request.path|startswith:"/dashboard/users" %}class="active" {% endif %}><a href="{% url 'list-users' %}">Users</a></li>
+        {% endif %}
+
+        <li role="separator" class="divider"></li>
+      </ul>
+      {% endif %}
+      <ul class="nav navbar-nav navbar-right">
+        {% if user.is_authenticated %}
+        <p class="navbar-text hidden-xs"><a href="{% url 'account-general-update' %}" class="navbar-link"><span class="glyphicon glyphicon-user"></span></a></p>
+        <li class="visible-xs {% if request.path|startswith:"/dashboard/account" %}active{% endif %}"><a href="{% url 'account-general-update' %}">Account</a></li>
+        <li><a href="{% url 'logout' %}">Logout</a></li>
+        {% else %}
+        <li><a href="{% url 'login' %}">Login</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

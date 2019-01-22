@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container container-form">
+  <form class="form" method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button class="btn btn-success btn-block" type="submit">Login</button>
+  </form>
+</div>
+
+<style>
+  body {
+    background-color: #eee;
+  }
+
+  @media (min-width: 600px) {
+    .container {
+      margin-top: 20vh;
+    }
+  }
+</style>
+{% endblock %}

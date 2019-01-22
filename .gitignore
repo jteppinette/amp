@@ -1,5 +1,2 @@
-*.pyc
+__pycache__
 venv
-staticfiles
-email
-**/migrations/0*

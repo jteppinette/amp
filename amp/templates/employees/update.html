@@ -1,0 +1,65 @@
+{% extends "navigation.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="jumbotron">
+  <div class="container">
+    <h1>Read/Update Employee</h1>
+    <p>This page allows you to read and update an Employee.</p>
+  </div>
+</div>
+
+<div class="container">
+
+  <ol class="breadcrumb">
+    <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+    <li><a href="{% url 'list-employees' %}">Employees</a></li>
+    <li class="active">{{form.first_name.value}} {{form.last_name.value}}</li>
+  </ol>
+
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#detail-update" aria-controls="detail-update" role="tab" data-toggle="tab">Detail Update</a></li>
+    <li role="presentation"><a href="#documents" aria-controls="profile" role="tab" data-toggle="tab">Documents</a></li>
+  </ul>
+
+  <div class="tab-content">
+
+    <div role="tabpanel" class="tab-pane active" id="detail-update">
+      <form class="form" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-success"> Submit</button>
+      </form>
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="documents">
+
+      <div class="panel panel-default">
+
+        <div class="panel-heading clearfix">
+          <span>{{object.documents.all.count}} Documents</span>
+          <span class="pull-right"><a class="btn btn-success" href="{% url 'new-employee-document' object.pk %}">Add Document</a></span>
+        </div>
+
+        <table class="table table-striped">
+          <tr>
+            <th>Name</th>
+            <th>Delete</th>
+          </tr>
+          {% for document in object.documents.all %}
+          <tr>
+            <td><a href="{{document.file.url}}">{{document.file}}</a></td>
+            <td><a href="{% url 'delete-employee-document' object.pk document.pk %}"><span class="glyphicon glyphicon-remove"></span></a></td>
+          </tr>
+          {% endfor %}
+        </table>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+{% endblock %}

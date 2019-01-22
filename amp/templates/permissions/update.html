@@ -1,0 +1,30 @@
+{% extends "navigation.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>Read/Update Permission</h1>
+    <p>This page allows you to read and update a Permission.</p>
+  </div>
+</div>
+
+<div class="container">
+
+  <ol class="breadcrumb">
+    <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+    <li><a href="{% url 'list-permissions' %}">Permissions</a></li>
+    <li class="active">{{form.name.value}}</li>
+  </ol>
+
+  <form class="form" method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <hr />
+    <button type="submit" class="btn btn-success"> Submit</button>
+  </form>
+
+</div>
+
+{% endblock %}

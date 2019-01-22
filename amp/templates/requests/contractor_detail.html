@@ -1,0 +1,96 @@
+{% extends "navigation.html" %}
+
+{% block content %}
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>{{contractorrequest}}</h1>
+    <p>This page allows you to view a more detailed view of this request.</p>
+  </div>
+</div>
+
+<div class="container">
+
+  <ol class="breadcrumb">
+    <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+    <li><a href="{% url 'list-requests' %}">Requests</a></li>
+    <li class="active">{{contractorrequest}}</li>
+  </ol>
+
+  <div class="panel panel-default">
+
+    <div class="panel-heading">Request Information</div>
+    <table class="table table-striped">
+      <tr>
+        <th>Name</th>
+        <th class="hidden-xs">Employer</th>
+        <th>Requested Permissions</th>
+        {% if contractorrequest.background_check %}
+        <th class="visible-lg">Background Check</th>
+        {% endif %}
+        <th class="hidden-xs">Remote</th>
+        <th>Approve</th>
+        <th>Reject</th>
+      </tr>
+      <tr>
+        <td>{{contractorrequest.first_name}} {{contractorrequest.last_name}}</td>
+        <td class="hidden-xs">{{contractorrequest.employer}}</td>
+        <td>
+          {% if contractorrequest.permissions %}
+          <ul>
+            {% for permission in contractorrequest.permissions.all %}
+            <li>{{permission.name}}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </td>
+        {% if contractorrequest.background_check %}
+        <td class="visible-lg visible-md"><a href="{{contractorrequest.background_check.url}}">{{contractorrequest.background_check}}</a></td>
+        {% endif %}
+        <td class="hidden-xs">{{contractorrequest.remote}}</td>
+        <td><a href="{% url 'approve-contractor-request' contractorrequest.pk %}"><span class="glyphicon glyphicon-ok"></span></a></td>
+        <td><a href="{% url 'reject-contractor-request' contractorrequest.pk %}"><span class="glyphicon glyphicon-remove"></span></a></td>
+      </tr>
+    </table>
+
+    <div class="panel-heading">Request Status</div>
+    <table class="table table-striped">
+      <tr>
+        <th>HR</th>
+        <th>TC</th>
+        <th>ACE</th>
+        <th>CIP</th>
+      </tr>
+      <tr>
+        {% if contractorrequest.hr_status == True %}
+        <td><span class="glyphicon glyphicon-ok"></span></td>
+        {% elif contractorrequest.hr_status == False %}
+        <td><span class="glyphicon glyphicon-remove"></span></td>
+        {% else %}
+        <td><span class="glyphicon glyphicon-minus"></span></td>
+        {% endif %}
+        {% if contractorrequest.tc_status == True %}
+        <td><span class="glyphicon glyphicon-ok"></span></td>
+        {% elif contractorrequest.tc_status == False %}
+        <td><span class="glyphicon glyphicon-remove"></span></td>
+        {% else %}
+        <td><span class="glyphicon glyphicon-minus"></span></td>
+        {% endif %}
+        {% if contractorrequest.ace_status == True %}
+        <td><span class="glyphicon glyphicon-ok"></span></td>
+        {% elif contractorrequest.ace_status == False %}
+        <td><span class="glyphicon glyphicon-remove"></span></td>
+        {% else %} <td><span class="glyphicon glyphicon-minus"></span></td>
+        {% endif %}
+        {% if contractorrequest.cip_status == True %}
+        <td><span class="glyphicon glyphicon-ok"></span></td>
+        {% elif contractorrequest.cip_status == False %}
+        <td><span class="glyphicon glyphicon-remove"></span></td>
+        {% else %}
+        <td><span class="glyphicon glyphicon-minus"></span></td>
+        {% endif %}
+      </tr>
+    </table>
+  </div>
+</div>
+{% endblock %}
