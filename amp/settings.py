@@ -64,6 +64,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "amp.urls"
+APPEND_SLASH = False
 
 EMAIL_DOMAIN = os.environ.get("SMTP_DOMAIN", "amp.localhost")
 EMAIL_HOST = os.environ.get("SMTP_SERVER", "0.0.0.0")
