@@ -110,9 +110,9 @@ class NewContractor(SuccessMessageMixin, CreateView):
     success_message = "Contractor %(first_name)s %(last_name)s was successfully created."
 
     def form_valid(self, form):
-        contractor = form.save(commit=False)
-        Log.objects.create(author=self.request.user.email, **contractor.creation_log())
-        return super().form_valid(form)
+        response = super().form_valid(form)
+        Log.objects.create(author=self.request.user.email, **self.object.creation_log())
+        return response
 
 
 class UpdateContractor(SuccessMessageMixin, UpdateView):
@@ -245,9 +245,9 @@ class NewEmployee(SuccessMessageMixin, CreateView):
     success_message = "Employee %(first_name)s %(last_name)s was successfully created."
 
     def form_valid(self, form):
-        employee = form.save(commit=False)
-        Log.objects.create(author=self.request.user.email, **employee.creation_log())
-        return super().form_valid(form)
+        response = super().form_valid(form)
+        Log.objects.create(author=self.request.user.email, **self.object.creation_log())
+        return response
 
 
 class UpdateEmployee(SuccessMessageMixin, UpdateView):
