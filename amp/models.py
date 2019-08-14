@@ -120,7 +120,7 @@ class Resource(models.Model):
 
 class Employee(Resource):
     def __str__(self):
-        return "Employee {resource}".format(resource=str(super()))
+        return "Employee {resource}".format(resource=super().__str__())
 
 
 class EmployeeDocument(models.Model):
@@ -140,7 +140,7 @@ class Contractor(Resource):
     employer = models.CharField(max_length=80)
 
     def __str__(self):
-        return "Contractor {resource}".format(resource=str(super()))
+        return "Contractor {resource}".format(resource=super().__str__())
 
 
 class ContractorDocument(models.Model):
